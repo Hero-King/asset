@@ -1,0 +1,181 @@
+网络接口配置文件
+
+[root@localhost ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0 
+TYPE=Ethernet #网卡类型 
+DEVICE=eth0 #网卡接口名称 
+ONBOOT=yes #系统启动时是否激活 yes|no
+BOOTPROTO=static #启用地址协议 –static:静态协议 –bootp:协议 –dhcp:协议 -none:不指定协议[最好指定]
+IPADDR=192.168.1.11 #网卡IP地址 
+NETMASK=255.255.255.0 #子网掩码 
+GATEWAY=192.168.1.1 #网卡网关地址 
+DNS1=10.203.104.41 #网卡DNS地址 
+HWADDR=00:0C:29:13:5D:74 #网卡设备MAC地址 
+BROADCAST=192.168.1.255 #网卡广播地址 
+注：在修改文件ifcfg-ethx后还需要重新导入文件才能生效，具体命令如下：
+
+[root@localhost ~]# /etc/init.d/network reload #命令有start | restart | stop | reload
+
+重新导入ifcfg-eth0网络配置文件 
+[root@localhost ~]# /etc/init.d/network reload 
+
+网卡接口关闭与激活 
+[root@localhost ~]# ifdown eth0 #关闭网络 
+[root@localhost ~]# ifup eth0 #启动网络
+
+网络服务启动与关闭 
+方法一: 
+[root@localhost ~]# service network stop #关闭网络服务 
+[root@localhost ~]# service network start #启动网络服务 
+[root@localhost ~]# service network restart #重启网络服务 
+方法二： 
+[root@localhost ~]# /etc/init.d/network stop 
+[root@localhost ~]# /etc/init.d/network start 
+[root@localhost ~]# /etc/init.d/network restart 
+网卡状态查询 
+[root@localhost ~]# service network status
+
+临时配置网卡信息，无需重启。 
+[root@localhost ~]# ifconfig eth0 10.1.1.10 netmask 255.0.0.0 
+查看网卡接口信息，默认列出所有接口 
+[root@localhost ~]# ifconfig 
+查看当前路由及网关信息 
+[root@localhost ~]# netstat -r
+
+DNS： 
+主机名：CentOS 
+主DNS：202.106.46.151 
+第二DNS:202.106.0.20 
+第三DNS:8.8.8.8
+
+网络配置： 
+eth0 
+静态ip：192.168.1.106 
+子网掩码 255.255.255.0 
+默认网关 IP 192.168.1.1
+
+DEVICE=eth0 
+IPADDR=192.168.1.106 
+NETMASK=255.255.255.0 
+BROADCAST=192.168.1.255 
+ONBOOT=yes 
+BOOTPROTO=none 
+GATEWAY=192.168.1.1 
+TYPE=Ethernet 
+配置子网掩码有两种方式： 
+
+PREFIXO0=24  和 NETMASK=255.255.255.0都是正确的子网掩码配置项，但是两者同时存在的时候反而会报错；原因在/etc/sysconfig/network-scripts/network-functions配置文件里面源码的写法问题。具体可以参看下面地址案例：
+
+http://blog.csdn.net/aikui0621/article/details/9148997#reply
+
+https://serverfault.com/questions/304949/prefix-versus-netmask
+
+NETMASK和PREFIX配置冲突问题还未找到合理的解释！！最好的办法就是只按照其中一种配置就行，不要一起写
+
+RedHat6中配置网卡可以进入网卡配置文件更改网卡参数
+
+网卡配置文件位置：/etc/sysconfig/network-scripts/ifcfg-ethxx  #修改ethxx网卡配置，下面以eth0网卡为例
+HWADDR=00:0C:29:8D:24:73
+TYPE=Ethernet    
+BOOTPROTO=static  #启用静态IP地址，不会自动获取ip
+DEFROUTE=yes
+PEERDNS=yes
+PEERROUTES=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_PEERDNS=yes
+IPV6_PEERROUTES=yes
+IPV6_FAILURE_FATAL=no
+NAME=eth0
+UUID=ae0965e7-22b9-45aa-8ec9-3f0a20a85d11
+ONBOOT=yes  #开启自动启用网络连接
+IPADDR0=192.168.21.128  #设置IP地址
+PREFIXO0=24  #设置子网掩码，这种写法只需要写掩码位数
+GATEWAY0=192.168.21.2  #设置网关
+DNS1=8.8.8.8  #设置主DNS
+DNS2=8.8.4.4  #设置备DNS
+
+service network restart   #重启网络
+
+ 
+
+CentOS7 网络设置-nmcli/nmtui
+
+CentOS7中配置网络有个强大的图形化配置工具- nmcli和nmtui 。
+
+nmcli：NetworkManageCommandLine Interface   #用命令行方式配置网卡信息
+
+nmtui：NetworkManageTextUser Iterface   #用文本界面的方式配置网卡信息
+
+>方法一、网络设置-nmcli
+
+[root@localhost ~]# nmcli -h
+
+Usage: nmcli [OPTIONS] OBJECT { COMMAND | help }  #用法格式
+
+OPTIONS
+  -t[erse]                                   terse output
+  -p[retty]                                  pretty output
+  -m[ode] tabular|multiline                  output mode
+  -f[ields] <field1,field2,...>|all|common   specify fields to output
+  -e[scape] yes|no                           escape columns separators in values
+  -n[ocheck]                                 don't check nmcli and NetworkManager versions
+  -a[sk]                                     ask for missing parameters
+  -w[ait] <seconds>                          set timeout waiting for finishing operations  #设置命令行超时退出时间
+  -v[ersion]                                 show program version    #显示nmcli的版本信息
+  -h[elp]                                    print this help   #获取帮助
+
+OBJECT
+  g[eneral]       NetworkManager's general status and operations
+  n[etworking]    overall networking control
+  r[adio]         NetworkManager radio switches
+  c[onnection]    NetworkManager's connections
+  d[evice]        devices managed by NetworkManager   #显示网卡设备信息
+  a[gent]         NetworkManager secret agent or polkit agent 
+
+[root@localhost ~]# nmcli d   #显示网卡设备信息，查看要配置的网卡名称
+
+[root@localhost ~]# nmcli connection modify ethxx ipv4.method manual  ipv4.address 192.168.4.1/24  ipv4.gateway 192.168.4.254  ipv4.dns 192.168.4.200 connection.autoconnect yes  #method为manual设为手动，后面才能配ip，一套命令下来可以把获取地址方式、ip地址、掩码、网关、随机自连连接方式都设置好了
+
+[root@localhost ~]# nmcli connection up ethxx   #激活刚才配置的网卡信息
+
+>方法二、网络设置-nmtui
+
+[root@localhost ~]# nmtui   #进入网卡配置文本界面,进入edit界面
+
+   
+
+配置完成后，要激活连接，重启一下网卡服务，systemctl restart network
+
+注意ip地址配置的时候是CIDR格式，CIDR的作用就是支持IP地址的无类规划,别忘了/24 ，默认是/32，会导致ssh+ip怎么连都连不上。
+
+补充：
+
+    在RedHat的Linux系统中，会发现存在一个本机回送地址：127.0.0.1  
+
+[root@localhost ~]# ls /etc/sysconfig/network-scripts/
+
+ifcfg-lo
+
+[root@localhost ~]# cat /etc/sysconfig/network-scripts/ifcfg-lo   #这是系统回环网卡地址配置信息
+
+DEVICE=lo
+IPADDR=127.0.0.1
+NETMASK=255.0.0.0
+NETWORK=127.0.0.0
+# If you're having problems with gated making 127.0.0.0/8 a martian,
+# you can change this to something else (255.255.255.255, for example)
+BROADCAST=127.255.255.255
+ONBOOT=yes
+NAME=loopback
+
+对于回送地址，查了一下相关资料，有以下收获：
+
+        回送地址：127.0.0.1。一般用于测试使用。例如：ping 127.0.0.1 来测试本机TCP/IP是否正常。
+
+        127.0.0.1是回送地址，指本地机，一般用来测试使用。回送地址（127.x.x.x）是本机回送地址（Loopback Address），即主机IP堆栈内部的IP地址，主要用于网络软件测试以及本地机进程间通信，无论什么程序，一旦使用回送地址发送数据，协议软件立即返回，不进行任何网络传输。大家常用“ping 127.0.0.1”命令在本机上做回路测试，用来验证本机的TCP/IP协议簇是否被正确安装。
+
+        但你发现了吗?使用“ping 127.1”这个命令也能得到同样的测试结果，其实“ping 127.1”和“ping 127.0.0.1”这两条命令是一样的，都是在进行回路测试。为什么会这样呢?
+
+        这就是Ping命令应用中IP地址的使用技巧。大家都知道，IP地址由32位二进制数字组成，为了方便大家记忆，将每8位二进制数字换算成十进制数字，因此就形成了容易记忆的由四部分十进制数字组成的IP地址(如127.0.0.1)。由于，Windows操作系统具有自动填充 “.0”的功能，因此我就可将“127.0.0.1”变为“127.1”。但是，这个“.0”的省略是有条件限制的，并不能任意省略。在Ping命令的应用中，只能将在IP地址的最后一部分十进制数字前出现的一个或多个“.0”省略，如把“ping 127.0.0.1”命令改写成“ping 127.1”。如果这一个或多个 “.0”没有紧挨着最后一部分的十进制数字，而是在其他位置，则这个“.0”不能省略，如“ping 202.0.96.1”就不能写成“ping 202.96.1”。这是因为“ping 202.96.1”返回的结果是“202.96.0.1”的应答信息，而不是“202.0.96.1”的应答信息。

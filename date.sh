@@ -18,5 +18,6 @@ echo "
 %T 显示时间 时:分:秒 
 "
 backFileName=$(date +%Y%m%d)
+echo "查看帮助文档"
 # tar -zcvf ${backFileName}.tar.gz /var/spool/cron/
 
