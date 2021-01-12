@@ -219,7 +219,51 @@ push/pop 段寄存器/内存单元 可以的
 
 栈段  SS:SP
 
+#### 汇编编程
+GCC 编译器在编译一个C语言程序时需要经过以下 4 步：
+将C语言源程序预处理，生成.i文件。
+预处理后的.i文件编译成为汇编语言，生成.s文件。
+将汇编语言文件经过汇编，生成目标文件.o文件。
+将各个模块的.o文件链接起来生成一个可执行程序文件。
 
+汇编语言: 
+源代码  编译连接  二进制可执行程序
+源代码:  包括伪指令(汇编器执行的)和汇编指令(对应成机器码)
+assume cs:codeg
+codeg segment
+start: mov ax 0123H
+    mov bx 0456H
 
+codeg ends
+end
+
+XXX segment  定义一个段名为XXX段 成对使用
+XXX ends
+一个汇编程序是多个段组成,这些段被用来存放代码/数据/栈空间,至少有一个段:代码段
+end 汇编程序的结束标志,编译器退出
+assume 假设假如  上面假设代码段是codeg段
+源程序: 源程序文件中所有的内容
+程序: 源程序中最终由计算机执行处理的指令或数据,可执行文件
+
+计算2的3次方
+assume cs:abc
+abc segement
+start :move ax,2
+add ax,ax
+add ax,ax
+add ax,ax
+abc ends
+end start
+
+程序P1返回: 就是把CPU的控制权交还给调用这个程序P1的程序
+mov ax,4c00H int 21H (中断来实现各种dos功能的调用) 但是linux中都是通过内核来实现的,因此所有的功能都需要系统调用来实现int 8oh
+
+汇编器: win平台masm  linux平台nasm
+nasm -f elf aa.asm   win: masm aa.asm  编译生成obj文件(将源程序转换机器码,伪指令和汇编指令转成机器码)
+windows链接 link aa.obj   >>aa.exe      链接:多个目标文件链接到一起,生成一个可执行程序;或者需要调用库程序的某个子程序,需要将库文件和程序的目标文件链接到一起
+执行二进制程序后 秒弹黑窗口 又回到dos
+程序没有任何输出,因为只是做了寄存器加法的操作,没向显存写入任何东西
+
+### BX 和loop
 
 
