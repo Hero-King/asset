@@ -29,4 +29,7 @@ LVM 硬盘分区后格式化文件系统可以使用LVM Logical Volume Manager(�
 VFS virtual filesystem Switch 内核提供的功能,针对不同文件系统提供统一的读写接口
 之前linux使用ext4 centos7后 默认使用xfs文件系统
 
+远程唤醒: WOL PCIE唤醒   yum install ethtool   ethtool -s [网卡名] wol g 是的系统支持远程唤醒;
+
+
 ```
