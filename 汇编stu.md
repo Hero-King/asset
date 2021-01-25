@@ -310,13 +310,35 @@ data ends
 start: mov ax,data
   mov ds,ax
 
+and 指令(逻辑与指令)  or指令
+改变字母的大小写就是改变AScll码值
+idata就是数字
+偏移地址可以用 [bx + idata]表示 ，比如bx+1  或者1[bx]
+DI和SI是对BX寄存器的补充，但是不能拆分成8位寄存器
+比如复制的操作，就用DS:SI 表示原始的内存空间，用DS:DI表示目标地址空间
+[bx + si + 1] 表示一个内存的偏移地址 
 
+双层循环怎么做？？  loop默认跟cx绑定  在第一层循环中，把cx的值暂存到寄存器中，但是寄存器是有限的，如果程序比较大，就寄存器都在二层循环中用了，只有存到内存中！！ 才是合理的
+8086CPU 中只有四个寄存器可以用在偏x移地址中[]，bx si di bp 进行内存单元的寻址 只能bx + si/di , bp + si/di
+bp对应的段地址是ss 是支援sp用的
 
+CPU处理的数据可以在三个地方：  CPU内部（寄存器） 内存（偏移地址） 端口  
+CPU找数据的方式就是寻址方式 直接寻址（就是直接的数值 mov ax,1） 寄存器寻址（mov ax,bx 数据存放在bx寄存器中） 寄存器相对寻址（mov ax,[bx+idata]） 基址变址寻址（mov ax,[bx+si]） 相对基址变址寻址（mov ax,[bx+si+idata]）
 
+div指令： division（除法）
+dd （double word） 32位
 
+### 转移指令
+offset 在汇编语言中，由编译器处理的符号，是： 取得标号的偏移地址 
+start: mov ax, offset start   ==> mov ax,0
+    s:mov ax,offset s         => mov ax,3
+jmp是无条件跳转指令,可以只修改IP 也可以同时修改CS 和 IP
+call和ret指令都是转移指令,可以修改IP 或者CS和IP
+ret使用栈中的数据,修改IP的内容,实现近转移 相当于pop IP 栈数据放到IP寄存器中
+retf使用栈中的数据,修改CS + IP的内容 实现远转移 相当于 pop IP  pop cs
+call指令 call 标号 把当前IP 或者cs+ip入栈 然后跳转JMP到标号的地方去执行
+就是函数调用啦!! easy
 
-
-  
 
 
 
