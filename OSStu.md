@@ -55,7 +55,7 @@ VMM（虚拟机监视器）在操作系统和硬件之间多了一层
 保存现场；异常处理（杀死/重启等）；恢复现场 
 系统调用：
 应用程序发出调用；操作系统去处理
-API ：   win32 API 用于windows     POSIX API 用于linux unix macos  java api 用于jvm (jvm在调用win32 或者posix)
+API ：   win32 API 用于windows     POSIX API 用于linux unix macos ,  javaapi 用于jvm (jvm在调用win32 或者posix)
  
 操作系统用户态： cpu不能执行一些特殊的指令 特权指令 io处理
 操作系统内核态： cpu可以执行任何指令
