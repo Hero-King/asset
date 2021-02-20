@@ -66,3 +66,9 @@ systemctl restart docker
 # 生成秘钥
 yes | ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
 ssh-copy-id  -i /root/.ssh/id_rsa.pub root@192.168.1.100
+
+# 生成swap 2G
+dd if=/dev/zero of=/swapfile1 bs=1024 count=2000000
+mkswap /swapfile1
+swapon /swapfile1
+# 关闭  swapoff命令
