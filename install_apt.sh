@@ -71,4 +71,5 @@ ssh-copy-id  -i /root/.ssh/id_rsa.pub root@192.168.1.100
 dd if=/dev/zero of=/swapfile1 bs=1024 count=2000000
 mkswap /swapfile1
 swapon /swapfile1
+echo "/swapfile1           swap           swap       defaults        0   0" >> /etc/fstab
 # 关闭  swapoff命令
