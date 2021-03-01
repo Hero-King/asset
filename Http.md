@@ -238,6 +238,8 @@ TCP    传输层
 - 使用浏览器进行全双工通信的websocket
 websocket : web浏览器和web服务器之间全双工通信标准
 一旦建立好websocket 通信过程中可以互相发送json xml html 图片等任意格式的数据
+没有同源限制，客户端可以与任意服务器通信。
+协议标识符是ws（如果加密，则为wss），服务器网址就是 URL。 ws://example.com:80/some/path
 websocket 特点
 服务器推送
 减少通信量,一旦建立连接就是一直保持连接的状态 websocket首部信息量很少
@@ -268,7 +270,22 @@ Socket其实并不是一个协议，而是为了方便使用TCP或UDP而抽象�
 - web服务器管理文件 webdav (web-based distributed authoring and versioning)
 
 
+## web攻击
+主动攻击(主动攻击server):  SQL注入攻击 OS命令注入攻击
+被动攻击(用户无意识的自己客户端攻击):  跨站脚本攻击(cross-site scripting  XSS) 跨站点请求伪造(cross-site request forgeries CSRF) Http首部注入攻击
 
+XSS : 通过存在安全漏洞的web网站注册者的浏览器内运行非法的Html标签或者js的一种攻击方式
+是攻击者利用预先设置好的陷阱触发的被动攻击
+
+设计缺陷引发的安全漏洞:
+强制浏览(强制浏览非公开的文件) 不正确的错误消息处理(不要把具体的错误信息展示在页面)
+开放重定向
+
+会话管理疏忽的漏洞
+会话劫持攻击(攻击者拿到用户的会话ID伪装成用户)  会话固定攻击(强制用户使用攻击者指定的会话ID)
+
+其他攻击
+密码破解 点击劫持 DOS/ddos攻击  后门程序
 
 
 
