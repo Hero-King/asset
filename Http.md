@@ -220,6 +220,54 @@ HTTPS 采用共享密钥加密和公开密钥加密两者并用的混合加密
 理速度要慢。
 CA认证等
 
+## 基于Http功能追加的协议
+- SPDY 
+目的是消除Http性能瓶颈,降低客户端需要实时同步服务器数据的情况下,产生大量的无效Http通信问题
+以会话层的形式加入,控制对数据的流动,但还是财通http建立连接
+Http   应用层
+SPDY   会话层
+SSL    表示层
+TCP    传输层
+
+提供了Http不能提供的功能:
+多路复用流: 单一tcp连接完成多有的http请求
+赋予请求优先级: 
+压缩Http首部
+推送功能: 服务器向客户端推送数据
+
+- 使用浏览器进行全双工通信的websocket
+websocket : web浏览器和web服务器之间全双工通信标准
+一旦建立好websocket 通信过程中可以互相发送json xml html 图片等任意格式的数据
+websocket 特点
+服务器推送
+减少通信量,一旦建立连接就是一直保持连接的状态 websocket首部信息量很少
+
+websocket任然是基于http连接的,用到upgrade字段,
+握手成功后不再使用http格式的数据帧,而是使用本身的数据帧
+
+```
+WebSocket同HTTP一样也是应用层的协议，但是它是一种双向通信协议，是建立在TCP之上的。
+使用场景: 网站上的即时通讯是很常见的，比如网页的QQ，聊天系统等。按照以往的技术能力通常是采用轮询、Comet技术解决。
+
+WebSocket与HTTP的关系
+相同点
+都是一样基于TCP的，都是可靠性传输协议。
+都是应用层协议。
+不同点
+WebSocket是双向通信协议，模拟Socket协议，可以双向发送或接受信息。HTTP是单向的。
+WebSocket是需要握手进行建立连接的。
+联系
+WebSocket在建立握手时，数据是通过HTTP传输的。但是建立之后，在真正传输时候是不需要HTTP协议的。
+
+WebSocket与Socket的关系
+
+Socket其实并不是一个协议，而是为了方便使用TCP或UDP而抽象出来的一层，是位于应用层和传输控制层之间的一组接口。Socket是应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。当两台主机通信时，必须通过Socket连接，Socket则利用TCP/IP协议建立TCP连接。TCP连接则更依靠于底层的IP协议，IP协议的连接则依赖于链路层等更低层次。WebSocket则是一个典型的应用层协议。Socket是传输控制层协议，WebSocket是应用层协议。
+
+```
+
+- web服务器管理文件 webdav (web-based distributed authoring and versioning)
+
+
 
 
 
