@@ -62,3 +62,16 @@ Tasklist 语法
 ###  Pull Request
 Pull Request 是自己修改源代码后,请求对方仓库采纳该修改时采取的一种行为。
 <img src="img/pull request概念图.png"/>
+- Fork 到自己仓库 Pull Request
+1. fork原来的仓库（resource）到自己的github中
+2. clone代码,新建特性分支专注解决这个问题
+3. 本地修改代码，解决bug，后提交代码到自己的仓库中
+4. 在仓库中发起pull request请求，请求resource 仓库合并我的代码
+5. resource 仓库管理员审核代码，测试代码后通过即可合并
+
+向发送过 Pull Request 的分支添加提交时,该提交会自动添加至已
+发送的 Pull Request 中。  这一方法要求尽早发送 Pull Request,越早效果越明显。
+
+- 不进行 Fork 直接从分支发送 Pull Request
+如果用户对该仓库有编辑权限,则可以直接创建分支,从分支发送 Pull Request。
+利用这一设计,团队开发时不妨为每一名成员赋予编辑权限,免去 Fork 仓库的麻烦。这样,成员在有需要时就可以创建自己的分支,然后直接向 master分支等发送 Pull Request。
