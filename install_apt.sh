@@ -73,3 +73,16 @@ mkswap /swapfile1
 swapon /swapfile1
 echo "/swapfile1           swap           swap       defaults        0   0" >> /etc/fstab
 # 关闭  swapoff命令
+
+# 安装pip
+# 如果你还未安装，则可以使用以下方法来安装：
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   # 下载安装脚本
+python get-pip.py    # 运行安装脚本
+pip --version
+
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 同时安装多个软件包（已安装的会自动忽略）, -y 表示对所有询问都回答 Yes
+apt-get install -y gcc make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-dev
