@@ -52,7 +52,7 @@ Issue 可以通过添加标签(Label)来进行整理。
 然。这里只需轻轻点击一下便可以显示相应提交的具体内容,在代码审
 查时省去了从大量提交日志中搜索相应提交的麻烦,非常方便。
 - Close Issue
-只要在该提交中以下列任意一种格式描述提交信息,对应的 Issue 就会被 Close。 fix #24  fixes #24   fixed #24  close #24 closed #24  resolve #24等等
+只要在该提交中以下列任意一种格式描述提交信息,对应的 Issue 就会被 Close。 fix #24  fixes #24   fixed #24  close #24 closed #24  resolve #24  resolved #24等等
 
 Tasklist 语法
 #本月要做的任务
