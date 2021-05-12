@@ -1,5 +1,7 @@
 #! /bin/bash
 
+# 安装先解决read only filesystem问题
+
 #  debain版本
 # chsh -s /bin/bash
 # 切换默认的sh在执行这个脚本   dpkg-reconfigure dash 选择否
