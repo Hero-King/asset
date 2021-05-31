@@ -152,6 +152,7 @@ Content-Type: multipart/form-data; boundary=AaB03x  boundary 字符串来划分�
 
 - 301 永久性重定向。
 - 302 临时性重定向。
+- 304 not modify
 - 403 Forbidden
 - 404 Not Found
 
@@ -289,7 +290,7 @@ Socket其实并不是一个协议，而是为了方便使用TCP或UDP而抽象�
 
 
 ## web攻击
-主动攻击(主动攻击server):  SQL注入攻击 OS命令注入攻击
+主动攻击(主动攻击server):  SQL注入攻击 OS命令注入攻击 DDOs 
 被动攻击(用户无意识的自己客户端攻击):  跨站脚本攻击(cross-site scripting  XSS) 跨站点请求伪造(cross-site request forgeries CSRF) Http首部注入攻击
 
 XSS : 通过存在安全漏洞的web网站注册者的浏览器内运行非法的Html标签或者js的一种攻击方式
