@@ -24,24 +24,13 @@ services:
       - CAIYUN_TOKEN=
       - CAIYUN_ENCRYPT=
       - CAIYUN_TEL=
-      # - CAIYUN_AUTH_USER_NAME=<change me>
-      # - CAIYUN_AUTH_PASSWORD=<change me>
+      - CAIYUN_AUTH_USER_NAME=<change me>
+      - CAIYUN_AUTH_PASSWORD=<change me>
 EOF
 
-mkdir -p /root/docker/aliyunpan
-cd /root/docker/aliyunpan
-echo "pwd: `pwd`"
-cat > docker-compose.yml <<EOF
-version: '3.3'
-services:
-  aliyundrive-webdav:
-    container_name: aliyundrive-webdav
-    restart: unless-stopped
-    ports:
-      - '9001:8080'
-    environment:
-      - 'REFRESH_TOKEN=mytoken...'
-    image: messense/aliyundrive-webdav
-EOF
 
 echo "complete!! 请前往路径编辑配置"
+
+pip install aliyundrive-webdav
+
+aliyundrive-webdav -p 9001 --host 127.0.0.1 --refresh-token refreshtoken -U admin -W admin

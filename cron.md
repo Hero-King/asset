@@ -1,10 +1,11 @@
-https://www.cnblogs.com/zhoul/p/9931664.html
+# cron定时任务
+> https://www.cnblogs.com/zhoul/p/9931664.html
 在linux下，如果想要在未来的某个时刻执行某个任务，并且在未来的每一个这样的时刻里都要执行这个任务。举个简单的例子，比如说想要在将来，
 每天的十二点都重启路由器，大多数发行版都自带一个守护进程（daemon）cron来完成这项工作。这篇文章主要介绍了在linux上定期执行命令、脚本
 （cron，crontab，anacron）的相关知识
 
 
-1. cron，crontab以及anacron的关系
+## cron，crontab以及anacron的关系
 cron是大多数linux发行版都自带的守护进程（daemon），用来重复运行某些被设定好了确定的运行时间的任务，这些任务可以是每个月运行、每周运行、每天运行，
 甚至是每一分钟运行。用cron执行的任务适合于24小时运行的机器，cron执行的任务会在设定好的时刻执行，当机器处于关机状态下并错过了任务执行的时间，
 cron任务就无法预期执行了。
@@ -15,7 +16,7 @@ anacron不是守护进程，可以看做是cron守护进程的某种补充程序
 anacron会检查anacron任务是否在合适的周期执行了，如果未执行则在anacron设定好的延迟时间之后只执行一次任务，而不管任务错过了几次周期。
 举个例子，比如你设定了一个每周备份文件的任务，但是你的电脑因为你外出度假而处于关机状态四周，当你回到家中开机后，anacron会在延迟一定时间之后只备份一次文件。由于发行版的不同，cron守护进程如何运行anacron会有所不同。
 
-2.crontab命令，crontab文件语法
+## crontab命令，crontab文件语法
 
 系统默认crontab文件为/etc/crontab,以及/etc/cron.d/目录下的文件，有些程序会把自己的crontab文件放在/etc/cron.d/目录下。
 要修改/etc/crontab以及/etc/cron.d/目录下的文件需要root权限。cron守护进程会检查/etc/crontab以及/etc/cron.d/目录下的文件，
@@ -33,7 +34,7 @@ cron守护进程会检查/var/spool/cron目录下的文件，根据这些文件�
 EDITOR=vim; export EDITOR
 
 使用crontab -h 查看帮助
-当用 crontab -e 编辑当前用户的crontab文件时，首先写入以下内容。
+当用 crontab -e **编辑当前用户的crontab文件时，首先写入以下内容**。
 1 # crontab -e
  2 SHELL=/bin/bash
  3 MAILTO=root@example.com
@@ -92,7 +93,7 @@ MAILTO变量设置cron任务执行结果发送的邮箱，PATH设置去哪些目
 你可以把需要每个小时运行一次的脚本放到/etc/cron.hourly目录下，cron守护进程会每个小时都运行一次。
 当然/etc下面还有cron.daily/  cron.hourly/ cron.monthly/ weekly/
 
-2.3.限制可以使用cron的用户
+## 限制可以使用cron的用户
 
 在/etc/目录下，可能默认会有cron.allow以及cron.deny文件，也可能没有，没有的情况下可以自己创建，cron.allow文件包含了可以使用cron的用户名，cron.deny文件包含了不可以使用cron的用户名。两个文件中每个用户名占一行，并且不允许出现空格。
 
@@ -103,10 +104,11 @@ root用户在任何情况下都可以使用cron。
 假如cron.allow不存在，则列在cron.deny文件中的用户名不可以使用cron。
 
 
-3.用anacron执行周期性的任务
+## 用anacron执行周期性的任务
 
 anacron程序可以周期性的执行任务，但具体执行时间并不确定。可以每天、每周、每个月周期性的执行任务。当anacron的配置文件发生改变时，下一次anacron运行时会检查到配置文件的变化。anacron的配置文件为/etc/anacrontab,编辑需要root权限，默认以下内容：
 
+```
 # See anacron(8) and anacrontab(5) for details.
 SHELL=/bin/sh
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
@@ -120,8 +122,9 @@ START_HOURS_RANGE=3-22
 7  25  cron.weekly    nice run-parts /etc/cron.weekly
 @monthly 45  cron.monthly   nice run-parts /etc/cron.monthly
 可以看到前三行设置了默认环境，RANDOM_DELAY变量设置了最大延迟执行时间，START_HOURS_RANGE变量设置了anacron任务执行的时间范围，默认在每天的3点到22点之间。最后三行则设置了三条默认的anacron任务，分别是每天执行，每周执行，每月执行。
+```
 
-3.1.anacron文件语法
+### anacron文件语法
 
 观察前面三条默认的anacron任务，可以看到一条anacron任务分为四个部分，从左到右依次为：
 
@@ -131,7 +134,7 @@ START_HOURS_RANGE=3-22
 要执行的命令
 在/etc/anacrontab中的三条默认anacron任务中，nice命令用来调整后面命令的优先级，run-parts命令用来执行设置的目录下的所有脚本，就是说这三条任务分别每天，每周，每月执行/etc/cron.daily，/etc/cron.weekly，/etc/cron.monthly目录下的脚本。所以我们不用自己往/etc/anacrontab中添加anacrontab任务，而只需把脚本放到相应的目录下，anacron就会周期性的执行这些脚本了。
 
-3.2.anacron如何运行
+### 3.2.anacron如何运行
 
 既然anacron不是守护进程，那它是如何做到周期性执行任务的呢？在centos7下，cron会运行/etc/cron.d/0hourly，在/etc/cron.d/0hourly文件里，
 有一条cron任务是这样的：
@@ -146,7 +149,7 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=root
 HOME=/
 
-# run-parts
+## run-parts
 01 * * * * root run-parts /etc/cron.hourly
 02 4 * * * root run-parts /etc/cron.daily
 22 4 * * 0 root run-parts /etc/cron.weekly
@@ -164,10 +167,9 @@ run-parts:可以执行某个目录下的所有脚本文件
 
 
 
-Linux 进行工作排程的种类有两种，
+> Linux 进行工作排程的种类有两种，
 at 是执行突发性的 乐意处理并执行一次就结束的，依赖于atd这个服务
 crontab 这个指令是周期性的  也可以编辑文件
 Linux中有很多的周期性工作要做的  比如周期更新 locate数据库，文件位于/var/lib/mlocate
 	比如RPM登陆文件的建立
-
 At 设置好的定时任务 可以通过atq查询，通过atrm删除

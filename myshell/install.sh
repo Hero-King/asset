@@ -50,12 +50,7 @@ echo "export CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${J
 echo "export PATH=$PATH:${JAVA_HOME}/bin " >> /etc/profile && source /etc/profile
 
 # 安装nodejs
-node_url="https://mirrors.huaweicloud.com/nodejs/v12.22.3/node-v12.22.3-linux-x64.tar.xz"
-cd /usr/local/ && wget ${node_url}  && xz -d node-v12.22.3-linux-x64.tar.xz && \
-tar xvf node-v12.19.1-linux-x64.tar  && \
-echo "export NODE_HOME=/usr/local/node-v12.22.3" >> /etc/profile && source /etc/profile && echo "export PATH=$PATH:$NODE_HOME/bin " >> /etc/profile && source /etc/profile
-
-npm config set registry http://registry.npm.taobao.org/
+curl -fsSL https://rpm.nodesource.com/setup_16.x | bash -
 
 #maven 
 cd /usr/local/src/ && wget https://mirror.bit.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz && \

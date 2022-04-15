@@ -4,6 +4,8 @@
 
 # function： 编写hello world脚本
 echo "Hello World"
+# -e 开启转义
+echo "Hello World,echo -e输出转义字符或者输出带颜色字体 \n"
 echo -e  "Hello World,echo -e输出转义字符或者输出带颜色字体 \n"
 echo "\"Hello World\""   #使用\转义字符
 echo '我是单引号包裹的字符${PATH} 你看我没有输出环境变量，\" 你看我也没有转义字符'
