@@ -43,6 +43,13 @@ apt-get install -y gcc locate make build-essential openssl libssl-dev zlib1g-dev
 libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
 libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-dev
 
+# 更新locate数据库
+updatedb
+
+# 防止机器被扫描爆破工具 根据实时日志，统计请求数量，如果某个时间段，某种请求超过了阈值，就可以封禁该 IP 
+# 配置/etc/fail2ban/jail.conf 文件
+apt install fail2ban -y
+
 # 安装nginx
 apt install nginx -y
 

@@ -31,6 +31,13 @@ EOF
 
 echo "complete!! 请前往路径编辑配置"
 
-pip install aliyundrive-webdav
+# pip install aliyundrive-webdav
+# aliyundrive-webdav -p 9001 --host 127.0.0.1 --refresh-token refreshtoken -U admin -W admin
 
-aliyundrive-webdav -p 9001 --host 127.0.0.1 --refresh-token refreshtoken -U admin -W admin
+wget https://github.com/messense/aliyundrive-webdav/releases/download/v1.3.1/aliyundrive-webdav_1.3.1_arm64.deb
+dpkg -i aliyundrive-webdav_1.3.1_arm64.deb
+
+# 配置文件
+cat /etc/systemd/system/aliyundrive-webdav.service
+
+# 如果需要放在nginx 之后, 需要删除掉 --auto-index
