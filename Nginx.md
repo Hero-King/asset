@@ -12,6 +12,8 @@ rpm -ql nginx-mod-stream # 查看包nginx-mod-stream创建了哪些文件 如下
 # /usr/share/nginx/modules/mod-stream.conf 此文件被nginx.conf include到配置中
 ```
 
+> 如果需要正向代理 请安装第三方ngx_http_proxy_connect_module 模块 需要编译安装 使用gost也可以代理
+
 ## config
 
 ### 目录

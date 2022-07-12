@@ -1,4 +1,8 @@
 # 图解HTTP 笔记
+## http认证
+**http://admin:123456@192.168.1.1:8081**
+**http://user:password@www.baidu.com**
+<img src="./img/url-constructor-components-10.png"/>
 ## 网络基础
 TCP/IP 协议(protocol)
 TCP/IP 协议族按层次分别分为以下 4 层:应用层、传输层、网络层和数据链路层。
