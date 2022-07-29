@@ -46,6 +46,12 @@ libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-dev
 # 更新locate数据库
 updatedb
 
+# 安装 xauth 支持X11
+apt install -y xauth
+
+# 安装chrome
+# apt install -y chromium
+
 # 防止机器被扫描爆破工具 根据实时日志，统计请求数量，如果某个时间段，某种请求超过了阈值，就可以封禁该 IP 
 # 配置/etc/fail2ban/jail.conf 文件
 apt install fail2ban -y
@@ -82,8 +88,12 @@ wget https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-l
 # 安装mysql
 #docker pull mysql/mysql-server:8.0.22-1.1.18 && docker run -d --name=mysql1 -p 8080:8080 mysql/mysql-server:8.0.22-1.1.18 
 # 查看密码:  docker logs mysql1 2>&1 | grep GENERATED     docker exec -it mysql1 mysql -uroot -p 链接mysql  改密码: ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
-# update user set host= "%" where user = "root";
+#设置允许root用户远程登录 update user set host= "%" where user = "root";
 
+# 安装MySQL 本地
+# apt install mysql-server -y
+# 配置MySQL
+# mysql_secure_installation
 
 # git 设置
 # gitUrl="https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.28.0.tar.gz"
