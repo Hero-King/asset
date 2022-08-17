@@ -1,0 +1,17 @@
+Host www.heroking.top
+  HostName www.heroking.top
+  User root
+  ForwardAgent yes
+  # ProxyCommand C:\Users\XXX\AppData\Local\Programs\Git\mingw64\bin\connect.exe -S 127.0.0.1:10808 -a none %h %p
+Host m
+  HostName m.heroking.top
+  Port 22
+  User admin
+  ForwardAgent yes
+  ProxyCommand C:\Users\XXX\AppData\Local\Programs\Git\mingw64\bin\connect.exe -S 127.0.0.1:10808 -a none %h %p
+Host aml
+  HostName aml.heroking.top
+  Port 22
+  User root
+  ForwardAgent yes
+  ProxyCommand C:\Users\XXX\AppData\Local\Programs\Git\mingw64\bin\connect.exe -S 127.0.0.1:10808 -a none %h %p
