@@ -12,7 +12,7 @@ rpm -ql nginx-mod-stream # 查看包nginx-mod-stream创建了哪些文件 如下
 # /usr/share/nginx/modules/mod-stream.conf 此文件被nginx.conf include到配置中
 ```
 
-> 如果需要正向代理 请安装第三方ngx_http_proxy_connect_module 模块 需要编译安装 使用gost也可以代理
+> 如果需要正向代理 请安装第三方 ngx_http_proxy_connect_module 模块 需要编译安装 使用 gost 也可以代理
 
 ## config
 
@@ -39,6 +39,59 @@ location /books {
     root /new_home;
     try_files $uri $uri/ /books/index.html;
     index  index.html index.htm;
+}
+
+```
+
+v2ray 配置
+
+```shell
+location /ray { # 与 V2Ray 配置中的 path 保持一致
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:10000;#假设WebSocket监听在环回地址的10000端口上
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host $http_host;
+    # Show realip in v2ray access.log
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+
+{
+  "log": {
+    "loglevel": "warning",
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log"
+  },
+
+  "inbounds": [
+    {
+      "port": 10000,
+      "listen": "127.0.0.1",
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "b831381d-6384-4d53-ad4f",
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/ray"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
 }
 
 ```
