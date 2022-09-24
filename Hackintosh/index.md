@@ -63,3 +63,12 @@ https://blog.daliansky.net/clover-user-manual.html
 ### Mac 软件
 
 - Intel power Gadget
+- clover configurator
+
+### OpenCore
+官方文档： https://github.com/dortania/OpenCore-Install-Guide
+国光的黑苹果OC教程 https://apple.sqlsec.com/
+clover过度到oc: https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/Clover-config.md#graphics
+显卡伪冒设备Id : https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html
+
+ATI hd5450 => deviceId: 68E0 vendor ID: 1002(ATI显卡都是这个代码)

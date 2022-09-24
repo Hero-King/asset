@@ -15,7 +15,7 @@ mount 分区即可 如果乱码使用 iocharset指定编码
 fsck/xfs_repair 文件系统恢复  fsck.ext4
 命令 & 将进程放入bash后台执行
 jobs 查看bash后台  bg fg 命令
-nohub 可以脱机执行  可以 nohub *** &  
+nohub 可以脱机执行  可以 nohub *** &
 systemctl get-default/set-default/list-units(显示目前启动的units)/list-unit-files(显示/usr/lib/systemd/system里面的units)/list-dependencies[--reverse](显示依赖的服务或者被某服务依赖)  --type=??
 /var/log/messages 系统重要日志,崩溃或者添加设备等都可以查看这里的日志
 shsh 更改shell
@@ -29,7 +29,7 @@ LVM 硬盘分区后格式化文件系统可以使用LVM Logical Volume Manager(�
 VFS virtual filesystem Switch 内核提供的功能,针对不同文件系统提供统一的读写接口
 之前linux使用ext4 centos7后 默认使用xfs文件系统
 
-远程唤醒: WOL PCIE唤醒   yum install ethtool   ethtool -s [网卡名] wol g 是的系统支持远程唤醒;
+远程唤醒: WOL PCIE唤醒   yum install ethtool   ethtool -s [网卡名] wol g 是的系统支持远程唤醒;主板设置
 
 
 ```
