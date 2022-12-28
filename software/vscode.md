@@ -1,9 +1,12 @@
 ### win7安装ssh客户端
 https://www.mls-software.com/opensshd.html
+> win10已经自带ssh客户端、服务端程序
 
-### 修改终端为git bash
-vscode -> 设置 -> 搜索shell:window(找到terminal>integrated>SHell:window) > 打开JSON配置文件   
-修改terminal.integration.shell.windows 改为Git的bash.exe绝对路径
+### ~~修改终端为git bash~~
+~~vscode -> 设置 -> 搜索shell:window(找到terminal>integrated>SHell:window) > 打开JSON配置文件   
+修改terminal.integration.shell.windows 改为Git的bash.exe绝对路径~~ 
+
+`win10不在需要使用git bash, powershell已经比较不错了`
 
 ### 使用remote-ssh插件实现云开发
 你是否还在为重装系统、换用其他OS而需要重装IDE，插件等而烦恼，现在使用remote-ssh就可以实现在linux远程开发 vacode-server占用内存400M左右
@@ -11,6 +14,7 @@ vscode -> 设置 -> 搜索shell:window(找到terminal>integrated>SHell:window) >
 - 安装具有ssh功能的模块，windows7推荐使用git win10自带openssh客户端，在vscode中设置默认的终端是git
 - 安装remote-ssh插件并保存连接，输入密码
 - linux云主机安装vscode-server，之前的连接会在/root/.vscode-server生成目录，这里要讲一下，如果是有网环境，bin/${vscode-server git版本的commitId}/目录下面会自动下载好适配本地vscode版本的vscode-server，如果没有，则手动下载解压到当前目录 参考：https://www.cnblogs.com/litaozijin/p/13202992.html 
+- 如果vscode版本大于1.64 vscode加入了“接受条约”的要求，强制要求用户需要去阅读确认后手动修改以表明接受其声明, 需要`vim ~/.vscode-server/bin/${hash}/server.sh` 追加`--accept-server-license-terms`参数
 - 至此可以正常连接使用了，可以配置秘钥免密码登陆，插件需要把本地插件安装到ssh中
 
 ### ssh连接走自己的代理服务器
