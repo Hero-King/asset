@@ -86,14 +86,20 @@ systemctl restart docker
 wget https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-linux-aarch64 -O /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 
 # 安装mysql
+# docker pull mysql/mysql-server   docker run -d --name=mysql -p 33060:33060 -e MYSQL_ROOT_PASSWORD=123456 -v /mysql/conf:/etc/mysql/conf.d -v /mysql/logs:/logs -v /mysql/data:/var/lib/mysql   mysql/mysql-server:8.0 
 #docker pull mysql/mysql-server:8.0.22-1.1.18 && docker run -d --name=mysql1 -p 8080:8080 mysql/mysql-server:8.0.22-1.1.18 
 # 查看密码:  docker logs mysql1 2>&1 | grep GENERATED     docker exec -it mysql1 mysql -uroot -p 链接mysql  改密码: ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
-#设置允许root用户远程登录 update user set host= "%" where user = "root";
+#设置允许root用户远程登录 update user set host= "%" where user = "root"; 
+#允许某个用户在任何主机可以访问mysql服务器 GRANT ALL PRIVILEGES ON *.* TO '用户名'@'%' IDENTIFIED BY '密码' WITH GRANT OPTION;    FLUSH PRIVILEGES;
+
 
 # 安装MySQL 本地
 # apt install mysql-server -y
 # 配置MySQL
 # mysql_secure_installation
+
+# 安装redis
+# apt install redis-server 配置绑定地址等信息
 
 # git 设置
 # gitUrl="https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.28.0.tar.gz"
