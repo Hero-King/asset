@@ -12,5 +12,8 @@
     "url": "https://gitee.com/Hero-King/asset.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.9.9"
+  }
 }
