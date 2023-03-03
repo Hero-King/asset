@@ -1,16 +1,16 @@
 {
-    "printWidth": 150,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "tabWidth": 2,
-    "useTabs": false,
-    "semi": false,
-    "overrides": [
-      {
-        "files": ".prettierrc",
-        "options": {
-          "parser": "json"
-        }
+  "printWidth": 150,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": {
+        "parser": "json"
       }
-    ]
+    }
+  ]
 }

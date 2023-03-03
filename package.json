@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "gitbook serve",
-    "build": "gitbook build "
+    "start": "npm run docs:dev",
+    "nav": "vuepress nav docs -f",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "lint": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -14,6 +17,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vuepress": "^1.9.9"
+    "prettier": "2.8.4",
+    "vuepress": "^1.9.9",
+    "vuepress-plugin-auto-sidebar": "^2.3.2"
   }
 }
