@@ -6,6 +6,7 @@ export default defineConfig({
   description: '学习犹如逆水行舟,不进则退',
   title: 'HeroKing的个人笔记',
   // base: "/", //Vue原型上有 $withBase 取值当前base
+  dest: './dist', // 设置输出目录
 
   plugins: [
     [

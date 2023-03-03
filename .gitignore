@@ -13,3 +13,6 @@ _book
 
 package-lock.json
 yarn.lock
+dist
+.temp
+.cache
