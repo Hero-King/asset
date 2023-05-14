@@ -18,7 +18,6 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 2. 学习数据结构与算法 先看书籍<大话数据结构>
 3. g2
 4. big.js
-5. poros
 
 ### 50projects50days
 

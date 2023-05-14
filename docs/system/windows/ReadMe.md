@@ -47,9 +47,9 @@ https://code.visualstudio.com/updates/v1_71 使用 github 账号同步设置
 
 #### 拓展
 
-- Proxy SwitchyOmega(请求转向代理服务器)
+- <a :href="$withBase('/chromeExtensions/SwitchyOmega_Chromium.crx')">Proxy SwitchyOmega(请求转向代理服务器) </a>
 
-- FeHelper(前端助手)
+- <a :href="$withBase('/chromeExtensions/fehelper.crx')">FeHelper(前端助手) </a>
 
 - Octotree(github 代码树)
 
@@ -62,7 +62,8 @@ https://code.visualstudio.com/updates/v1_71 使用 github 账号同步设置
 - Vue.js devtools
 
 - Tampermonkey
-  1. Open the Fuckking URL Right Now(知乎等网站外链直接跳转)
+  1. <a :href="$withBase('/chromeExtensions/tampermonkey.js')"> 自己的脚本 </a>
+  2. Open the Fuckking URL Right Now(知乎等网站外链直接跳转)
 
 ### Nodejs
 
