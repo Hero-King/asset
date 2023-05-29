@@ -169,6 +169,68 @@ Navicat Premium / Sqlyog (小海豚)
 
 调整聊天记录存储目录
 
+### code-server
+前往 <a href='https://coder.com/docs/code-server/latest'>官方网站</a> 下载一键安装脚本 
+
+#### 安装
+```shell 
+curl -fsSL https://code-server.dev/install.sh | sh
+```
+
+#### 配置
+- NGINX 转发  必须Https才能支持 serviceWork
+```
+    server {
+       listen       443 ssl ;
+       listen       [::]:443 ssl ;
+       server_name  code.heroking.top;
+
+       ssl_certificate "/etc/pki/nginx/code.heroking.top.pem";
+       ssl_certificate_key "/etc/pki/nginx/private/code.heroking.top.key";
+       ssl_session_timeout  10m;
+       ssl_ciphers HIGH:!aNULL:!MD5;
+       ssl_prefer_server_ciphers on;
+
+        # 使用其他路径访问
+        #location /code/ {
+        #    proxy_pass http://localhost:10000/;
+        #    proxy_set_header Host $host;
+        #    proxy_set_header Upgrade $http_upgrade;
+        #    proxy_set_header Connection upgrade;
+        #    proxy_set_header Accept-Encoding gzip;
+        #}
+        location / {
+            proxy_pass http://localhost:10000/;
+            proxy_set_header Host $host;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection upgrade;
+            proxy_set_header Accept-Encoding gzip;
+        }
+   }
+```
+
+- 配置code-server   
+`cat ~/.config/code-server/config.yaml`
+
+#### 远程访问devServer
+打开 /proxy/<port>/  或者 /absproxy/<port>/  会自动代理到port下
+
+因此,需要devtools打包路径(publicPath)到 /proxy/<port>/  或者 /absproxy/<port>/
+
+- vue项目
+```
+const port = 8080
+devServer: {
+        host: "0.0.0.0",
+        disableHostCheck: true,
+        port,
+        // https://www.webpackjs.com/configuration/dev-server/#devserver-public 解决sockPath远程环境总是指向本机IP的问题
+        public: `https://code.heroking.top/absproxy/${port}/`,
+        sockPath: `absproxy/${port}/sockjs-node`,
+    }
+```
+
+
 ### 其他软件
 
 - everything windows 文件搜索
