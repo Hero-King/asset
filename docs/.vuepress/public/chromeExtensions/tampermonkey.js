@@ -12,7 +12,7 @@
 ;(function () {
   'use strict'
 
-  console.log('HeroKing scripts run');
+  console.log('HeroKing scripts run')
 
   const d = document
   if (location && location.host.includes('localhost:')) {
@@ -43,4 +43,38 @@
     })
   }
 
+  window.addEventListener('load', () => {
+    removeAds()
+    svoltBasePriceCalc()
+  })
+
+  function removeAds() {
+    // 去除网页google广告
+    const gooads = d.querySelectorAll('ins.adsbygoogle')
+    for (let i = 0; i < gooads.length; i++) {
+      const ele = gooads[i]
+      ele.parentElement.removeChild(ele)
+    }
+  }
+
+  // 底价专利
+  function svoltBasePriceCalc() {
+    if (location.href.startsWith('http://10.36.30.83/login')) {
+      const h3 = document.querySelector('#app > div > form > h3')
+      h3.style.fontSize = '24px'
+      h3.style.color = '#000'
+      h3.innerText = title
+    }
+    if (location.href.startsWith('http://10.36.30.83/basepricecalc/pricemanage/index')) {
+      let drop = document.querySelector('.sidebar-logo-container > .el-dropdown')
+      drop.remove()
+      const logoContainer = d.querySelector('.sidebar-logo-container > div')
+      logoContainer.removeChild(logoContainer.firstChild)
+      let h3 = document.createElement('h3')
+      h3.innerText = title
+      h3.style.fontSize = '16px'
+      h3.style.color = '#FFF'
+      logoContainer.appendChild(h3)
+    }
+  }
 })()
