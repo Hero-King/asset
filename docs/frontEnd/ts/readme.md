@@ -1,10 +1,10 @@
-## typescript
+# typescript
 
 ```shell
 npm install -g typescript
 ```
 
-### 配置文件 tsconfig.json
+## 配置文件 tsconfig.json
 
 生成默认配置 `tsc --init`
 
@@ -89,3 +89,60 @@ npm install -g typescript
 }
 
 ```
+
+## 基础类型 
+多种类型用 | 隔开
+
+1.  boolean
+2.  number
+3.  string
+4.  数组 number[] / 泛型 Array<number>  ReadonlyArray<T>
+5.  元组(Tuple) let x: [string, number];
+6.  枚举
+    ```ts
+      enum Color {Red, Green, Blue} // 默认情况下，从0开始为元素编号。
+      let c: Color = Color.Green;   // 1
+
+      enum Color {Red = 1, Green, Blue}
+      let colorName: string = Color[2]; // 'Green'
+
+      console.log(colorName);  // 显示'Green'因为上面代码里它的值是2
+    ```
+7. Any
+8. Void  当一个函数没有返回值时，你通常会见到其返回值类型是 void  / 声明一个void类型的变量没有什么大用，因为你只能为它赋予undefined和null
+9. undefined
+10. null
+11. never类型表示的是那些永不存在的值的类型。比如那些总是会抛出异常或根本就不会有返回值
+12. object
+
+### 类型断言
+```ts
+let someValue: any = "this is a string";
+let strLength: number = (someValue as string).length;
+```
+
+## 接口
+接口的作用就是为这些类型命名和为你的代码或第三方代码定义契约。
+```ts
+interface LabelledValue {
+  label: string;
+  color?: string;  //可选属性
+  readonly x: number;  //只读属性
+  [propName: string]: any; // 字符串索引签名
+}
+
+function printLabel(labelledObj: LabelledValue) {
+  console.log(labelledObj.label);
+}
+```
+
+注意: 如果一个对象字面量存在任何“目标类型”不包含的属性时，你会得到一个错误。
+解决: 
+  - 最简便的方法是使用类型断言
+  - 最佳的方式是能够添加一个字符串索引签名,  [propName: string]: any;
+
+### 继承接口
+
+interface Square extends Shape, PenStroke  {
+    sideLength: number;
+}
