@@ -2,6 +2,9 @@
 
 ```shell
 npm install -g typescript
+tsc -v
+tsc ***.ts  xxx.ts ddd.ts	// 编译ts -> js
+
 ```
 
 ## 配置文件 tsconfig.json
@@ -91,44 +94,94 @@ npm install -g typescript
 ```
 
 ## 基础类型 
-多种类型用 | 隔开
+联合类型: 多种类型用 | 隔开  
 
-1.  boolean
+1.  boolean 
 2.  number
-3.  string
-4.  数组 number[] / 泛型 Array<number>  ReadonlyArray<T>
-5.  元组(Tuple) let x: [string, number];
-6.  枚举
-    ```ts
-      enum Color {Red, Green, Blue} // 默认情况下，从0开始为元素编号。
-      let c: Color = Color.Green;   // 1
 
-      enum Color {Red = 1, Green, Blue}
-      let colorName: string = Color[2]; // 'Green'
+1. string
 
-      console.log(colorName);  // 显示'Green'因为上面代码里它的值是2
-    ```
-7. Any
-8. Void  当一个函数没有返回值时，你通常会见到其返回值类型是 void  / 声明一个void类型的变量没有什么大用，因为你只能为它赋予undefined和null
-9. undefined
-10. null
-11. never类型表示的是那些永不存在的值的类型。比如那些总是会抛出异常或根本就不会有返回值
-12. object
+2. 数组 number[] / 泛型 Array<number>  ReadonlyArray<T>
+
+3. 元组(Tuple) let x: [string, number];
+
+4. 枚举
+   ```ts
+     enum Color {Red, Green, Blue} // 默认情况下，从0开始为元素编号。
+     let c: Color = Color.Green;   // 1
+   
+     enum Color {Red = 1, Green, Blue}
+     let colorName: string = Color[2]; // 'Green'
+   
+     console.log(colorName);  // 显示'Green'因为上面代码里它的值是2
+   ```
+
+5. Any
+
+6. Void  当一个函数没有返回值时，你通常会见到其返回值类型是 void  / 声明一个void类型的变量没有什么大用，因为你只能为它赋予undefined和null
+
+7. undefined
+
+8. null
+
+9. never类型表示的是那些永不存在的值的类型。比如那些总是会抛出异常或根本就不会有返回值
+
+10. object
+
+11. 字面量类型  
+
+```
+let bl: 'male' | 'demale' = 'male'  // bl 只能是这两个字符串
+let person: {name: string, age: number}
+
+person = {
+    name: '12',
+    age: 10,
+}
+```
+
+
 
 ### 类型断言
+
+语法格式:   值 as 类型  或者   <类型>值
+
 ```ts
 let someValue: any = "this is a string";
 let strLength: number = (someValue as string).length;
+let strLength: number = (<string>someValue).length;
 ```
 
+## 函数
+
+可选参数使用?  同接口
+
+```tsx
+function add(x: number, y: number): number {
+    return x + y;
+}
+
+let myAdd = function(x: number, y: number = 12 ): number { return x + y; };
+
+// 剩余参数
+function buildName(firstName: string, ...restOfName: string[]) {
+  return firstName + " " + restOfName.join(" ");
+}
+```
+
+
+
 ## 接口
+
 接口的作用就是为这些类型命名和为你的代码或第三方代码定义契约。
 ```ts
 interface LabelledValue {
   label: string;
   color?: string;  //可选属性
   readonly x: number;  //只读属性
+  sayHi: ()=>string   
   [propName: string]: any; // 字符串索引签名
+
 }
 
 function printLabel(labelledObj: LabelledValue) {
@@ -141,11 +194,13 @@ function printLabel(labelledObj: LabelledValue) {
   - 最简便的方法是使用类型断言
   - 最佳的方式是能够添加一个字符串索引签名,  [propName: string]: any;
 
-
-### 导入导出
-
 ### 继承接口
 
 interface Square extends Shape, PenStroke  {
     sideLength: number;
 }
+
+
+
+## 泛型
+
