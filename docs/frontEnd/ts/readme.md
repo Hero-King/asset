@@ -141,6 +141,9 @@ function printLabel(labelledObj: LabelledValue) {
   - 最简便的方法是使用类型断言
   - 最佳的方式是能够添加一个字符串索引签名,  [propName: string]: any;
 
+
+### 导入导出
+
 ### 继承接口
 
 interface Square extends Shape, PenStroke  {
