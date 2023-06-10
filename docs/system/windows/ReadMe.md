@@ -159,7 +159,8 @@ linux: https://repo.huaweicloud.com/apache/maven/maven-3/3.8.7/binaries/apache-m
 
 ### idea
 
-官网下载 激活教程: https://www.pycharm6.com/idea.html
+官网下载 激活教程: ~~https://www.pycharm6.com/idea.html~~
+使用这个: https://github.com/libin9iOak/ja-netfilter-all
 
 ### 数据库客户端
 
@@ -230,6 +231,9 @@ devServer: {
     }
 ```
 
+### Python
+
+https://mirrors.huaweicloud.com/python
 
 ### 其他软件
 
