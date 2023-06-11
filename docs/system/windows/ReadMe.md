@@ -214,9 +214,9 @@ curl -fsSL https://code-server.dev/install.sh | sh
 `cat ~/.config/code-server/config.yaml`
 
 #### 远程访问devServer
-打开 /proxy/<port>/  或者 /absproxy/<port>/  会自动代理到port下
+打开 `/proxy/<port>/`  或者 `/absproxy/<port>/`  会自动代理到port下
 
-因此,需要devtools打包路径(publicPath)到 /proxy/<port>/  或者 /absproxy/<port>/
+因此,需要devtools打包路径(publicPath)到 `/proxy/<port>/`  或者 `/absproxy/<port>/`
 
 - vue项目
 ```

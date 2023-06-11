@@ -1,6 +1,6 @@
-## ActiveMq
+# ActiveMq
 
-### 安装
+## 安装
 
 使用 docker 安装
 
@@ -17,36 +17,36 @@ docker run -p 61616:61616 --name activemq -d  -p 61614:61614 -p 1883:1883  -p 81
 > 1883 MQTT (since `rmohr/activemq:5.12.1`)  
 > 61614 WS (since `rmohr/activemq:5.12.1`)
 
-### Web console
+## Web console
 
 web 控制台 http://ip:8161 默认用户名密码 admin/admin
 <img :src="$withBase('/img/activemq_manage.jpg')"/>
 
-### 原理
+## 原理
 
-#### 优势
+### 优势
 
 1、解耦  
 2、削峰  
 3、异步
 
-#### 消息类型
+### 消息类型
 
 - 一对一(Point To Point)的 queue
 - 一对多的发布订阅(订阅者只能接收到订阅后 发布者发布的消息)的 Topic
 
-### 连接
+## 连接
 
 <a href="https://activemq.apache.org/connectivity"> 官方指导文档</a>
 
 - 支持 Ajax
 - 支持 websocket 需要使用 Stomp 比如<a href="https://github.com/jmesnil/stomp-websocket">STOMP.js</a>基于 websocket 技术创建 Stomp 客户端
 
-### Topic
+## Topic
 
 消息一对多
 
-#### 前端直连
+### 前端直连
 
 使用 mqtt (只能使用发布/订阅模式,好像不支持 queue)
 

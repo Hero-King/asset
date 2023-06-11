@@ -101,7 +101,7 @@ tsc ***.ts  xxx.ts ddd.ts	// 编译ts -> js
 
 1. string
 
-2. 数组 number[] / 泛型 Array<number>  ReadonlyArray<T>
+2. 数组 number[] / 泛型 `Array<number>  ReadonlyArray<T>`
 
 3. 元组(Tuple) let x: [string, number];
 

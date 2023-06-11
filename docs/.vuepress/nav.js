@@ -1,113 +1,121 @@
 module.exports = [
   {
-    text: 'afterEnd',
-    items: [
+    "text": "afterEnd",
+    "items": [
       {
-        text: 'mongodb',
-        link: '/afterEnd/mongodb/'
+        "text": "Mongodb",
+        "link": "/afterEnd/mongodb/"
       },
       {
-        text: 'mysql',
-        link: '/afterEnd/mysql/'
+        "text": "Python",
+        "link": "/afterEnd/python/"
       },
       {
-        text: 'nginx',
-        link: '/afterEnd/nginx/'
+        "text": "Mysql",
+        "link": "/afterEnd/mysql/"
       },
       {
-        text: 'redis',
-        link: '/afterEnd/redis/'
+        "text": "Nginx",
+        "link": "/afterEnd/nginx/"
       },
       {
-        text: 'jms',
-        link: '/afterEnd/JMS/'
+        "text": "Redis",
+        "link": "/afterEnd/redis/"
+      },
+      {
+        "text": "JMS",
+        "link": "/afterEnd/JMS/"
+      },
+      {
+        "text": "After End",
+        "link": "/afterEnd/"
       }
     ]
   },
   {
-    text: 'algorithms',
-    items: [
+    "text": "algorithms",
+    "items": [
       {
-        text: 'algorithms',
-        link: '/algorithms/'
+        "text": "Algorithms",
+        "link": "/algorithms/"
       }
     ]
   },
   {
-    text: 'frontEnd',
-    items: [
+    "text": "frontEnd",
+    "items": [
       {
-        text: 'ts',
-        link: '/frontEnd/ts/'
+        "text": "Front End",
+        "link": "/frontEnd/"
       },
       {
-        text: 'frontEnd',
-        link: '/frontEnd/'
+        "text": "Ts",
+        "link": "/frontEnd/ts/"
       }
     ]
   },
   {
-    text: 'life',
-    items: [
+    "text": "life",
+    "items": [
       {
-        text: 'life',
-        link: '/life/'
+        "text": "Life",
+        "link": "/life/"
       }
     ]
   },
   {
-    text: 'network',
-    items: [
+    "text": "network",
+    "items": [
       {
-        text: 'network',
-        link: '/network/'
+        "text": "Network",
+        "link": "/network/"
       },
       {
-        text: 'proxy',
-        link: '/network/proxy/'
+        "text": "Proxy",
+        "link": "/network/proxy/"
       }
     ]
   },
   {
-    text: 'software',
-    items: [
+    "text": "software",
+    "items": [
       {
-        text: 'ftp',
-        link: '/software/ftp/ftp'
+        "text": "Ftp",
+        "link": "/software/ftp/"
       },
       {
-        text: 'git',
-        link: '/software/git/git'
+        "text": "Git",
+        "link": "/software/git/"
       },
       {
-        text: 'samba',
-        link: '/software/samba/samba'
+        "text": "Samba",
+        "link": "/software/samba/"
       },
       {
-        text: 'software',
-        link: '/software/'
+        "text": "Software",
+        "link": "/software/"
       }
     ]
   },
   {
-    text: 'system',
-    items: [
+    "text": "system",
+    "items": [
       {
-        text: 'hackintosh',
-        link: '/system/Hackintosh/'
+        "text": "Hackintosh",
+        "link": "/system/Hackintosh/"
       },
       {
-        text: 'linux',
-        link: '/system/linux/'
+        "text": "Linux",
+        "link": "/system/linux/"
       },
       {
-        text: 'system',
-        link: '/system/'
+        "text": "System",
+        "link": "/system/"
       },
       {
-        text: 'windows',
-        link: '/system/windows/'
+        "text": "Windows",
+        "link": "/system/windows/"
       }
     ]
   }
-]
+];
