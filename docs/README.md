@@ -14,7 +14,6 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 ### Plan
 
-1. vuepress 将 asset 项目 部署到 aml 机器中; 优化 md 文件
 2. 学习数据结构与算法 先看书籍<大话数据结构>
 3. g2
 4. big.js
