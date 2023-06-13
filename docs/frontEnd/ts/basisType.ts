@@ -4,11 +4,28 @@ const age: number = 10
 const numArr: number[] = [1, 2, 3, 5]
 const numArr2: Array<number> = [1, 2, 3, 5]
 
+// type : 类型别名  接口创建了一个新的名字，可以在其它任何地方使用。 类型别名并不创建新名字—比如，错误信息就不会使用别名。 在下面的示例代码里，在编译器中将鼠标悬停在 interfaced上，显示它返回的是 Interface，但悬停在 aliased上时，显示的却是对象字面量类型。
+// 另一个重要区别是类型别名不能被 extends和 implements（自己也不能 extends和 implements其它类型）。
+type Alias = { num: number }
+interface Interface {
+  num: number
+}
+
+// 交叉类型 & 与操作
+type buttonType = 'small' | 'mini' | 'default'
+type defaultButton = 'default'
+export type buttonTypeMix = buttonType & defaultButton // 'default'
+// 常用于与对象  表示多个对象中字段必须有
+type obj1 = { name: string }
+type obj2 = { age: string }
+let t: obj1 & obj2 = { name: 'name', age: '1212' }
+
 const tuple: [string, number] = ['12', 23]
 
 // 字面量类型
 let bl: 'male' | 'demale' = 'male'
 
+// 枚举
 enum Color {
   Red,
   Green
@@ -17,6 +34,7 @@ enum Color {
 const color: Color = Color.Red
 console.log(color, 'enum color')
 
+// 函数
 function justLog(param: string): void {
   console.log(param)
 }
@@ -29,10 +47,14 @@ const add = (x: number, y: number, ...rest: number[]): number => {
   return rest.reduce((p, c) => p + c, x + y)
 }
 
-
-let person: {name: string, age: number}
-
+let person: { name: string; age: number }
 person = {
-    name: '12',
-    age: 10,
+  name: '12',
+  age: 10
 }
+
+// 必须有name属性, 其他属性类型为any
+let j: { name: string; [propname: string]: any }
+
+// 函数类型
+let fun: (a: number, b: number) => number
