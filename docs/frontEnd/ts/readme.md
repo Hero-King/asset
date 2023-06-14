@@ -166,6 +166,14 @@ let strLength: number = (<string>someValue).length
 
 <<< @/docs/frontEnd/ts/class.ts
 
+
+
+### 抽象类
+
+- 不能被实例化 专门用来被其他类继承的 
+
+- 抽象方法 没有方法体
+
 ## 函数
 
 可选参数使用? 同接口
@@ -209,6 +217,12 @@ function printLabel(labelledObj: LabelledValue) {
 - 最简便的方法是使用类型断言
 - 最佳的方式是能够添加一个字符串索引签名, [propName: string]: any;
 
+
+
+> 接口支持声明多次, 那么结果就是组合之后的内容  type只能声明一次
+
+
+
 ### 示例
 
 <<< @/docs/frontEnd/ts/interface.ts
@@ -222,3 +236,28 @@ interface Square extends Shape, PenStroke {
 ```
 
 ## 泛型
+
+<<< @/docs/frontEnd/ts/t.ts
+
+## 命名空间namespace
+
+`解决命名冲突问题`  命名空间定义了标识符的可见范围，一个标识符可在多个名字空间中定义，它在不同名字空间中的含义是互不相干的。
+
+> 拒绝命名空间和模块化一起使用, 没啥意义
+
+<<< @/docs/frontEnd/ts/namespace.ts
+
+
+
+## 声明文件
+
+没使用ts书写的工具库在使用时, ts不能知道他的类型和方法, 从而引申出了声明文件 .d.ts
+
+```tsx
+declare var jQuery: (selector: string) => any;
+// declare 定义的类型只会用于编译时的检查，编译结果中会被删除。
+// 其他文件引入 <reference path = "xxx.d.ts" />
+```
+
+
+

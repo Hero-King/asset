@@ -16,6 +16,23 @@ function test<T, K>(a: T, b: K): K {
   return b
 }
 
+interface IItem {
+  length: number
+}
+
+// 约束泛型
+function getItem<T extends IItem>(a: T): number {
+  return a.length
+}
+
+class SomeClass<T> {
+  name: T
+  constructor(name: T) {
+    this.name = name
+  }
+}
+const sc =  new SomeClass<string>('12')
+
 test<number, string>(10, 'hello')
 
 function myLog(params: StrAndNum) {

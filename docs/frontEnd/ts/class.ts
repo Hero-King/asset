@@ -1,4 +1,4 @@
-class Person {
+export class Person {
   // 属性修饰符 属性名 : 类型
   name: string
   age: number

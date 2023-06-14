@@ -13,7 +13,8 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 ## TODO
 
 ### Plan
-
+0. 体验serverless 云函数
+1. 体验aws CodeWhisperer
 2. 学习数据结构与算法 先看书籍<大话数据结构>
 3. g2
 4. big.js
