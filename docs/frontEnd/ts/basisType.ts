@@ -11,8 +11,11 @@ interface Interface {
   num: number
 }
 
-// 交叉类型 & 与操作
-type buttonType = 'small' | 'mini' | 'default'
+// 函数类型
+let fun: (a: number, b: number) => number
+
+// 交叉类型 & 与操作  联合函数类型
+type buttonType = 'small' | 'mini' | 'default' | (() => string)
 type defaultButton = 'default'
 export type buttonTypeMix = buttonType & defaultButton // 'default'
 // 常用于与对象  表示多个对象中字段必须有
@@ -55,6 +58,3 @@ person = {
 
 // 必须有name属性, 其他属性类型为any
 let j: { name: string; [propname: string]: any }
-
-// 函数类型
-let fun: (a: number, b: number) => number

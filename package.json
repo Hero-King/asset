@@ -8,7 +8,7 @@
     "nav": "vuepress nav docs -f",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:publish": "npm run docs:build && scp -r ./dist/* aml.heroking.top:/var/www/aml/",
+    "docs:publish": "npm run docs:build && scp -r ./dist/* aml.heroking.top:/var/www/aml/asset",
     "lint": "prettier --write ."
   },
   "repository": {
