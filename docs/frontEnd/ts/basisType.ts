@@ -37,6 +37,15 @@ enum Color {
 const color: Color = Color.Red
 console.log(color, 'enum color')
 
+enum SomeType {
+  'Success' = 'Suc',
+  'Fail' = 'F'
+}
+
+let someType: SomeType = SomeType.Success
+console.log(someType);
+
+
 // 函数
 function justLog(param: string): void {
   console.log(param)
