@@ -13,8 +13,9 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 ## TODO
 
 ### Plan
-0. 体验serverless 云函数
-1. 体验aws CodeWhisperer
+
+0. 体验 serverless 云函数
+1. 体验 aws CodeWhisperer
 2. 学习数据结构与算法 先看书籍<大话数据结构>
 3. g2
 4. big.js
@@ -22,3 +23,8 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 ### 50projects50days
 
 ### vue 源码
+
+## bookmark
+
+<a href="https://www.bookstack.cn/" > 书栈网</a>
+<a href="https://gitee.com/only4/computer-related-books/blob/master/README.md#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B1%BB%E7%94%B5%E5%AD%90%E4%B9%A6"> 计算机类电子书 </a>
