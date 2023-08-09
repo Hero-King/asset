@@ -15,6 +15,7 @@ let output = identity<string>('myString') // type of output will be 'string'
 function test<T, K>(a: T, b: K): K {
   return b
 }
+test<number, string>(10, 'hello')
 
 interface IItem {
   length: number
@@ -31,9 +32,8 @@ class SomeClass<T> {
     this.name = name
   }
 }
-const sc =  new SomeClass<string>('12')
-
-test<number, string>(10, 'hello')
+const sc = new SomeClass<string>('12')
+console.log(sc.name) // string 类型
 
 function myLog(params: StrAndNum) {
   console.log(params)

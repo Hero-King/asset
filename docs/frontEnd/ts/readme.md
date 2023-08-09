@@ -25,8 +25,8 @@ tsc ***.ts  xxx.ts ddd.ts	// 编译ts -> js
     /* 基本选项 */
     "incremental": true /* 启用增量编译 */,
     "target": "ESNEXT" /* 指定 ECMAScript 目标版本：'ES3'、'ES5'（默认）、'ES2015'、'ES2016'、'ES2017'、'ES2018'、'ES2019'、'ES2020' 或 'ESNEXT'。 */,
-    "module": "commonjs" /* 指定模块代码生成：“none”、“commonjs”、“amd”、“system”、“umd”、“es2015”、“es2020”或“ESNext”。 */,
-    "lib": [] /* 指定要包含在编译中的库文件。 */,
+    "module": "commonjs" /* 设置编译后代码使用的模块化系统; 指定模块代码生成：“none”、“commonjs”、“amd”、“system”、“umd”、“es2015”、“es2020”或“ESNext”。 */,
+    "lib": [] /* 指定代码运行时所包含的库（宿主环境）。ES5、ES6/ES2015、ES7/ES2016、ES2017 ...、ESNext、DOM等 如果不包含dom 那就找不到dom相关的类型声明*/,
     "allowJs": true /* 允许编译 javascript 文件。 */,
     "checkJs": true /* 报告 .js 文件中的错误。 */,
     "jsx": "preserve" /* 指定 JSX 代码生成：'preserve'、'react-native' 或 'react'。 */,
@@ -122,7 +122,7 @@ tsc ***.ts  xxx.ts ddd.ts	// 编译ts -> js
     console.log(colorName) // 显示'Green'因为上面代码里它的值是2
     ```
 
-7.  Any
+7.  Any 不指定类型时 编译器默认 any 类型
 
 8.  Void 当一个函数没有返回值时，你通常会见到其返回值类型是 void / 声明一个 void 类型的变量没有什么大用，因为你只能为它赋予 undefined 和 null
 
@@ -160,17 +160,42 @@ let strLength: number = (someValue as string).length
 let strLength: number = (<string>someValue).length
 ```
 
+## 高级类型
+
+### 交叉类型
+
+- interface & interface   =>  把现有的多种类型叠加到一起成为一种类型，它包含了所需的所有类型的特性。
+- 字面量类型 & 字面量类型  => 共有的类型
+
+### 联合类型
+
+表示一个值可以是几种类型之一
+
+- `number | string | boolean`表示一个值可以是`number`，`string`，或`boolean`。
+- interface | interface  => 如果一个值是联合类型，我们只能访问此联合类型的所有类型里共有的成员。
+
+### typeof类型保护
+
+`typeof`操作符用于获取变量的类型，因此操作符后面接的始终是一个变量。
+
+
+### keyof
+
+`keyof`操作符后面接一个类型，生成由`string`或者`number`组成的联合字面量类型。
+
+### 示例
+
+<<< @/docs/frontEnd/ts/advancedType.ts
+
 ## 类 Class
 
 定义类
 
 <<< @/docs/frontEnd/ts/class.ts
 
-
-
 ### 抽象类
 
-- 不能被实例化 专门用来被其他类继承的 
+- 不能被实例化 专门用来被其他类继承的
 
 - 抽象方法 没有方法体
 
@@ -217,9 +242,16 @@ function printLabel(labelledObj: LabelledValue) {
 - 最简便的方法是使用类型断言
 - 最佳的方式是能够添加一个字符串索引签名, [propName: string]: any;
 
+> 接口支持声明多次, 那么结果就是组合之后的内容 type 只能声明一次
 
+### type 和 interface区别
 
-> 接口支持声明多次, 那么结果就是组合之后的内容  type只能声明一次
+|          | type                 | interface                |
+| -------- | -------------------- | ------------------------ |
+| 功能     | 类型别名             | 接口类型                 |
+|          | 可以给任意类型起别名 | 只能表示接口类型         |
+| 多次定义 | type不支持           | 会被视为合并所有声明成员 |
+
 
 
 
@@ -239,25 +271,20 @@ interface Square extends Shape, PenStroke {
 
 <<< @/docs/frontEnd/ts/t.ts
 
-## 命名空间namespace
+## 命名空间 namespace
 
-`解决命名冲突问题`  命名空间定义了标识符的可见范围，一个标识符可在多个名字空间中定义，它在不同名字空间中的含义是互不相干的。
+`解决命名冲突问题` 命名空间定义了标识符的可见范围，一个标识符可在多个名字空间中定义，它在不同名字空间中的含义是互不相干的。
 
 > 拒绝命名空间和模块化一起使用, 没啥意义
 
 <<< @/docs/frontEnd/ts/namespace.ts
 
-
-
 ## 声明文件
 
-没使用ts书写的工具库在使用时, ts不能知道他的类型和方法, 从而引申出了声明文件 .d.ts
+没使用 ts 书写的工具库在使用时, ts 不能知道他的类型和方法, 从而引申出了声明文件 .d.ts
 
 ```tsx
-declare var jQuery: (selector: string) => any;
+declare var jQuery: (selector: string) => any
 // declare 定义的类型只会用于编译时的检查，编译结果中会被删除。
 // 其他文件引入 <reference path = "xxx.d.ts" />
 ```
-
-
-
