@@ -164,15 +164,13 @@ let strLength: number = (<string>someValue).length
 
 ### 交叉类型
 
-- interface & interface   =>  把现有的多种类型叠加到一起成为一种类型，它包含了所需的所有类型的特性。
-- 字面量类型 & 字面量类型  => 共有的类型
+同时满足两种类型
 
 ### 联合类型
 
-表示一个值可以是几种类型之一
+表示一个值可以是几种类型之一 满足其一即可
 
 - `number | string | boolean`表示一个值可以是`number`，`string`，或`boolean`。
-- interface | interface  => 如果一个值是联合类型，我们只能访问此联合类型的所有类型里共有的成员。
 
 ### typeof类型保护
 

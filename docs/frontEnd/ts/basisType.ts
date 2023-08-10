@@ -35,13 +35,28 @@ export type buttonTypeMix = buttonType & defaultButton // 'default'
 let defaultBtn: buttonTypeMix = 'default' // 只能是字符串 'default'
 // 常用于与对象  表示多个对象中字段必须有 ***
 type obj1 = { name: string }
-type obj2 = { age: string }
+type obj2 = { age: number; age1: number }
 type withObj = obj1 & obj2
-let t: withObj = { name: 'name', age: '1212' }
+let t: withObj = { name: 'name', age: 12, age1: 1212 } // {name, age, age1} 缺一不可
+let tt: obj2 | obj1 = { name: 'name' } // obj2 和 obj1类型其一即可
+let tt12: obj2 | obj1 = { age: 1, age1: 2 }
 
 let aa: typeof t // 获取变量t的ts类型
 type tKeys = keyof withObj // keyof 后面接类型 获得类型的所有的key 的联合字面量类型
 let tt1: tKeys = 'age'
+
+interface Student {
+  name: string
+  age: number
+}
+
+interface Teacher {
+  name: string
+  tClass: string
+}
+let p1: Teacher & Student = { name: '小', age: 20, tClass: '数学' } // 必须同时满足两个类型
+let p2: Teacher | Student = { name: '小', age: 18 }
+let p3: Teacher | Student = { name: '小', tClass: '英语' }
 
 const tuple: [string, number] = ['12', 23]
 
