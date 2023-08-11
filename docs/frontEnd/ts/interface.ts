@@ -26,3 +26,6 @@ const customer2 = <IPerson>{
     return 'Hi there'
   }
 }
+
+let aaaa:Html
+let bb : TestGlobal

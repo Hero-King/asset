@@ -16,4 +16,10 @@ declare module 'dayjs' {
   export interface foo {}
 }
 
-declare type Html = HTMLElement | string
+// type TestGlobal = string   // 非全局
+// declare type TestGlobal = string  // 非全局 不确定啊  有的项目中d.ts这样声明是全局的
+
+// 全局的
+declare global {
+  type TestGlobal = string
+}

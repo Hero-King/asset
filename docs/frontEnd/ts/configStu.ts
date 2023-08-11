@@ -10,6 +10,8 @@ declare global {
     say: () => void
   }
   interface String {}
+
+  type Html = HTMLElement | string
 }
 
 //  interface.ts中也定义了IPerson 接口 优先引用当前模块的
