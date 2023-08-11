@@ -106,5 +106,6 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
-  "files": ["configStu.ts"],            /*  指定要编译的文件列表  Specifies an allowlist of files to include in the program. An error occurs if any of the files can’t be found.*/
+  // "include": ["./**/*"]
+  // "files": ["configStu.ts","interface.ts"],            /*  指定要编译的文件列表  Specifies an allowlist of files to include in the program. An error occurs if any of the files can’t be found.*/
 }

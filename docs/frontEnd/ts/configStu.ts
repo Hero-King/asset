@@ -1,9 +1,24 @@
-// import * as dayjs from 'dayjs'
 import _ from 'underscore'
-import { ThrottleSettings } from 'underscore'
+import * as dayjs from 'dayjs'
+import type { ThrottleSettings } from 'underscore'
 console.log(_.VERSION)
-let aa: _.ThrottleSettings
+let aa: ThrottleSettings
 
-// let day: dayjs.Dayjs = dayjs()
-// const year = day.format('YYYY')
-// console.log(year)
+//  拓展全局变量
+declare global {
+  interface Window {
+    say: () => void
+  }
+  interface String {}
+}
+
+//  interface.ts中也定义了IPerson 接口 优先引用当前模块的
+interface IPerson {
+  gg: string
+}
+
+let bb: IPerson = {
+  gg: 'Tom'
+}
+
+window.say()

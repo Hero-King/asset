@@ -1,5 +1,8 @@
 # typescript
 
+> 参考资料
+> https://ts.xcatliu.com/ 
+
 ```shell
 npm install -g typescript
 tsc -v
@@ -273,16 +276,36 @@ interface Square extends Shape, PenStroke {
 
 `解决命名冲突问题` 命名空间定义了标识符的可见范围，一个标识符可在多个名字空间中定义，它在不同名字空间中的含义是互不相干的。
 
-> 拒绝命名空间和模块化一起使用, 没啥意义
+> 拒绝命名空间和模块化一起使用, 没啥意义; 不在推荐使用命名空间 请使用模块化
 
 <<< @/docs/frontEnd/ts/namespace.ts
 
 ## 声明文件
 
-没使用 ts 书写的工具库在使用时, ts 不能知道他的类型和方法, 从而引申出了声明文件 .d.ts
+没使用 ts 书写的工具库在使用时, ts 不能知道他的类型和方法, 从而引申出了声明文件 .d.ts , 通常我们会把声明语句放到一个单独的文件（jQuery.d.ts）中，这就是声明文件
+
+**declare 定义的类型只会用于编译时的检查，编译结果中会被删除。**
+
+- declare var 声明全局变量
+- declare function 声明全局方法
+- declare class 声明全局类
+- declare enum 声明全局枚举类型
+- declare namespace 声明（含有子属性的）全局对象  // declare namespace 还是比较常用的，它用来表示全局变量是一个对象，包含很多子属性。
+- interface 和 type 声明全局类型
+- export 导出变量
+- export namespace 导出（含有子属性的）对象
+- export default ES6 默认导出
+- export = commonjs 导出模块
+- export as namespace UMD 库声明全局变量
+- declare global 扩展全局变量
+- declare module 扩展模块
+- /// <reference /> 三斜线指令
 
 ```tsx
-declare var jQuery: (selector: string) => any
-// declare 定义的类型只会用于编译时的检查，编译结果中会被删除。
+declare var jQuery: (selector: string) => any  // declare var 并没有真的定义一个变量，只是定义了全局变量 jQuery 的类型
+declare namespace jQuery {
+    function ajax(url: string, settings?: any): void;
+}
+
 // 其他文件引入 <reference path = "xxx.d.ts" />
 ```
