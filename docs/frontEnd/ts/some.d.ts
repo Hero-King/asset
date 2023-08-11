@@ -17,7 +17,7 @@ declare module 'dayjs' {
 }
 
 // type TestGlobal = string   // 非全局
-// declare type TestGlobal = string  // 非全局 不确定啊  有的项目中d.ts这样声明是全局的
+// declare type TestGlobal = string  // 只要 .ts 或 .d.ts 文件中有 import 或 export，那么这个文件中的 declare 就会变成局部变量。
 
 // 全局的
 declare global {

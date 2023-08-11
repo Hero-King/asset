@@ -286,6 +286,8 @@ interface Square extends Shape, PenStroke {
 
 **declare 定义的类型只会用于编译时的检查，编译结果中会被删除。**
 
+**只要 .ts 或 .d.ts 文件中有 import 或 export导入导出命令(declare内部的不算)，那么这个文件中的 declare 就会变成局部变量。**
+
 - declare var 声明全局变量
 - declare function 声明全局方法
 - declare class 声明全局类
