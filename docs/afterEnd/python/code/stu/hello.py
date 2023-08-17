@@ -71,3 +71,18 @@ else:
 
 ticks = time.time()
 print("当前时间戳为:", ticks)
+
+input1 = input("请输入: ")
+print(input1)
+
+my_list = ['google', 'runoob', 'taobao']
+print(my_list[0])  # 输出 "google"
+print(my_list[1])  # 输出 "runoob"
+print(my_list[2])  # 输出 "taobao"
+
+# Fibonacci series: 斐波纳契数列
+# 两个元素的总和确定了下一个数
+a, b = 0, 1
+while b < 10:
+    print(b, end=',')
+    a, b = b, a+b

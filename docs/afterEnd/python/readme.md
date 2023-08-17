@@ -40,31 +40,38 @@
   在 Python 中，所有标识符可以包括英文、数字以及下划线(\_)，但不能以数字开头。
   Python 中的标识符是区分大小写的。
   _以下划线开头的标识符是有特殊意义的。_
-  以单下划线开头 \_foo 的代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用 from xxx import \* 而导入。
-  以双下划线开头的 **foo 代表类的私有成员，
-  以双下划线开头和结尾的 **foo** 代表 Python 里特殊方法专用的标识，如 **init\_\_() 代表类的构造函数。
+  以单下划线开头`_foo`的代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用 from xxx import \* 而导入。
+  以双下划线开头的`__foo`代表类的私有成员，
+  以双下划线开头和结尾的`__foo__`代表 Python 里特殊方法专用的标识，如`__init__()`代表类的构造函数。
   Python 可以同一行显示多条语句，方法是用分号 ; 分开
 
 - 行和缩进
   学习 Python 与其他语言最大的区别就是，Python 的代码块不使用大括号 {} 来控制类，函数以及其他逻辑判断。python 最具特色的就是用缩进来写模块。
   缩进的空白数量是可变的，但是所有代码块语句必须包含相同的缩进空白数量，这个必须严格执行。
-  以下实例缩进为四个空格:
-  实例
+
+  ```python
   if True:
-  print ("True")
+    print ("True")
   else:
-  print ("False")
+    print ("False")
+  ```
 
 - 多行语句(同 linux 的 shell)
   Python 语句中一般以新行作为语句的结束符。
   但是我们可以使用斜杠（ \）将一行的语句分为多行显示，如下所示：
+
+  ```python
   total = item_one + \
    item_two + \
    item_three
 
+  # 在 [], {}, 或 () 中的多行语句，不需要使用反斜杠 \
+  ```
+
 - Python 引号
   Python 可以使用引号( ' )、双引号( " )、三引号( ''' 或 """ ) 来表示字符串，引号的开始与结束必须是相同类型的。
   其中三引号可以由多行组成，编写多行文本的快捷语法，常用于文档字符串，在文件的特定地点，被当做注释。
+  字符串可以用 + 运算符连接在一起，用 \* 运算符重复
   word = 'word'
   sentence = "这是一个句子。"
   paragraph = """这是一个段落。
@@ -78,7 +85,7 @@
 - 等待用户输入
   下面的程序执行后就会等待用户输入，按回车键后就会退出：
 
-```
+```python
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
@@ -94,18 +101,20 @@ raw_input("按下 enter 键退出，其他任意键显示...\n")
   像 if、while、def 和 class 这样的复合语句，首行以关键字开始，以冒号( : )结束，该行之后的一行或多行代码构成代码组。
   我们将首行及后面的代码组称为一个子句(clause)。
   如下实例：
-
-if expression :
-suite
-elif expression :  
- suite  
-else :  
- suite
+  ```python
+  if expression :
+  suite
+  elif expression :
+  suite
+  else :
+  suite
+  ```
 
 ## Python 变量类型
 
-Python 有五个标准的数据类型：
+Python 有的数据类型：
 Numbers（数字）
+bool（布尔类型）
 String（字符串）
 List（列表）
 Tuple（元组）
@@ -126,7 +135,19 @@ Dictionary（字典）
   支持截取, 加号 + 是列表连接运算符，星号 \* 是重复操作 ["aa","bb"]
 
 - set
-  set1 = {"11","22"}
+  无序、可变的数据类型，用于存储唯一的元素
+  set1 = {"11","22"}  
+   集合运算:
+
+  ```python
+    a = set('abracadabra')
+    b = set('alacazam')
+    print(a)
+    print(a - b) # a 和 b 的差集
+    print(a | b) # a 和 b 的并集
+    print(a & b) # a 和 b 的交集
+    print(a ^ b) # a 和 b 中不同时存在的元素
+  ```
 
 - 元组 tuple
   元组是另一个数据类型，类似于 List（列表）。
@@ -162,30 +183,30 @@ runoob
   两者之间的区别在于：字典当中的元素是通过键来存取的，而不是通过偏移存取。
   字典用"{ }"标识。字典由索引(key)和它对应的值 value 组成。
 
-```python
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-
+  ```python
+  #!/usr/bin/python
+  # -*- coding: UTF-8 -*-
 
-dict = {}
-dict['one'] = "This is one"
-dict[2] = "This is two"
+  dict = {}
+  dict['one'] = "This is one"
+  dict[2] = "This is two"
 
-tinydict = {'name': 'runoob','code':6734, 'dept': 'sales'}
+  tinydict = {'name': 'runoob','code':6734, 'dept': 'sales'}
 
 
-print dict['one']          # 输出键为'one' 的值
-print dict[2]              # 输出键为 2 的值
-print tinydict             # 输出完整的字典
-print tinydict.keys()      # 输出所有键
-print tinydict.values()    # 输出所有值
-"""
-This is one
-This is two
-{'dept': 'sales', 'code': 6734, 'name': 'runoob'}
-['dept', 'code', 'name']
-['sales', 6734, 'runoob']
-"""
-```
+  print dict['one']          # 输出键为'one' 的值
+  print dict[2]              # 输出键为 2 的值
+  print tinydict             # 输出完整的字典
+  print tinydict.keys()      # 输出所有键
+  print tinydict.values()    # 输出所有值
+  """
+  This is one
+  This is two
+  {'dept': 'sales', 'code': 6734, 'name': 'runoob'}
+  ['dept', 'code', 'name']
+  ['sales', 6734, 'runoob']
+  """
+  ```
 
 - Python 数据类型转换
   有时候，我们需要对数据内置的类型进行转换，数据类型的转换，你只需要将数据类型作为函数名即可。
@@ -193,7 +214,10 @@ This is two
 以下几个内置的函数可以执行数据类型之间的转换。这些函数返回一个新的对象，表示转换的值。
 float(x) 将 x 转换到一个浮点数
 
-## 运算符
+## 运算符/关键字
+
+- type(var)
+- isinstance(var, type)
 
 逻辑运算符
 and x and y 布尔"与" - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。 (a and b) 返回 20。

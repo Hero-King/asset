@@ -55,11 +55,19 @@
 - front(EMS 项目)
   1. 目录 dev-ops/work-order、knowledge-base、device-manage
   2. components/DictSelect exportButton forgetPasswordDaialog 优秀组件 tables
+- onex-ui (vue3+ts)
+  1. 目录 energy-mgt oc/sm
+     > 新增/编辑弹框 form rest 问题 使用 resetFields 思路: 打开弹框时执行 reset,使得 form 内容为空, 然后在给 form 赋值
 
 ### H5
 
-- jyr-app (整个项目)
+- jyr-app (精益人员定位)
 
+### app
 
-## Threejs 
+- gsy-app(储能工商业)
+- gsy-app-cli uniapp(cli 打包方式)
+
+## Threejs
+
 参见有道云笔记
