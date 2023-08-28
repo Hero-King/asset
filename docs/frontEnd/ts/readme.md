@@ -1,7 +1,7 @@
 # typescript
 
 > 参考资料
-> https://ts.xcatliu.com/ 
+> https://ts.xcatliu.com/
 
 ```shell
 npm install -g typescript
@@ -175,10 +175,9 @@ let strLength: number = (<string>someValue).length
 
 - `number | string | boolean`表示一个值可以是`number`，`string`，或`boolean`。
 
-### typeof类型保护
+### typeof 类型保护
 
 `typeof`操作符用于获取变量的类型，因此操作符后面接的始终是一个变量。
-
 
 ### keyof
 
@@ -245,16 +244,13 @@ function printLabel(labelledObj: LabelledValue) {
 
 > 接口支持声明多次, 那么结果就是组合之后的内容 type 只能声明一次
 
-### type 和 interface区别
+### type 和 interface 区别
 
 |          | type                 | interface                |
 | -------- | -------------------- | ------------------------ |
 | 功能     | 类型别名             | 接口类型                 |
 |          | 可以给任意类型起别名 | 只能表示接口类型         |
-| 多次定义 | type不支持           | 会被视为合并所有声明成员 |
-
-
-
+| 多次定义 | type 不支持          | 会被视为合并所有声明成员 |
 
 ### 示例
 
@@ -286,13 +282,13 @@ interface Square extends Shape, PenStroke {
 
 **declare 定义的类型只会用于编译时的检查，编译结果中会被删除。**
 
-**只要 .ts 或 .d.ts 文件中有 import 或 export导入导出命令(declare内部的不算)，那么这个文件中的 declare 就会变成局部变量。**
+**只要 .ts 或 .d.ts 文件中有 import 或 export 导入导出命令(declare 内部的不算)，那么这个文件中的 declare 就会变成局部变量。**
 
 - declare var 声明全局变量
 - declare function 声明全局方法
 - declare class 声明全局类
 - declare enum 声明全局枚举类型
-- declare namespace 声明（含有子属性的）全局对象  // declare namespace 还是比较常用的，它用来表示全局变量是一个对象，包含很多子属性。
+- declare namespace 声明（含有子属性的）全局对象 // declare namespace 还是比较常用的，它用来表示全局变量是一个对象，包含很多子属性。
 - interface 和 type 声明类型/接口
 - export 导出变量
 - export namespace 导出（含有子属性的）对象
@@ -304,10 +300,16 @@ interface Square extends Shape, PenStroke {
 - /// <reference /> 三斜线指令
 
 ```tsx
-declare var jQuery: (selector: string) => any  // declare var 并没有真的定义一个变量，只是定义了全局变量 jQuery 的类型
+declare var jQuery: (selector: string) => any // declare var 并没有真的定义一个变量，只是定义了全局变量 jQuery 的类型
 declare namespace jQuery {
-    function ajax(url: string, settings?: any): void;
+  function ajax(url: string, settings?: any): void
 }
 
 // 其他文件引入 <reference path = "xxx.d.ts" />
 ```
+
+## 根据后端接口文档自动生成 ts 返回值类型
+
+1. swagger-to-ts swaggts等多个生成typescript interface代码的插件
+2. Yeoman
+3. Pont：阿里开源的一种前后端桥接工具
