@@ -100,3 +100,17 @@ person = {
 let j: { name: string; [propname: string]: any }
 
 let dom: HTMLElement = document.getElementById('id') as HTMLElement
+
+//  有的时候重写属性
+interface overwrite extends Omit<Teacher, 'name'> {
+  name: Teacher['name'] | number
+}
+
+let oo: overwrite = {
+  name: 12,
+  tClass: ''
+}
+
+// 获取接口某个属性的类型
+type T1 = Teacher['name']
+let str: T1 = '12'
