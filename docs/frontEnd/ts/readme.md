@@ -296,7 +296,7 @@ interface Square extends Shape, PenStroke {
 - export = commonjs 导出模块
 - export as namespace UMD 库声明全局变量
 - declare global 扩展全局变量, 申明全局类型
-- declare module 扩展模块
+- declare module 扩展模块 https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation
 - /// <reference /> 三斜线指令
 
 ```tsx
@@ -310,6 +310,44 @@ declare namespace jQuery {
 
 ## 根据后端接口文档自动生成 ts 返回值类型
 
-1. swagger-to-ts swaggts等多个生成typescript interface代码的插件
+1. swagger-to-ts swaggts 等多个生成 typescript interface 代码的插件
 2. Yeoman
 3. Pont：阿里开源的一种前后端桥接工具
+
+## vue 相关
+
+首先 务必确保将扩展的模块放在 TypeScript 模块 中, 也就是说，拓展声明的代码文件需要包含至少一个顶级的 import 或 export，即使它只是 export {}。如果扩展被放在模块之外，它将覆盖原始类型，而不是扩展!
+
+- 全局原型链属性: app.config.globalProperties 上赋值 ts 声明的话需要使用 ts 模块拓展功能拓展`ComponentCustomProperties` 接口
+- 全局组件: 需要使用 ts 模块拓展功能 拓展模块`@vue/runtime-core`或者`vue` 的 `GlobalComponents`接口 例如:
+
+  ```ts
+  declare module 'vue' {
+    /**
+     * 自定义全局组件获得 Volar 提示（自定义的全局组件需要在这里声明下才能获得 Volar 类型提示哦）
+     */
+    export interface GlobalComponents {
+      IconifyIconOffline: typeof import('../src/components/ReIcon')['IconifyIconOffline']
+      IconifyIconOnline: typeof import('../src/components/ReIcon')['IconifyIconOnline']
+      FontIcon: typeof import('../src/components/ReIcon')['FontIcon']
+      Auth: typeof import('../src/components/ReAuth')['Auth']
+    }
+  }
+  ```
+
+- 拓展 windows
+
+  ```ts
+    // 拓展windows接口 这样window.$axios 类型可推断
+    declare global {
+      interface Window {
+        $axios:  AxiosInstance
+      }
+      // 声明全局变量 __APP__ 类型  就可以随处获取 __APP__ 变量
+      const __APP__ :  {
+        lastBuildTime: string
+      }
+    }
+    
+
+  ```
