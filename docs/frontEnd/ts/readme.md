@@ -313,6 +313,9 @@ declare namespace jQuery {
 1. swagger-to-ts swaggts 等多个生成 typescript interface 代码的插件
 2. Yeoman
 3. Pont：阿里开源的一种前后端桥接工具
+4. swagger-typescript-api
+5. umi/openapi 直接生成 api 请求文件
+6. openapi-typescript-codegen 支持只生成类型/请求/核心文件  在已有请求实例的时候 推荐使用这个生成type的功能
 
 ## vue 相关
 
@@ -351,3 +354,4 @@ declare namespace jQuery {
     
 
   ```
+
