@@ -315,7 +315,7 @@ declare namespace jQuery {
 3. Pont：阿里开源的一种前后端桥接工具
 4. swagger-typescript-api
 5. umi/openapi 直接生成 api 请求文件
-6. openapi-typescript-codegen 支持只生成类型/请求/核心文件  在已有请求实例的时候 推荐使用这个生成type的功能
+6. openapi-typescript-codegen 支持只生成类型/请求/核心文件 在已有请求实例的时候 推荐使用这个生成 type 的功能
 
 ## vue 相关
 
@@ -341,17 +341,23 @@ declare namespace jQuery {
 - 拓展 windows
 
   ```ts
-    // 拓展windows接口 这样window.$axios 类型可推断
-    declare global {
-      interface Window {
-        $axios:  AxiosInstance
-      }
-      // 声明全局变量 __APP__ 类型  就可以随处获取 __APP__ 变量
-      const __APP__ :  {
-        lastBuildTime: string
-      }
+  // 拓展windows接口 这样window.$axios 类型可推断
+  declare global {
+    interface Window {
+      $axios: AxiosInstance
     }
-    
-
+    // 声明全局变量 __APP__ 类型  就可以随处获取 __APP__ 变量
+    const __APP__: {
+      lastBuildTime: string
+    }
+  }
   ```
 
+## 运算符
+
+- ?? 严格的 || 运算 (0 ?? 1)返回 0
+- ?. 对象属性存在时取值, 否则返回 undefined
+- ? 接口声明时某个字段不是必须的
+- !. 断言 告诉 ts 对象一定有某个属性 obj!.aa
+- obj.aa! 告诉 ts aa 属性一定不为空  list声明的是数组类型 想要赋值为空时list = null!
+- !! 运算可以把表达式强行转换为逻辑值。

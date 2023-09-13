@@ -114,3 +114,15 @@ let oo: overwrite = {
 // 获取接口某个属性的类型
 type T1 = Teacher['name']
 let str: T1 = '12'
+
+// 变量后 + !  表示非undefined
+let a: string[] = null!
+
+interface IDemo {
+  x?: number // 由于x是可选的，因此parma.x的类型为number | undefined，无法传递给number类型的y，因此需要用x!
+}
+let y: number
+const demo = (parma: IDemo) => {
+  y = parma.x!
+  return y
+}
