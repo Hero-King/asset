@@ -26,6 +26,8 @@ function getItem<T extends IItem>(a: T): number {
   return a.length
 }
 
+
+
 class SomeClass<T> {
   name: T
   constructor(name: T) {

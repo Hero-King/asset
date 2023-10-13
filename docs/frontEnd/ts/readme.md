@@ -361,3 +361,9 @@ declare namespace jQuery {
 - !. 断言 告诉 ts 对象一定有某个属性 obj!.aa
 - obj.aa! 告诉 ts aa 属性一定不为空  list声明的是数组类型 想要赋值为空时list = null!
 - !! 运算可以把表达式强行转换为逻辑值。
+
+
+## 技巧
+- v-bind时候绑定的对象类型? -> `Partial<组件Props类型>`
+- button size属性只能是几个字面量类型 -> 你也声明几个字面量类型
+- el-date-picker 的value类型 ModelValueType
