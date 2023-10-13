@@ -359,11 +359,19 @@ declare namespace jQuery {
 - ?. 对象属性存在时取值, 否则返回 undefined
 - ? 接口声明时某个字段不是必须的
 - !. 断言 告诉 ts 对象一定有某个属性 obj!.aa
-- obj.aa! 告诉 ts aa 属性一定不为空  list声明的是数组类型 想要赋值为空时list = null!
+- ! 非空断言运算符 用于断言操作的对象是非 null 和非 undefined 类型 ; obj.aa! 告诉 ts aa 属性一定不为空 list 声明的是数组类型 想要赋值为空时 list = null!
 - !! 运算可以把表达式强行转换为逻辑值。
 
+```ts
+function test(params: number | undefined | null, callback: () => number | undefined) {
+  const count = params! // 排除undefined 和null，不报错
+
+  const number = callback!() // 除去undefined
+}
+```
 
 ## 技巧
-- v-bind时候绑定的对象类型? -> `Partial<组件Props类型>`
-- button size属性只能是几个字面量类型 -> 你也声明几个字面量类型
-- el-date-picker 的value类型 ModelValueType
+
+- v-bind 时候绑定的对象类型? -> `Partial<组件Props类型>`
+- button size 属性只能是几个字面量类型 -> 你也声明几个字面量类型
+- el-date-picker 的 value 类型 ModelValueType
