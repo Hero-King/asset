@@ -9,20 +9,9 @@
 开源的 scrcpy github 上下载 或者 https://gitcode.net/mirrors/Genymobile/scrcpy/-/tree/master
 手机需要开启 usb 调试和 use 安全设置 然后重启手机
 
-## ts
+## 搭建
 
-输出的文件需要手动改动 所以不推荐使用 ts
-
-1. npm i @autojs/types-pro9 -D
-
-2. tsconfig 配置 typeRoots : ["./node_modules/@types","./node_modules/@autojs"]
-
-3. 使用
-
-```ts
-import * as app from 'app'
-app.launch('com.tencent.mm')
-```
+使用 vscode autojs 插件的新建项目功能 ; ts文件包: @sm003/autojs6-dts
 
 ## API
 
