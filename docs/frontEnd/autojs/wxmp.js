@@ -51,12 +51,14 @@ function runTaskList() {
     }
   }
   console.log('一轮执行完成')
+  toast('一轮执行完成')
 }
 
 function genderTaskList() {
   getMewxMpNames()
   Array.from(myMpNames).forEach((name) => {
     if (config[name]) {
+      
       taskList.push(genderTask(name))
     }
   })
