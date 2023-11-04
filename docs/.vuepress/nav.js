@@ -45,6 +45,10 @@ module.exports = [
     "text": "frontEnd",
     "items": [
       {
+        "text": "Autojs",
+        "link": "/frontEnd/autojs/"
+      },
+      {
         "text": "Css",
         "link": "/frontEnd/css/"
       },
