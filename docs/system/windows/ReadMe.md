@@ -51,8 +51,6 @@ https://code.visualstudio.com/updates/v1_71 使用 github 账号同步设置
 
 - <a :href="$withBase('/chromeExtensions/fehelper.crx')">FeHelper(前端助手) </a>
 
-- Octotree(github 代码树)
-
 - MobX Developer Tools
 
 - React Developer Tools
@@ -242,3 +240,7 @@ https://mirrors.huaweicloud.com/python
 - v2ray 穿墙神器
 - mRemoteNg 远程桌面
 - putty (ssh 连接,老古董,支持隧道)
+- fastgithub github加速器
+- mobaxterm
+- fiddler中文破解版
+- typora md文件编写神器

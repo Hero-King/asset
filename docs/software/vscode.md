@@ -44,7 +44,7 @@ https://www.mls-software.com/opensshd.html
 
 你是否还在为重装系统、换用其他 OS 而需要重装 IDE，插件等而烦恼，现在使用 remote-ssh 就可以实现在 linux 远程开发 vacode-server 占用内存 400M 左右
 
-## 使用步骤
+### 使用步骤
 
 - 安装具有 ssh 功能的模块，windows7 推荐使用 git win10 自带 openssh 客户端，在 vscode 中设置默认的终端是 git
 - 安装 remote-ssh 插件并保存连接，输入密码
