@@ -16,5 +16,17 @@
 
 将光猫不需要的几个端口绑定到一起, 主路由有线回程到某一个不需要的端口
 
+## 单臂路由
+
+只有一个网口时刷机openwrt系统, 默认只有一个lan口,
+- 关闭lan口的桥接
+- 设置lan口物理设备 eth0
+- 新建wan口物理设备 eth0 用于宽带拨号
+- 与openwrt连接的设备关闭dhcp服务
+
+https://www.right.com.cn/forum/thread-5768047-1-1.html
+https://www.right.com.cn/FORUM/thread-6196997-1-1.html
+https://www.right.com.cn/forum/thread-4066357-1-1.html
+
 ## 资料
 https://zhuanlan.zhihu.com/p/450698488
