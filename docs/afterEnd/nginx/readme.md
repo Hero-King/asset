@@ -28,9 +28,9 @@ rpm -ql nginx-mod-stream # 查看包nginx-mod-stream创建了哪些文件 如下
 - server_name 指定主机名或者说域名,支持访问不同域名同端口区分项目
 - location 路径匹配 有多种匹配规则 `Nginx服务器会首先会检查多个location中是否有普通的uri匹配，如果有多个匹配，会先记住匹配度最高的那个。然后再检查正则匹配，这里切记正则匹配是有顺序的，从上到下依次匹配配成功，则结束检查，并就会使用这个location块处理此请求。如果正则匹配全部失败，就会使用刚才记录普通uri匹配度最高的那个location块处理此请求。`
 - location.root 设置当前 location 对应的根目录,使得访问的文件路径是 ${root}/${location}
-- location.alias 当前location对应的目录,访问的资源路径不会拼接location
-- proxy_pass url 后面的 url 如果带/ 则会处理成绝对路径(请求会忽略 location 后的路径) 不带/ 则转发后请求的 URL 是 拼接 location 的路径
-- try_files 找不到 url 对应的资源时返回哪个文件 `try_files $uri $uri/ /index.html` 注意路径是对于 root 的路径
+- location.alias 当前 location 对应的目录,访问的资源路径不会拼接 location, alias 的处理结果是: 使用 alias 定义的路径
+- location.proxy_pass url 后面的 url 如果带/ 则会处理成绝对路径(请求会忽略 location 后的路径) 不带/ 则转发后请求的 URL 是 拼接 location 的路径
+- location.try_files 找不到 url 对应的资源时返回哪个文件 `try_files $uri $uri/ /index.html` 注意路径是对于 root 的路径
 
 ### location 规则
 
@@ -54,6 +54,15 @@ rpm -ql nginx-mod-stream # 查看包nginx-mod-stream创建了哪些文件 如下
 
 在 nginx 中，location 指令的匹配顺序是按照精确匹配、前缀匹配、正则表达式匹配的顺序进行。也就是说，当有多个 location 都可以匹配到同一个 URI 时，会优先选择精确匹配，然后是前缀匹配，最后是正则表达式匹配。
 
+### 多 server 模块
+
+1. 首先选择所有的字符串完全匹配的 server_name。（完全匹配）
+2. 选择通配符在前面的 server_name，如\*.mumusir.com www.mumusir.com
+3. 选择通配符在后面的 server_name，如 mumusir.\* mumusir.com mumusir.cn
+4. 最后选择使用正则表达式匹配的 server_name，如~^www\.(.\*)\.com$
+5. 如果全部都没有匹配到，那么将选择在 listen 配置项后加入[default_server]的 server 块
+6. 如果没写，那么就找到匹配 listen 端口的第一个 Server 块的配置文件 #如果通过 ip 访问，会直接到 5，判断是否有 default_server 的 server 块，就走 6
+
 ## Example
 
 ### 前端路由项目 NGINX 配置
@@ -71,7 +80,9 @@ location /books {
 ```
 
 #### 多项目配置
-直接设置root 路径为多个项目资源的存放目录
+
+直接设置 root 路径为多个项目资源的存放目录
+
 ```shell
 root /var/www/aml;
 index index.html;
