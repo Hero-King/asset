@@ -9,4 +9,3 @@
 - 分区合并到同一个 参考 https://zhuanlan.zhihu.com/p/605741611
 - 安装无线网卡驱动 (已不支持kernel5.15)
 
-## openwrt

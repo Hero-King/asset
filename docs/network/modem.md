@@ -1,15 +1,14 @@
 # 光猫
 
-
 ## 桥接
 
 1. 取消 hdcp 使能或者关闭 dhcp 服务器
 2. 记录好 Internet 连接和 iptv 连接 vlanid
-3. internet业务改成桥接
+3. internet 业务改成桥接
 
 ## vlan 绑定
 
-选择好连接和绑定的某个端口, 输入用户侧 vlanid; 然后在路由器上使用对应的 vlanid 接受数据 
+选择好连接和绑定的某个端口, 输入用户侧 vlanid(写法是出口 vlanid/上层业务 vlanid); 然后在路由器上使用对应的 vlanid 接受数据
 `vlan绑定端口1后系统会自动取消网络连接中的业务到端口1的绑定`
 
 ## 光猫交换机功能(省掉弱电箱中的交换机)
@@ -18,15 +17,18 @@
 
 ## 单臂路由
 
-只有一个网口时刷机openwrt系统, 默认只有一个lan口,
-- 关闭lan口的桥接
-- 设置lan口物理设备 eth0
-- 新建wan口物理设备 eth0 用于宽带拨号
-- 与openwrt连接的设备关闭dhcp服务
+光猫 Internet 业务取消所有端口绑定, (设置 lan1 口 vlan 绑定)
+只有一个网口时刷机 openwrt 系统, 默认只有一个 lan 口,
+
+- 关闭 lan 口的桥接
+- 设置 lan 口物理设备 eth0
+- 新建 wan 口物理设备 eth0 用于宽带拨号
+- 与 openwrt 连接的设备关闭 dhcp 服务
 
 https://www.right.com.cn/forum/thread-5768047-1-1.html
 https://www.right.com.cn/FORUM/thread-6196997-1-1.html
 https://www.right.com.cn/forum/thread-4066357-1-1.html
 
 ## 资料
+
 https://zhuanlan.zhihu.com/p/450698488
