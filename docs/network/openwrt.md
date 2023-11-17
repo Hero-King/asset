@@ -125,3 +125,4 @@ acme 使用 : https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E
 页面配置: 常规设置域名先写主域名,其他域名,后写泛解析域名(\*.域名) 验证方式`dns`;DnsAPI`dns_ali`; API 凭证列表: `Ali_Key="<key>" Ali_Secret="<secret>"` 
 软件库搜索dnsapi 安装
 执行acme: `service acme start`, acme安装在 /usr/lib/acme/client/acme.sh , 
+ssl证书目录 `/etc/acme/域名/域名.key和fullchain.cer`

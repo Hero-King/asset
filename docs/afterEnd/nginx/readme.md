@@ -25,12 +25,39 @@ rpm -ql nginx-mod-stream # 查看包nginx-mod-stream创建了哪些文件 如下
 
 ### 配置项
 
-- server_name 指定主机名或者说域名,支持访问不同域名同端口区分项目
-- location 路径匹配 有多种匹配规则 `Nginx服务器会首先会检查多个location中是否有普通的uri匹配，如果有多个匹配，会先记住匹配度最高的那个。然后再检查正则匹配，这里切记正则匹配是有顺序的，从上到下依次匹配配成功，则结束检查，并就会使用这个location块处理此请求。如果正则匹配全部失败，就会使用刚才记录普通uri匹配度最高的那个location块处理此请求。`
-- location.root 设置当前 location 对应的根目录,使得访问的文件路径是 ${root}/${location}
-- location.alias 当前 location 对应的目录,访问的资源路径不会拼接 location, alias 的处理结果是: 使用 alias 定义的路径
-- location.proxy_pass url 后面的 url 如果带/ 则会处理成绝对路径(请求会忽略 location 后的路径) 不带/ 则转发后请求的 URL 是 拼接 location 的路径
+<a href="https://docs.nginx.com/nginx/admin-guide/web-server/web-server/" >nginx 配置成 web 服务器上手文档</a>
+
+为了方便描述,先定义几个变量
+`locationPath`: server.location 配置项后面定义的路径, 路径匹配的话请写上末尾的`/`
+`resetUrl`: 客户端请求 url 裁减掉 locationPath 后的内容
+
+- listen 监听端口 listen 127.0.0.1:8080; listen 80 default_server[可选];
+- server_name 指定主机名或者说域名,支持访问不同域名同端口区分项目 如 server_name example.org www.example.org;
+- <a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#location"> location </a> 路径匹配, 注意写法,路径后面带上/ 有多种匹配规则 `Nginx服务器会首先会检查多个location中是否有普通的uri匹配，如果有多个匹配，会先记住匹配度最高的那个。然后再检查正则匹配，这里切记正则匹配是有顺序的，从上到下依次匹配配成功，则结束检查，并就会使用这个location块处理此请求。如果正则匹配全部失败，就会使用刚才记录普通uri匹配度最高的那个location块处理此请求。`
+- location.root 设置当前 location 对应的根目录,url 访问的文件路径是 `${root}/${url}` (root 后路径带不带/ 无影响, 官方都是写上的)
+- location.alias url1 当前 location 查找资源的目录,访问的资源路径是去掉 locationPath 的, 即`${alias}/${resetUrl}` ;注意: locationPath 和 url1 后末尾必须同时带'/'或者同时不带
+- location.proxy_pass url1 **url1 和 locationPath 至少有一个末尾以'/'结尾**, urll 以'/'结尾,新 url 舍弃 locationPath 理解为`${url1}${resetUrl}`, 不以'/'结尾 理解成`${url1}${locationPath}${resetUrl}` 约等于原始路径 原文: https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass
 - location.try_files 找不到 url 对应的资源时返回哪个文件 `try_files $uri $uri/ /index.html` 注意路径是对于 root 的路径
+
+> 测试目录 /test/index.html(页面 1) /test/dist/index.html(页面 2) /test/dist/assets/img.png
+> nginx 默认会把/dist 301 重定向到 /dist/
+
+| location     | 配置                                  | 页面 1      | 页面 2     | 图片                      | 备注                                                           |
+| ------------ | ------------------------------------- | ----------- | ---------- | ------------------------- | -------------------------------------------------------------- |
+| /            | root:E:/test                          | /           | /dist      | /dist/assets/img.png      |                                                                |
+| /            | root:E:/test/                         | /           | /dist      | /dist/assets/img.png      |                                                                |
+| /dist        | root:E:/test                          | no          | /dist      | /dist/assets/img.png      |                                                                |
+| /dist/       | root:E:/test/                         | no          | /dist      | /dist/assets/img.png      |                                                                |
+| ~ \.(png)$   | root:E:/test                          | no          | no         | /dist/assets/img.png      |                                                                |
+| =/index.html | root:E:/test                          | /index.html | no         | no                        | url 完全匹配                                                   |
+| /Dist/       | root:E:/test                          | no          | /dist      | no                        |                                                                |
+| /            | proxy_pass:http://localhost:300       | /           | /dist      | /dist/assets/img.png      |                                                                |
+| /dist/       | proxy_pass:http://localhost:300       | no          | /dist      | /dist/assets/img.png      | proxy_pass 后面内容无 / 写法正确时则将客户端原始 url 转发      |
+| /dist/       | proxy_pass:http://localhost:300/      | /dist       | /dist/dist | /dist/dist/assets/img.png | 所以 proxy_pass 改成 :3000/dist/跟上一阿行同效果               |
+| /            | proxy_pass:http://localhost:300/dist  | no          | /          | 访问不到!!                | 客户端/dist 会被处理成/distdist 相当于根据 location 匹配后拼接 |
+| /            | proxy_pass:http://localhost:300/dist/ | no          | /          | /assets/img.png           |                                                                |
+| /            | alias:E:/test/                        | /           | /dist      | /dist/assets/img.png      |                                                                |
+| /dist/       | alias:E:/test/                        | /dist       | /dist/dist | /dist/dist/assets/img.png | alias 后面加上 dist 目录即可省掉后面 dist 前缀                 |
 
 ### location 规则
 
@@ -42,13 +69,13 @@ rpm -ql nginx-mod-stream # 查看包nginx-mod-stream创建了哪些文件 如下
   ```
 - “^~” 前缀匹配 找到普通 uri 匹配度最高的那个 location 后，立即处理此请求，并不再进行正则匹配
   ```shell
-    location ^~ /abc {
+    location ^~ /abc/ {
     # do something  表示当请求的URI以“/abc”开头时，就匹配到这个location。如果有多个location都匹配到了同一个URI，那么nginx会选择最长的前缀匹配来处理请求。
     }
   ```
 - “~”，执行正则匹配，区分大小写 按顺序匹配，一旦匹配上即停止后续匹配
 - “~\*”，执行正则匹配，忽略大小写 按顺序匹配，一旦匹配上即停止后续匹配
-- 普通匹配 不加任何规则时，默认是大小写敏感，前缀匹配，相当于加了“~”与“^~” 匹配后，继续更长前缀匹配和正则匹配。
+- 普通匹配 不加任何规则时，前缀匹配，继续更长前缀匹配和正则匹配。
 
 #### 匹配顺序
 
@@ -65,9 +92,21 @@ rpm -ql nginx-mod-stream # 查看包nginx-mod-stream创建了哪些文件 如下
 
 ## Example
 
-### 前端路由项目 NGINX 配置
+### 代理/api 请求
 
-#### 单项目配置
+```shell
+location /api/ {
+  proxy_pass http://IP:Port/;
+  proxy_connect_timeout 15s;
+  proxy_send_timeout 15s;
+  proxy_read_timeout 15s;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto http;
+}
+```
+
+### 一个 server 块托管多个前端项目
 
 ```js
 // 资源路径 /new_home/books/index.html
@@ -79,14 +118,25 @@ location /books {
 
 ```
 
-#### 多项目配置
-
-直接设置 root 路径为多个项目资源的存放目录
+或者直接设置 root 路径为多个项目资源的存放目录
 
 ```shell
 root /var/www/aml;
 index index.html;
 ```
+
+### 项目文件目录与 locationPath 不一致
+
+```shell
+  location /ems/ {
+    alias E:/test/dist/;
+  }
+```
+
+### 一个 server 块反向代理多个服务
+
+- 方案一: 通过 location 去区分不同服务主机, proxy_pass 使用末尾'/'的方式, 但是要求服务的所有资源带固定前缀 或者用的'./'相对路径加载资源
+- 方案二: 使用虚拟主机功能
 
 ### v2ray 配置
 
