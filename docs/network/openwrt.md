@@ -7,7 +7,8 @@ opkg op 的软件包管理程序, opkg install; list ;
 uci op 的配置文件配置器
 
 ## 资料
-野火OpenWrt用户手册 ： https://doc.embedfire.com/openwrt/user_manal/zh/latest/index.html
+
+野火 OpenWrt 用户手册 ： https://doc.embedfire.com/openwrt/user_manal/zh/latest/index.html
 
 ## 安装
 
@@ -35,10 +36,11 @@ pve 安装 `qm importdisk 100 /var/lib/vz/template/iso/xx.img local` ; 然后磁
 - abdlock ABD 广告过滤
 - amule amule 下载工具
 - dockerman docker
-- kodexplorer 可道云（像windows一样管理文件）
-- AdGuard Home 去广告插件(原理dns劫持)
+- kodexplorer 可道云（像 windows 一样管理文件）
+- AdGuard Home 去广告插件(原理 dns 劫持)
 
 ### 常用的包
+
 - ttyd web shell
 - v2ray-server
 - netdata (性能检测) `cd /usr/share/netdata/web  chown -R root:root *`
@@ -129,16 +131,23 @@ include conf.d/*.conf;
 
 acme 使用 : https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E
 
-页面配置: 常规设置域名先写主域名,其他域名,后写泛解析域名(\*.域名) 验证方式`dns`;DnsAPI`dns_ali`; API 凭证列表: `Ali_Key="<key>" Ali_Secret="<secret>"` 
-软件库搜索dnsapi 安装
-执行acme: `service acme start`, acme安装在 /usr/lib/acme/client/acme.sh , 
-ssl证书目录 `/etc/acme/域名/域名.key和fullchain.cer`， 在nginx中配置即可
+页面配置: 常规设置域名先写主域名,其他域名,后写泛解析域名(\*.域名) 验证方式`dns`;DnsAPI`dns_ali`; API 凭证列表: `Ali_Key="<key>" Ali_Secret="<secret>"`
+软件库搜索 dnsapi 安装
+执行 acme: `service acme start`, acme 安装在 /usr/lib/acme/client/acme.sh ,
+ssl 证书目录 `/etc/acme/域名/域名.key和fullchain.cer`， 在 nginx 中配置即可
 
 ### v2ray
-在ui中配置好，勾选允许访问内网
+
+在 ui 中配置好，勾选允许访问内网
 
 ### minidlna
+
 家庭流媒体， 只需要调整下媒体目录，启用即可 后台监控可以访问网关:8200
 
 ### BearDropper
-安装luci-app-BearDropper
+
+安装 luci-app-BearDropper
+
+### alist
+
+配置好端口, 如果需要外网访问需要防火墙放行, 启用 ssl, 数据目录不调整, 缓存目录默认`/tmp/alist`, 如果需要离线下载大文件, 调整此目录到新的磁盘分区中
