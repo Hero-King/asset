@@ -26,4 +26,10 @@
 安全性菜单证书中, 使用阿里签发的免费的 ssl 证书替换默认证书
 
 ### nginx 功能
+
 登陆门户中 高级配置 nginx
+
+## 资源管理
+
+pve 使用的 noVnc 作为系统界面
+资产网关 Apache Guacamole
