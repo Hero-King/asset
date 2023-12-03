@@ -19,6 +19,8 @@ uci op 的配置文件配置器
 按照品牌搜索下载对应的 sysupdate.bin 包
 pve 安装 `qm importdisk 100 /var/lib/vz/template/iso/xx.img local` ; 然后磁盘添加; 设置硬盘启动; 启动后修改密码; ip: 192.168.2.1 修改 ip `vi /etc/config/network`
 
+ipv6 可能需要 21.02.3 版本
+
 ## 插件
 
 - 首页改用 nginx
@@ -43,6 +45,9 @@ pve 安装 `qm importdisk 100 /var/lib/vz/template/iso/xx.img local` ; 然后磁
 
 - ttyd web shell
 - v2ray-server
+
+### 常用的包
+
 - netdata (性能检测) `cd /usr/share/netdata/web  chown -R root:root *`
 - acme 自动化 ssl 证书管理
 - aria2 下载工具
@@ -153,4 +158,47 @@ ssl 证书目录 `/etc/acme/域名/域名.key和fullchain.cer`， 在 nginx 中�
 配置好端口, 如果需要外网访问需要防火墙放行, 启用 ssl, 数据目录不调整, 缓存目录默认`/tmp/alist`, 如果需要离线下载大文件, 调整此目录到新的磁盘分区中
 
 ### netdata
-默认不支持https 修改`/usr/lib/lua/luci/view/netdata.htm` 
+
+默认不支持 https 修改`/usr/lib/lua/luci/view/netdata.htm`
+
+### 上网
+
+#### 单臂路由
+
+https://www.right.com.cn/forum/thread-5768047-1-1.html
+https://www.right.com.cn/FORUM/thread-6196997-1-1.html
+
+光猫不设置 vlan 也可以
+
+```shell
+config interface 'loopback'
+        option device 'lo'
+        option proto 'static'
+        option ipaddr '127.0.0.1'
+        option netmask '255.0.0.0'
+
+config globals 'globals'
+        option ula_prefix 'fdf6:076a:018b::/48'
+        option packet_steering '1'
+
+config device
+        option name 'br-lan'
+        option type 'bridge'
+        list ports 'eth0'
+        option promisc '1'
+
+config interface 'lan'
+        option device 'eth0'
+        option proto 'static'
+        option ipaddr '192.168.2.1'
+        option netmask '255.255.255.0'
+        option ip6assign '60'
+
+config interface 'wan'
+        option proto 'pppoe'
+        option username 'xxx'
+        option password 'xxx'
+        option device 'eth0'
+        option ipv6 'auto'
+
+```
