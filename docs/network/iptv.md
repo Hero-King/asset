@@ -26,12 +26,18 @@ M3U 文件可以直接在文本编辑器中打开和修改，并且可以通过�
 
 ### 直播源
 
-https://github.com/fanmingming/live
-https://github.com/lylehust/Chinese-IPTV
-https://lqtv.github.io/  
-江苏联通 rtsp https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=8291952&page=1#pid18673242
+- https://github.com/fanmingming/live
+- https://github.com/lylehust/Chinese-IPTV
+- https://lqtv.github.io/
+- 江苏联通 rtsp https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=8291952&page=1#pid18673242
 
 ### 使用 ipv6 地址观看 IPTV
 
 1. 电视上安装 `tvbox` 软件(下载路径: /cloud/aliyun/软件/电视)
-2. tvbox 右上角配置页面中设置直播源: https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/v6.m3u  明明的 v6.m3u 支持回看 ipv6.m3u 不支持
+2. tvbox 右上角配置页面中设置直播源:
+
+```txt
+https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/v6.m3u
+```
+
+> 明明的 v6.m3u 支持回看 ipv6.m3u 不支持
