@@ -16,3 +16,4 @@ yarn.lock
 dist
 .temp
 .cache
+package-lock.json
