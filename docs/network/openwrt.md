@@ -159,7 +159,37 @@ ssl 证书目录 `/etc/acme/域名/域名.key和fullchain.cer`， 在 nginx 中�
 
 ### netdata
 
-默认不支持 https 修改`/usr/lib/lua/luci/view/netdata.htm`
+默认不支持 https 
+
+修改`/usr/lib/lua/luci/view/netdata.htm`
+```js
+if(window.location.hostname.includes('heroking.top')){
+  document.getElementById("netdata").src = "https://" + window.location.hostname + ":8000/netdata/";
+}else{
+  document.getElementById("netdata").src = "http://" + window.location.hostname + ":19999";
+}
+
+```
+
+使用nginx代理网页
+```shell
+
+server {
+  listen 8000;
+  listen [::]:8000;
+  server_name op.heroking.top;
+  location / {
+    proxy_pass https://192.168.2.1;
+  }
+
+  location ^~ /netdata/ {
+     proxy_pass http://192.168.2.1:19999/;
+  }
+}
+
+```
+
+
 
 ### 上网
 
@@ -202,3 +232,7 @@ config interface 'wan'
         option ipv6 'auto'
 
 ```
+
+## nav
+
+使用github pages 搭建个人导航页
