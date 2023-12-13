@@ -15,6 +15,8 @@ function fn2(): never {
 let bl: 'male' | 'demale' = 'male'
 let tmpnum: 1 | 2 | 3 | 4 | 5
 let b: { name: string; age?: number }
+let arr1: [] = []
+let arr2: [1, 2] = [1, 2]
 
 // type : 类型别名  接口创建了一个新的名字，可以在其它任何地方使用。 类型别名并不创建新名字—比如，错误信息就不会使用别名。 在下面的示例代码里，在编译器中将鼠标悬停在 interface上，显示它返回的是 Interface，但悬停在 aliased上时，显示的却是对象字面量类型。
 // 另一个重要区别是类型别名不能被 extends和 implements（自己也不能 extends和 implements其它类型）。
