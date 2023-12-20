@@ -71,7 +71,7 @@ nvm install v16.14.2
 #### 更换淘宝源
 
 ```shell
-npm config set registry https://registry.npm.taobao.org/
+npm config set registry https://registry.npmmirror.com/
 ```
 
 #### 调整缓存位置
@@ -169,15 +169,19 @@ Navicat Premium / Sqlyog (小海豚)
 调整聊天记录存储目录
 
 ### code-server
-前往 <a href='https://coder.com/docs/code-server/latest'>官方网站</a> 下载一键安装脚本 
+
+前往 <a href='https://coder.com/docs/code-server/latest'>官方网站</a> 下载一键安装脚本
 
 #### 安装
-```shell 
+
+```shell
 curl -fsSL https://code-server.dev/install.sh | sh
 ```
 
 #### 配置
-- NGINX 转发  必须Https才能支持 serviceWork
+
+- NGINX 转发 必须 Https 才能支持 serviceWork
+
 ```
     server {
        listen       443 ssl ;
@@ -208,15 +212,17 @@ curl -fsSL https://code-server.dev/install.sh | sh
    }
 ```
 
-- 配置code-server   
-`cat ~/.config/code-server/config.yaml`
+- 配置 code-server  
+  `cat ~/.config/code-server/config.yaml`
 
-#### 远程访问devServer
-打开 `/proxy/<port>/`  或者 `/absproxy/<port>/`  会自动代理到port下
+#### 远程访问 devServer
 
-因此,需要devtools打包路径(publicPath)到 `/proxy/<port>/`  或者 `/absproxy/<port>/`
+打开 `/proxy/<port>/` 或者 `/absproxy/<port>/` 会自动代理到 port 下
 
-- vue项目
+因此,需要 devtools 打包路径(publicPath)到 `/proxy/<port>/` 或者 `/absproxy/<port>/`
+
+- vue 项目
+
 ```
 const port = 8080
 devServer: {
@@ -233,6 +239,11 @@ devServer: {
 
 https://mirrors.huaweicloud.com/python
 
+### SVN
+
+小乌龟下载: https://sourceforge.net/projects/tortoisesvn/
+中文语言包: https://sourceforge.net/projects/tortoisesvn/files/1.14.5/Language%20Packs/
+
 ### 其他软件
 
 - everything windows 文件搜索
@@ -240,7 +251,7 @@ https://mirrors.huaweicloud.com/python
 - v2ray 穿墙神器
 - mRemoteNg 远程桌面
 - putty (ssh 连接,老古董,支持隧道)
-- fastgithub github加速器
+- fastgithub github 加速器
 - mobaxterm
-- fiddler中文破解版
-- typora md文件编写神器
+- fiddler 中文破解版
+- typora md 文件编写神器

@@ -23,3 +23,7 @@ Person.sayHello()
 
 const p = new Person('wjj', 20)
 console.log(p instanceof Person, 'person instanceof Person')
+
+let p2: Person
+p2 = new Person("huihui", 24)
+p2.say()
