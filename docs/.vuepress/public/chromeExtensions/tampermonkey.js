@@ -36,7 +36,7 @@
         // 播放结束
         myVid.addEventListener('ended', () => {
           setTimeout(() => {
-            location.reload()
+            // location.reload()
           }, 1000 * 5)
         })
       }, 1000 * 2)
