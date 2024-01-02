@@ -2,7 +2,7 @@ name: Daily Notify
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   schedule:
-    - cron: '20 11 * * *'
+    - cron: '48 18 * * *'
 jobs:
   Notify-Actions:
     runs-on: ubuntu-latest
@@ -14,4 +14,3 @@ jobs:
       - name: Run node scripts
         run: node docs/.vuepress/public/notify/daily.js --token ${{ secrets.PUSHPLUS_TOKEN }}
       - run: echo "run success"
-     
