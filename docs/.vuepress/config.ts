@@ -17,6 +17,9 @@ export default defineConfig({
           // 更多选项:
           // `default`、`lowercase`、`uppercase`、`capitalize`、`camelcase`、`kebabcase`、`titlecase`
           mode: 'titlecase'
+        },
+        git: {
+          trackStatus: 'add'
         }
       }
     ]
