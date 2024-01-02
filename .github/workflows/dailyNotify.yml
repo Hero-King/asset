@@ -2,7 +2,7 @@ name: Daily Notify
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   schedule:
-    - cron: '56 18 * * *'
+    - cron: '20 11 * * *'
 jobs:
   Notify-Actions:
     runs-on: ubuntu-latest
