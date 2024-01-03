@@ -183,7 +183,7 @@ server {
   }
 
   location ^~ /netdata/ {
-     proxy_pass http://192.168.2.1:19999/;
+     proxy_pass http://127.0.0.1:19999/;
   }
 }
 
