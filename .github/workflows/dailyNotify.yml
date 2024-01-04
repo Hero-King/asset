@@ -1,7 +1,7 @@
 name: Daily Notify
 on:
   schedule:
-    - cron: '55 15 * * *'
+    - cron: '0 2 * * *'
 jobs:
   Notify-Actions:
     runs-on: ubuntu-latest
