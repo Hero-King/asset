@@ -21,6 +21,7 @@ axios({
     content: `
     <h4>时间: ${formattedTime}</h4>
     <p>小程序签到</p>
+    <p>支付宝偷能量 签到</p>
     `
   }
 })
