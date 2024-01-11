@@ -1,7 +1,8 @@
 [
   {
     "name": "中国石化会员中心|江苏",
-    "url": "#小程序://石化会员/CbDeTGDnlsm2tzC"
+    "url": "#小程序://石化会员/CbDeTGDnlsm2tzC",
+    "signinFun": "sinopec"
   },
   {
     "url": "#小程序://白药生活+/CkqqlXNANqs3DSn"
