@@ -5,7 +5,6 @@
       "name": "直播",
       "type": 0,
       "url": "https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/v6.m3u",
-      "epg": "https://live.fanmingming.com/e.xml"
     },
   ],
   "rules": [
