@@ -128,3 +128,7 @@ const demo = (parma: IDemo) => {
   y = parma.x!
   return y
 }
+
+interface LikeObj {
+  [key: string]: string
+}

@@ -66,3 +66,25 @@ uniCloud/cloudfunctions/common 目录
 ## 云数据库
 
 使用 clientDb 客户端可以直接操作云数据库: 通过`<uniCloud-db>`组件或 uniCloud.database() API 来访问 uniCloud 数据库。也支持搭配 action 云函数追加服务器逻辑
+
+## 条件编译
+
+```js
+// #ifdef H5
+
+/// #endif
+```
+
+## 打包部署
+
+### 跨端应用 ajax 前缀路径设置
+
+一种是代码托管需要我们自己放在 web 容器中, 然后在平台上或者告诉用户我们应用的地址, ajax 前缀直接设置成'/' 即可
+
+另一种是微信小程序那样代码托管在平台中, 需要将 ajax 前缀设置成我们的网关等正确的地址
+
+uniapp 默认只有两个环境, 一个是运行(开发)环境, 一个是发行(正式)环境, 对于一套系统会有测试、正式环境, uni-app 提供了小程序/h5 端解决方案
+
+> https://uniapp.dcloud.net.cn/collocation/package.html
+
+> https://blog.csdn.net/wangjun5159/article/details/124110108
