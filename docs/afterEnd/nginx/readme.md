@@ -90,6 +90,10 @@ rpm -ql nginx-mod-stream # 查看包nginx-mod-stream创建了哪些文件 如下
 5. 如果全部都没有匹配到，那么将选择在 listen 配置项后加入[default_server]的 server 块
 6. 如果没写，那么就找到匹配 listen 端口的第一个 Server 块的配置文件 #如果通过 ip 访问，会直接到 5，判断是否有 default_server 的 server 块，就走 6
 
+### 重定向
+return/rewrite关键字
+https://nginx.org/en/docs/http/ngx_http_rewrite_module.html
+
 ## Example
 
 ### 代理/api 请求

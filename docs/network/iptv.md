@@ -24,20 +24,21 @@ M3U 文件可以直接在文本编辑器中打开和修改，并且可以通过�
 
 在 IPTV 领域，M3U 文件也被广泛使用。供应商可以创建 M3U 格式的播放列表，其中包含多个电视频道或点播节目的链接地址，用户可以通过将这些播放列表导入他们的 IPTV 设备或应用程序来观看这些内容。
 
-### 直播源
+## 电视软件
 
-- https://github.com/fanmingming/live
+常用资源导航页: https://饭太硬.top/
+
+### TVbox
+
+右上角配置页面中设置接口地址, 常用接口地址
+
+1. https://饭太硬.top/tv
+2. 自己配置了明明的直播源`备用`: https://blog.heroking.top/tv/tv.json (只有直播)
+3. `https://op.heroking.top:8000/tv` 已使用302重定向到指定的源地址
+
+#### 直播源
+
+- 网页 https://github.com/fanmingming/live 直播地址: https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/v6.m3u // 明明的 v6.m3u 支持回看 ipv6.m3u 不支持
 - https://github.com/lylehust/Chinese-IPTV
 - https://lqtv.github.io/
 - 江苏联通 rtsp https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=8291952&page=1#pid18673242
-
-### 使用 ipv6 地址观看 IPTV
-
-1. 电视上安装 `tvbox` 软件(下载路径: /cloud/aliyun/软件/电视)
-2. tvbox 右上角配置页面中设置直播源:
-
-```txt
-https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/v6.m3u
-```
-
-> 明明的 v6.m3u 支持回看 ipv6.m3u 不支持
