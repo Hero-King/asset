@@ -2,6 +2,40 @@
 
 多端应用开发框架, vue2/3
 
+## 拦截器
+
+uni.addInterceptor() , 通过 Interceptor 实现，https://github.com/dcloudio/uni-app/blob/alpha/src/core/helpers/interceptor.js我们可以看到。
+invoke 可以接收一个 promise。那么我们就可以在 invoke 中返回一个 Promise 来处理异步方法
+
+```js
+uni.addInterceptor('navigateTo', {
+  invoke(args) {
+    return new Promise((resolve) => {
+      resolve(args)
+    })
+  }
+})
+```
+
+> 路由拦截只能拦截 uni 对象上路由跳转的方法, 对于 H5 首次进入页面时候拦截不到, 可以使用 app = getApp()身上的$router (uni-app 的 H5 端，自带了 vue.js、vue-router 及部分 es6 polyfill 库，这部分的体积 gzip 后只有 92k，和 web 开发使用 vue 基本一致。)的拦截器, 例如在 setupRouter 中
+
+    ```js
+    // #ifdef H5
+    const app = getApp()
+    // 非根路径进入应用跳转到登录页
+    let firstEnter = true
+    app.$router.beforeEach((to, from, next) => {
+      if (firstEnter && to.path !== '/') {
+        cache.set(BACK_URL, to.fullPath)
+        next('/pages/login/login')  // 跳转到登录页
+      } else {
+        next()
+      }
+      firstEnter = false
+    })
+    // #endif
+    ```
+
 ## Hbuilder
 
 开发工具, 新建项目 选择模板即可
