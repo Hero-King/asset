@@ -53,6 +53,10 @@ module.exports = [
         "link": "/frontEnd/css/"
       },
       {
+        "text": "Demo",
+        "link": "/frontEnd/demo/"
+      },
+      {
         "text": "Front End",
         "link": "/frontEnd/"
       },

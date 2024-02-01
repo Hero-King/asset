@@ -23,7 +23,9 @@
     "vuepress-plugin-auto-sidebar": "^2.3.2"
   },
   "dependencies": {
+    "async-validator": "^1.11.5",
     "axios": "^1.6.3",
+    "element-ui": "^2.15.14",
     "minimist": "^1.2.8"
   }
 }

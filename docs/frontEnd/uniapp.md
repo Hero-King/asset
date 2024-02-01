@@ -8,89 +8,83 @@ App.vue 中 `onLaunch` 生命周期中如果有异步执行, 不能够阻塞页�
 
 1. https://blog.csdn.net/ltc_Yan/article/details/130851715 巧妙利用 Promise Vue3 版本https://juejin.cn/post/7117586078013341732
 2. 预制首页为空白页, 在空白页中处理逻辑
+
    ```vue
    <template>
-   <div></div>
+     <div></div>
    </template>
+   <script setup lang="ts">
+   import { BACK_URL } from '@/enums/cacheEnums'
+   import { useUserStore } from '@/stores/user'
+   import cache from '@/utils/cache'
+   import { onLoad, onShow } from '@dcloudio/uni-app'
+   const userStore = useUserStore()
+   onShow(() => {
+     // #ifdef MP-WEIXIN
+     if (wx.hideHomeButton) {
+       wx.hideHomeButton()
+     }
+   })
+   onLoad(async () => {
+     console.log('login onLoad')
 
-<script setup lang="ts">
-import { BACK_URL } from '@/enums/cacheEnums'
-import { useUserStore } from '@/stores/user'
-import cache from '@/utils/cache'
-import { onLoad, onShow } from '@dcloudio/uni-app'
-const userStore = useUserStore()
-
-onShow(() => {
-    // #ifdef MP-WEIXIN
-    if (wx.hideHomeButton) {
-        wx.hideHomeButton()
-    }
-})
-
-onLoad(async () => {
-    console.log('login onLoad')
-
-    uni.showLoading({
-        title: '请稍后...'
-    })
-    if (!cache.get('tenantId')) {
-        userStore.logout()
-        uni.hideLoading()
-        uni.reLaunch({
-            url: '/pages/tenant/tenant'
-        })
-    } else if (!userStore.isLogin) {
-        uni.showLoading({
-            title: '登录状态已过期,自动登录中...'
-        })
-        const data = await userStore.codeLogin()
-        if (data) {
-            setTimeout(() => {
-                goPrePage()
-            }, 1000)
-        } else {
-            uni.$u.toast('登录失败, 请退出重试')
-        }
-    } else {
-        await userStore.getUser()
-        goPrePage()
-    }
-})
-
-const goPrePage = () => {
-    uni.hideLoading()
-    const pages = getCurrentPages()
-    if (pages.length > 1) {
-        const prevPage = pages[pages.length - 2]
-        uni.navigateBack({
-            success: () => {
-                // @ts-ignore
-                const { onLoad, options } = prevPage
-                // 刷新上一个页面
-                onLoad && onLoad(options)
-            }
-        })
-    } else if (cache.get(BACK_URL)) {
-        uni.redirectTo({
-            url: cache.get(BACK_URL),
-            fail() {
-                uni.switchTab({
-                    url: cache.get(BACK_URL)
-                })
-            }
-        })
-    } else {
-        uni.reLaunch({
-            url: '/pages/index/index'
-        })
-    }
-    cache.remove(BACK_URL)
-}
-</script>
-
-<style></style>
-
-    ```
+     uni.showLoading({
+       title: '请稍后...'
+     })
+     if (!cache.get('tenantId')) {
+       userStore.logout()
+       uni.hideLoading()
+       uni.reLaunch({
+         url: '/pages/tenant/tenant'
+       })
+     } else if (!userStore.isLogin) {
+       uni.showLoading({
+         title: '登录状态已过期,自动登录中...'
+       })
+       const data = await userStore.codeLogin()
+       if (data) {
+         setTimeout(() => {
+           goPrePage()
+         }, 1000)
+       } else {
+         uni.$u.toast('登录失败, 请退出重试')
+       }
+     } else {
+       await userStore.getUser()
+       goPrePage()
+     }
+   })
+   const goPrePage = () => {
+     uni.hideLoading()
+     const pages = getCurrentPages()
+     if (pages.length > 1) {
+       const prevPage = pages[pages.length - 2]
+       uni.navigateBack({
+         success: () => {
+           // @ts-ignore
+           const { onLoad, options } = prevPage
+           // 刷新上一个页面
+           onLoad && onLoad(options)
+         }
+       })
+     } else if (cache.get(BACK_URL)) {
+       uni.redirectTo({
+         url: cache.get(BACK_URL),
+         fail() {
+           uni.switchTab({
+             url: cache.get(BACK_URL)
+           })
+         }
+       })
+     } else {
+       uni.reLaunch({
+         url: '/pages/index/index'
+       })
+     }
+     cache.remove(BACK_URL)
+   }
+   </script>
+   ```
 
 ## 拦截器
 

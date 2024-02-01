@@ -7,6 +7,7 @@ export default defineConfig({
   title: 'HeroKing的个人笔记',
   // base: '/', //Vue原型上有 $withBase 取值当前base 部署在非跟目录: /asset/
   dest: './dist', // 设置输出目录
+  head: [['link', { href: 'https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css', rel: 'stylesheet' }]],
 
   plugins: [
     [
@@ -28,7 +29,7 @@ export default defineConfig({
   configureWebpack: {
     resolve: {
       alias: {
-        // '@alias': 'path/to/some/dir'
+        '@public': './public'
       }
     }
   },
