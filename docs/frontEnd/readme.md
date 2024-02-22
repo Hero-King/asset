@@ -3,6 +3,7 @@
 ## 好用的全局 npm 包
 
 - serve 静态文件服务器
+- live-server vscode 差用插件
 
 ## fc
 

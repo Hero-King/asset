@@ -70,7 +70,7 @@ img.src = 'https://xxx'
 ### ts 类型
 
 ```ts
-import { EChartsOption, EChartsType, DefaultLabelFormatterCallbackParams,TooltipComponentFormatterCallbackParams } from 'echarts'
+import { EChartsOption, EChartsType, DefaultLabelFormatterCallbackParams, TooltipComponentFormatterCallbackParams } from 'echarts'
 let echartInstance = ref<EChartsType>()
 const option: EChartsOption = {
   tooltip: {
@@ -187,7 +187,7 @@ let opt = {
 
 emphasis 配置项
 
-### 图裂的样式特别复杂(比如带边框)
+### 图例的样式特别复杂(比如带边框)
 
 使用 html + css 画出图例样式 使用 js + echarts.dispatchAction()
 
@@ -206,3 +206,5 @@ import VChart from 'vue-echarts';
  * - update-options: 图表更新的配置项。请参考 echartsInstance.setOption 的 opts参数
  */
 ```
+
+## uniapp 跨端图表: ucharts
