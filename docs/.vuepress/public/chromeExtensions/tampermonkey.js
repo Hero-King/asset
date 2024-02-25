@@ -15,9 +15,6 @@
   console.log('HeroKing scripts run')
 
   const d = document
-  if (location && location.host.includes('localhost:')) {
-    sessionStorage.setItem('limitSize', 15000)
-  }
 
   if (location.host == 'mongoosejs.net') {
     let advertise = d.querySelector('#layout .container > div:nth-child(1)')
@@ -77,4 +74,10 @@
       logoContainer.appendChild(h3)
     }
   }
+
+  // https网站允许加载http资源
+  const oMeta = document.createElement('meta')
+  oMeta.content = 'upgrade-insecure-requests'
+  oMeta.httpEquiv = 'Content-Security-Policy'
+  document.getElementsByTagName('head')[0].appendChild(oMeta)
 })()
