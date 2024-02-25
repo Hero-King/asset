@@ -51,6 +51,8 @@ https://code.visualstudio.com/updates/v1_71 使用 github 账号同步设置
 
 - <a :href="$withBase('/chromeExtensions/fehelper.crx')">FeHelper(前端助手) </a>
 
+- <a :href="$withBase('/chromeExtensions/floccus-build-v5.0.9.crx')">floccus 书签同步插件</a>
+
 - MobX Developer Tools
 
 - React Developer Tools
@@ -62,6 +64,7 @@ https://code.visualstudio.com/updates/v1_71 使用 github 账号同步设置
 - Tampermonkey
   1. <a :href="$withBase('/chromeExtensions/tampermonkey.js')"> 自己的脚本 </a>
   2. Open the Fuckking URL Right Now(知乎等网站外链直接跳转)
+  3. 使用 onedrive 同步数据
 
 ### Nodejs
 
