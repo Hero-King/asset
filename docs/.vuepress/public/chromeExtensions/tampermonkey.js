@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.2
+// @version      0.1.3
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
@@ -75,9 +75,12 @@
     }
   }
 
-  // https网站允许加载http资源
-  const oMeta = document.createElement('meta')
-  oMeta.content = 'upgrade-insecure-requests'
-  oMeta.httpEquiv = 'Content-Security-Policy'
-  document.getElementsByTagName('head')[0].appendChild(oMeta)
+  // 处理vue3源码解析: https://boychina.github.io/posts/2020-12-23-vue3-core-source-code-2 网站https加载http图片问题
+  if (location.host === 'boychina.github.io') {
+    // https网站允许加载http资源
+    const oMeta = document.createElement('meta')
+    oMeta.content = 'upgrade-insecure-requests'
+    oMeta.httpEquiv = 'Content-Security-Policy'
+    document.getElementsByTagName('head')[0].appendChild(oMeta)
+  }
 })()

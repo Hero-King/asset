@@ -1,5 +1,30 @@
 # 前端
 
+## 使用 Html 书写的 Demo 使用 import 语法
+
+参考链接: https://juejin.cn/post/7226448512627359781
+
+使用 script 标签的 `type="importmap"`
+
+```
+<script type="importmap">
+{
+  "imports": {
+    "dayjs": "https://cdn.skypack.dev/dayjs@1.10.7",
+    "react": "https://cdn.skypack.dev/react@17.0.1",
+    "react-dom": "https://cdn.skypack.dev/react-dom",
+    "square": "./modules/square.js",
+    "lodash": "/node_modules/lodash-es/lodash.js"
+  }
+}
+</script>
+<script type="module">
+  import dayjs from 'dayjs';
+
+  console.log(dayjs('2019-01-25').format('YYYY-MM-DDTHH:mm:ssZ[Z]'));
+</script>
+```
+
 ## 好用的全局 npm 包
 
 - serve 静态文件服务器
