@@ -11,7 +11,7 @@
 {
   "imports": {
     "dayjs": "https://cdn.skypack.dev/dayjs@1.10.7",
-    "react": "https://cdn.skypack.dev/react@17.0.1",
+    "react": "https://unpkg.com/react@17.0.2/umd/react.development.js",
     "react-dom": "https://cdn.skypack.dev/react-dom",
     "square": "./modules/square.js",
     "lodash": "/node_modules/lodash-es/lodash.js"
