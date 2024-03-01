@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ActiveMq | HeroKing的个人笔记</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <meta name="description" content="学习犹如逆水行舟,不进则退">
+    
+    <link rel="preload" href="/assets/css/0.styles.4fe2b2c9.css" as="style"><link rel="preload" href="/assets/js/app.f9095202.js" as="script"><link rel="preload" href="/assets/js/2.58ca2398.js" as="script"><link rel="preload" href="/assets/js/1.fe4f2297.js" as="script"><link rel="preload" href="/assets/js/26.a0478adf.js" as="script"><link rel="prefetch" href="/assets/js/10.70f53429.js"><link rel="prefetch" href="/assets/js/11.81b2cce9.js"><link rel="prefetch" href="/assets/js/12.43fe94a5.js"><link rel="prefetch" href="/assets/js/13.6008c46d.js"><link rel="prefetch" href="/assets/js/14.05a2e0de.js"><link rel="prefetch" href="/assets/js/15.38d6c072.js"><link rel="prefetch" href="/assets/js/16.6ed2f041.js"><link rel="prefetch" href="/assets/js/17.fef912e4.js"><link rel="prefetch" href="/assets/js/18.718e71ce.js"><link rel="prefetch" href="/assets/js/19.aa6abb70.js"><link rel="prefetch" href="/assets/js/20.37f148ad.js"><link rel="prefetch" href="/assets/js/21.97abc788.js"><link rel="prefetch" href="/assets/js/22.19090ba4.js"><link rel="prefetch" href="/assets/js/23.ca6f481e.js"><link rel="prefetch" href="/assets/js/24.c10ce1f8.js"><link rel="prefetch" href="/assets/js/25.c2f23c46.js"><link rel="prefetch" href="/assets/js/27.3479d0a0.js"><link rel="prefetch" href="/assets/js/28.6708c669.js"><link rel="prefetch" href="/assets/js/29.667018b5.js"><link rel="prefetch" href="/assets/js/3.5485b06c.js"><link rel="prefetch" href="/assets/js/30.1988ec33.js"><link rel="prefetch" href="/assets/js/31.26790053.js"><link rel="prefetch" href="/assets/js/32.1528e36a.js"><link rel="prefetch" href="/assets/js/33.79557af4.js"><link rel="prefetch" href="/assets/js/34.f882b642.js"><link rel="prefetch" href="/assets/js/35.6dca0ed0.js"><link rel="prefetch" href="/assets/js/36.f102184f.js"><link rel="prefetch" href="/assets/js/37.267f2e24.js"><link rel="prefetch" href="/assets/js/38.0683be00.js"><link rel="prefetch" href="/assets/js/39.e69eb704.js"><link rel="prefetch" href="/assets/js/4.3eaa0632.js"><link rel="prefetch" href="/assets/js/40.aa835983.js"><link rel="prefetch" href="/assets/js/41.39683c8d.js"><link rel="prefetch" href="/assets/js/42.332eac8e.js"><link rel="prefetch" href="/assets/js/43.d02bf42e.js"><link rel="prefetch" href="/assets/js/44.6b38a693.js"><link rel="prefetch" href="/assets/js/45.10fe68f4.js"><link rel="prefetch" href="/assets/js/46.06d2361c.js"><link rel="prefetch" href="/assets/js/47.041c299f.js"><link rel="prefetch" href="/assets/js/48.6a5a21c9.js"><link rel="prefetch" href="/assets/js/49.7c2da92b.js"><link rel="prefetch" href="/assets/js/5.9f44cd78.js"><link rel="prefetch" href="/assets/js/50.033f30c7.js"><link rel="prefetch" href="/assets/js/51.bef9789f.js"><link rel="prefetch" href="/assets/js/52.a42a3181.js"><link rel="prefetch" href="/assets/js/53.1975c086.js"><link rel="prefetch" href="/assets/js/54.5d2ef73d.js"><link rel="prefetch" href="/assets/js/55.03914cca.js"><link rel="prefetch" href="/assets/js/56.071fb3e9.js"><link rel="prefetch" href="/assets/js/57.7e08ead1.js"><link rel="prefetch" href="/assets/js/58.c03d2ee7.js"><link rel="prefetch" href="/assets/js/59.e6b38514.js"><link rel="prefetch" href="/assets/js/6.9a58384f.js"><link rel="prefetch" href="/assets/js/60.2f446c76.js"><link rel="prefetch" href="/assets/js/61.bdad6af0.js"><link rel="prefetch" href="/assets/js/62.ee508606.js"><link rel="prefetch" href="/assets/js/63.fbfa4174.js"><link rel="prefetch" href="/assets/js/64.11b7b627.js"><link rel="prefetch" href="/assets/js/65.7690ea18.js"><link rel="prefetch" href="/assets/js/66.24883096.js"><link rel="prefetch" href="/assets/js/67.6e5027f0.js"><link rel="prefetch" href="/assets/js/68.ee313281.js"><link rel="prefetch" href="/assets/js/69.32aaede8.js"><link rel="prefetch" href="/assets/js/7.4a122ab6.js"><link rel="prefetch" href="/assets/js/70.9f804d05.js"><link rel="prefetch" href="/assets/js/71.ec8108ee.js"><link rel="prefetch" href="/assets/js/72.46ae532b.js"><link rel="prefetch" href="/assets/js/73.dc058324.js"><link rel="prefetch" href="/assets/js/74.0b07f343.js"><link rel="prefetch" href="/assets/js/75.0e65fb52.js"><link rel="prefetch" href="/assets/js/76.dfbcd61f.js"><link rel="prefetch" href="/assets/js/77.9a27eb17.js"><link rel="prefetch" href="/assets/js/78.d0e8a5f5.js"><link rel="prefetch" href="/assets/js/79.0b8be9b0.js"><link rel="prefetch" href="/assets/js/80.fd92f1b4.js"><link rel="prefetch" href="/assets/js/81.118cf5e2.js"><link rel="prefetch" href="/assets/js/82.f1c94107.js"><link rel="prefetch" href="/assets/js/83.a636c041.js"><link rel="prefetch" href="/assets/js/84.c0d41be8.js"><link rel="prefetch" href="/assets/js/85.0aa8d46f.js"><link rel="prefetch" href="/assets/js/86.fd336e37.js"><link rel="prefetch" href="/assets/js/87.1fdd0381.js"><link rel="prefetch" href="/assets/js/88.da298910.js"><link rel="prefetch" href="/assets/js/89.153c1044.js"><link rel="prefetch" href="/assets/js/90.2a4bf8c6.js"><link rel="prefetch" href="/assets/js/91.f36618f4.js"><link rel="prefetch" href="/assets/js/92.6e449805.js"><link rel="prefetch" href="/assets/js/93.5462b852.js"><link rel="prefetch" href="/assets/js/94.f5421ab1.js"><link rel="prefetch" href="/assets/js/95.cb939b14.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.e8eeddec.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.4fe2b2c9.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">HeroKing的个人笔记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="afterEnd" class="dropdown-title"><span class="title">afterEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="afterEnd" class="mobile-dropdown-title"><span class="title">afterEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/afterEnd/mongodb/" class="nav-link">
+  Mongodb
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/mysql/" class="nav-link">
+  Mysql
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/nginx/" class="nav-link">
+  Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/redis/" class="nav-link">
+  Redis
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/JMS/" class="nav-link router-link-active">
+  JMS
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/" class="nav-link router-link-active">
+  After End
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithms" class="dropdown-title"><span class="title">algorithms</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithms" class="mobile-dropdown-title"><span class="title">algorithms</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/algorithms/" class="nav-link">
+  Algorithms
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="frontEnd" class="dropdown-title"><span class="title">frontEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="frontEnd" class="mobile-dropdown-title"><span class="title">frontEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontEnd/autojs/" class="nav-link">
+  Autojs
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/css/" class="nav-link">
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/demo/" class="nav-link">
+  Demo
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/" class="nav-link">
+  Front End
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/ts/" class="nav-link">
+  Ts
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="life" class="dropdown-title"><span class="title">life</span> <span class="arrow down"></span></button> <button type="button" aria-label="life" class="mobile-dropdown-title"><span class="title">life</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/life/" class="nav-link">
+  Life
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="network" class="dropdown-title"><span class="title">network</span> <span class="arrow down"></span></button> <button type="button" aria-label="network" class="mobile-dropdown-title"><span class="title">network</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/network/" class="nav-link">
+  Network
+</a></li><li class="dropdown-item"><!----> <a href="/network/proxy/" class="nav-link">
+  Proxy
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="software" class="dropdown-title"><span class="title">software</span> <span class="arrow down"></span></button> <button type="button" aria-label="software" class="mobile-dropdown-title"><span class="title">software</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/software/ftp/" class="nav-link">
+  Ftp
+</a></li><li class="dropdown-item"><!----> <a href="/software/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/software/samba/" class="nav-link">
+  Samba
+</a></li><li class="dropdown-item"><!----> <a href="/software/" class="nav-link">
+  Software
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="system" class="dropdown-title"><span class="title">system</span> <span class="arrow down"></span></button> <button type="button" aria-label="system" class="mobile-dropdown-title"><span class="title">system</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/system/Hackintosh/" class="nav-link">
+  Hackintosh
+</a></li><li class="dropdown-item"><!----> <a href="/system/linux/" class="nav-link">
+  Linux
+</a></li><li class="dropdown-item"><!----> <a href="/system/" class="nav-link">
+  System
+</a></li><li class="dropdown-item"><!----> <a href="/system/windows/" class="nav-link">
+  Windows
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="afterEnd" class="dropdown-title"><span class="title">afterEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="afterEnd" class="mobile-dropdown-title"><span class="title">afterEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/afterEnd/mongodb/" class="nav-link">
+  Mongodb
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/mysql/" class="nav-link">
+  Mysql
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/nginx/" class="nav-link">
+  Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/redis/" class="nav-link">
+  Redis
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/JMS/" class="nav-link router-link-active">
+  JMS
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/" class="nav-link router-link-active">
+  After End
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithms" class="dropdown-title"><span class="title">algorithms</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithms" class="mobile-dropdown-title"><span class="title">algorithms</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/algorithms/" class="nav-link">
+  Algorithms
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="frontEnd" class="dropdown-title"><span class="title">frontEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="frontEnd" class="mobile-dropdown-title"><span class="title">frontEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontEnd/autojs/" class="nav-link">
+  Autojs
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/css/" class="nav-link">
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/demo/" class="nav-link">
+  Demo
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/" class="nav-link">
+  Front End
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/ts/" class="nav-link">
+  Ts
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="life" class="dropdown-title"><span class="title">life</span> <span class="arrow down"></span></button> <button type="button" aria-label="life" class="mobile-dropdown-title"><span class="title">life</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/life/" class="nav-link">
+  Life
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="network" class="dropdown-title"><span class="title">network</span> <span class="arrow down"></span></button> <button type="button" aria-label="network" class="mobile-dropdown-title"><span class="title">network</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/network/" class="nav-link">
+  Network
+</a></li><li class="dropdown-item"><!----> <a href="/network/proxy/" class="nav-link">
+  Proxy
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="software" class="dropdown-title"><span class="title">software</span> <span class="arrow down"></span></button> <button type="button" aria-label="software" class="mobile-dropdown-title"><span class="title">software</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/software/ftp/" class="nav-link">
+  Ftp
+</a></li><li class="dropdown-item"><!----> <a href="/software/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/software/samba/" class="nav-link">
+  Samba
+</a></li><li class="dropdown-item"><!----> <a href="/software/" class="nav-link">
+  Software
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="system" class="dropdown-title"><span class="title">system</span> <span class="arrow down"></span></button> <button type="button" aria-label="system" class="mobile-dropdown-title"><span class="title">system</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/system/Hackintosh/" class="nav-link">
+  Hackintosh
+</a></li><li class="dropdown-item"><!----> <a href="/system/linux/" class="nav-link">
+  Linux
+</a></li><li class="dropdown-item"><!----> <a href="/system/" class="nav-link">
+  System
+</a></li><li class="dropdown-item"><!----> <a href="/system/windows/" class="nav-link">
+  Windows
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JMS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/afterEnd/JMS/activeMq.html" aria-current="page" class="active sidebar-link">ActiveMq</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/afterEnd/JMS/activeMq.html#安装" class="sidebar-link">安装</a></li><li class="sidebar-sub-header"><a href="/afterEnd/JMS/activeMq.html#web-console" class="sidebar-link">Web console</a></li><li class="sidebar-sub-header"><a href="/afterEnd/JMS/activeMq.html#原理" class="sidebar-link">原理</a></li><li class="sidebar-sub-header"><a href="/afterEnd/JMS/activeMq.html#连接" class="sidebar-link">连接</a></li><li class="sidebar-sub-header"><a href="/afterEnd/JMS/activeMq.html#topic" class="sidebar-link">Topic</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="activemq"><a href="#activemq" class="header-anchor">#</a> ActiveMq</h1> <h2 id="安装"><a href="#安装" class="header-anchor">#</a> 安装</h2> <p>使用 docker 安装</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># https://hub.docker.com/r/rmohr/activemq</span>
+<span class="token function">docker</span> run <span class="token parameter variable">-p</span> <span class="token number">61616</span>:61616 <span class="token parameter variable">--name</span> activemq <span class="token parameter variable">-d</span>  <span class="token parameter variable">-p</span> <span class="token number">61614</span>:61614 <span class="token parameter variable">-p</span> <span class="token number">1883</span>:1883  <span class="token parameter variable">-p</span> <span class="token number">8161</span>:8161 rmohr/activemq
+</code></pre></div><blockquote><p>端口说明<br>
+61616 JMS<br>
+8161 UI<br>
+5672 AMQP (since <code>rmohr/activemq:5.12.1</code>)<br>
+61613 STOMP (since <code>rmohr/activemq:5.12.1</code>)<br>
+1883 MQTT (since <code>rmohr/activemq:5.12.1</code>)<br>
+61614 WS (since <code>rmohr/activemq:5.12.1</code>)</p></blockquote> <h2 id="web-console"><a href="#web-console" class="header-anchor">#</a> Web console</h2> <p>web 控制台 http://ip:8161 默认用户名密码 admin/admin
+<img src="/img/activemq_manage.jpg"></p> <h2 id="原理"><a href="#原理" class="header-anchor">#</a> 原理</h2> <h3 id="优势"><a href="#优势" class="header-anchor">#</a> 优势</h3> <p>1、解耦<br>
+2、削峰<br>
+3、异步</p> <h3 id="消息类型"><a href="#消息类型" class="header-anchor">#</a> 消息类型</h3> <ul><li>一对一(Point To Point)的 queue</li> <li>一对多的发布订阅(订阅者只能接收到订阅后 发布者发布的消息)的 Topic</li></ul> <h2 id="连接"><a href="#连接" class="header-anchor">#</a> 连接</h2> <p><a href="https://activemq.apache.org/connectivity"> 官方指导文档</a></p> <ul><li>支持 Ajax</li> <li>支持 websocket 需要使用 Stomp 比如<a href="https://github.com/jmesnil/stomp-websocket">STOMP.js</a>基于 websocket 技术创建 Stomp 客户端</li></ul> <h2 id="topic"><a href="#topic" class="header-anchor">#</a> Topic</h2> <p>消息一对多</p> <h3 id="前端直连"><a href="#前端直连" class="header-anchor">#</a> 前端直连</h3> <p>使用 mqtt (只能使用发布/订阅模式,好像不支持 queue)</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> mqtt <span class="token keyword">from</span> <span class="token string">'mqtt'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'XXX'</span><span class="token punctuation">,</span>
+  <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">beforeDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>client<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>client<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>client <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// const client = mqtt.connect(socketUrl)</span>
+      <span class="token keyword">const</span> client <span class="token operator">=</span> mqtt<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'mqtt://10.36.30.84:61614'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">clientId</span><span class="token operator">:</span> <span class="token string">'chrome_wjj'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+      <span class="token keyword">this</span><span class="token punctuation">.</span>client <span class="token operator">=</span> client
+      client<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connect'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'connect'</span><span class="token punctuation">)</span>
+        client<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// client.publish('test', 'Hello mqtt')</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+      client<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arguments<span class="token punctuation">,</span> <span class="token string">'err'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      client<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arguments<span class="token punctuation">,</span> <span class="token string">'end'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+      client<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">topic<span class="token punctuation">,</span> message<span class="token punctuation">,</span> packet</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arguments<span class="token punctuation">)</span>
+        <span class="token comment">// message is Buffer</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment">// client.end()</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><a href="http://jmesnil.net/stomp-websocket/doc/" target="_blank">使用 stomp.js</a><br>
+下载地址: https://raw.githubusercontent.com/jmesnil/stomp-websocket/master/lib/stomp.js</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> url <span class="token operator">=</span> <span class="token string">'ws://10.36.30.84:61614'</span>
+<span class="token keyword">var</span> client <span class="token operator">=</span> Stomp<span class="token punctuation">.</span><span class="token function">client</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+client<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string-property property">'client-id'</span><span class="token operator">:</span> <span class="token string">'my-client-id-receive'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// client.send('/queue/test', {}, 'Hello, STOMP') 给queue中的test队列发消息</span>
+
+  <span class="token keyword">const</span> destination <span class="token operator">=</span> <span class="token string">'/queue/test'</span> <span class="token comment">// queue是队列 topic是多对一的那种模式</span>
+  client<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>destination<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'receive msg'</span><span class="token punctuation">,</span> arguments<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.f9095202.js" defer></script><script src="/assets/js/2.58ca2398.js" defer></script><script src="/assets/js/1.fe4f2297.js" defer></script><script src="/assets/js/26.a0478adf.js" defer></script>
+  </body>
+</html>
