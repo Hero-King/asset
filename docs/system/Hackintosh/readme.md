@@ -24,7 +24,11 @@ ESXI -》 github 搜索 esxi-unlocker3.0.1 版本
 
 ### 镜像
 
-- [黑果小兵](https://mirrors.dtops.cc/ISO/MacOS)
+- [黑果小兵](https://mirrors.dtops.cc/ISO/MacOS) 
+
+地址好像换了： 
+
+https://mirrors.dtops.co/ISO/MacOS/11/macOS%20Big%20Sur%2011.1%2020C69%20Installer%20for%20CLOVER%205127%20and%20WEPE.dmg
 
 dmg 文件直接使用 etcher 刻录到 U 盘，
 认真阅读网站信息
