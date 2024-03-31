@@ -5,9 +5,27 @@
 华硕安装 8.0.2 系统卡死在 loading driver, 使用 7.4 安装成功
 安装成功后访问 8006 端口管理
 
+使用 pve_source 优化 PVE 配置
+wget -q -O /root/pve_source.tar.gz 'https://bbs.x86pi.cn/file/topic/2023-11-28/file/01ac88d7d2b840cb88c15cb5e19d4305b2.gz' && tar zxvf
+
+替换 LX 模板仓库地址(pve_source 脚本中可替换)
+cp /usr/share/perl5/PVE/APLInfo.pm /usr/share/perl5/PVE/APLInfo.pm_back
+sed -i 's|http://download.proxmox.com|https://mirrors.tuna.tsinghua.edu.cn/proxmox|g' /usr/share/perl5/PVE/APLInfo.pm
+
 - 安装后处理源问题 参考 https://wph.im/245.html
 - 分区合并到同一个 参考 https://zhuanlan.zhihu.com/p/605741611
 - 安装无线网卡驱动 (已不支持 kernel5.15)
+
+## 快照
+
+想要使用快照功能, 需要虚拟机的硬盘是 qcow2 格式, raw 格式不支持快照, 需要使用 pve 的 qemu-img 命令转换
+
+## 设备直通
+
+## USB
+
+USB 直通有两种方式,一种是绑定插入的 USB 设备 ID,另一种是绑定 USB 端口,
+如果是 USB3.0,需要绑定两个端口,才能兼容3.0设备和2.0设备
 
 ## 群晖
 

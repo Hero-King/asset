@@ -70,3 +70,21 @@ clover 过度到 oc: https://github.com/dortania/OpenCore-Install-Guide/blob/mas
 显卡伪冒设备 Id : https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html
 
 ATI hd5450 => deviceId: 68E0 vendor ID: 1002(ATI 显卡都是这个代码)
+
+## docker 安装 Macos
+
+https://hub.docker.com/r/sickcodes/docker-osx
+
+## 用脚本安装 MACOSX
+
+https://github.com/luchina-gabriel/OSX-PROXMOX
+
+1. 在 pve 中执行 /bin/bash -c "$(curl -fsSL https://install.osx-proxmox.com)"
+2. pve 会自动重启, 后屏幕卡在 loading initial ramdisk 是正常的，web interface 能正常使用
+3. osx-setup
+
+具体操作步骤 https://blog.wubw.fun/2023/12/pve-8-hacintosh-sonoma.html
+
+## OSX-KVM
+
+虚拟机安装 osx 解决方案, 用他的脚本生成 macos recovery 镜像然后到 pve 中新建虚拟机,恢复Macos

@@ -12,12 +12,10 @@ uci op 的配置文件配置器
 
 ## 安装
 
-下载老朱推荐: https://www.right.com.cn/forum/thread-8293351-1-1.html
-目前使用 openwrt6.1-jpxb-20231028-x86-64-generic-squashfs-combined-efi.img https://www.right.com.cn/forum/thread-8286335-1-1.html
 后续使用 openwrt.ai 生成
 
 按照品牌搜索下载对应的 sysupdate.bin 包
-pve 安装 `qm importdisk 100 /var/lib/vz/template/iso/xx.img local` ; 然后磁盘添加; 设置硬盘启动; 启动后修改密码; ip: 192.168.2.1 修改 ip `vi /etc/config/network`
+pve 安装 `qm importdisk 100 /var/lib/vz/template/iso/xx.img local --format qcow2` ; (100是VMid) 然后磁盘添加; 设置硬盘启动; 启动后修改密码; ip: 192.168.2.1 修改 ip `vi /etc/config/network`
 
 ipv6 可能需要 21.02.3 版本
 
