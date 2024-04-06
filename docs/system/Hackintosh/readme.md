@@ -16,6 +16,12 @@
 
 ### BIOS
 
+华硕 H61 主板
+
+1. 关闭安全启动
+2. csm 直接设置 disabled
+3. OS type : otheros
+
 ### 虚拟机 Vmware
 
 安装 auto-unlocker 破解 VMware 使得支持 Mac 系统安装
@@ -24,9 +30,9 @@ ESXI -》 github 搜索 esxi-unlocker3.0.1 版本
 
 ### 镜像
 
-- [黑果小兵](https://mirrors.dtops.cc/ISO/MacOS) 
+- [黑果小兵](https://mirrors.dtops.cc/ISO/MacOS)
 
-地址好像换了： 
+地址好像换了：
 
 https://mirrors.dtops.co/ISO/MacOS/11/macOS%20Big%20Sur%2011.1%2020C69%20Installer%20for%20CLOVER%205127%20and%20WEPE.dmg
 
@@ -50,7 +56,21 @@ https://blog.daliansky.net/clover-user-manual.html
 - WhatEverGreen 显卡补丁
 - USBinjectALL usb 驱动
 
+AppleXcpmExtraMsrs 主要是在无原生电源管理的 CPU 上使用，一般是 Haswell-E，Broadwell-E，Skylake-X 这三种 CPU
+misc/security/securebootmodel disabled?
+
 ## 安装
+
+### 最新 Opencore 安装
+
+最新淘宝 EFI 文件已存放阿里云,镜像使用11.6、11.7
+
+自己想定制一份属于自己的EFI？ 浪费时间~ 可以参考
+- github: H61-i3-3220-GTX650-EFI
+- github: Opencore-IvyBridge-H61-Motherboard
+
+
+### 些许记录
 
 - 安装步骤：https://github.com/Lubibest/How-to-install-a-Hackintosh
 - 启动参数去掉 alcoff
@@ -74,6 +94,13 @@ clover 过度到 oc: https://github.com/dortania/OpenCore-Install-Guide/blob/mas
 显卡伪冒设备 Id : https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html
 
 ATI hd5450 => deviceId: 68E0 vendor ID: 1002(ATI 显卡都是这个代码)
+OC 的话在 MISC-Security-SecureBootModel 设置成 disabled
+设备属性哪里是否需要添加核心显卡？？
+UEFi/APFS 中 Min Version、Min Date 需要根据 Macos 版本设置
+
+### opencord 引导中不能使用键盘
+
+https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/extended/opencore-issues.html#can-t-select-anything-in-the-picker
 
 ## docker 安装 Macos
 
@@ -91,4 +118,4 @@ https://github.com/luchina-gabriel/OSX-PROXMOX
 
 ## OSX-KVM
 
-虚拟机安装 osx 解决方案, 用他的脚本生成 macos recovery 镜像然后到 pve 中新建虚拟机,恢复Macos
+虚拟机安装 osx 解决方案, 用他的脚本生成 macos recovery 镜像然后到 pve 中新建虚拟机,恢复 Macos
