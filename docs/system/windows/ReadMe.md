@@ -6,6 +6,13 @@ win10 lstc 长期稳定精简版本 <a href="https://msdn.itellyou.cn/"> 镜像�
 
 ## 系统设置
 
+### 代理服务器配置
+
+网络和 Internet 中代理服务器
+
+- Http 代理直接填写主机名+端口
+- socks 代理填写主机: socks=ip
+
 ### 系统激活
 
 ```shell

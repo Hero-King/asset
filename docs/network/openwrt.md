@@ -15,7 +15,7 @@ uci op 的配置文件配置器
 后续使用 openwrt.ai 生成
 
 按照品牌搜索下载对应的 sysupdate.bin 包
-pve 安装 `qm importdisk 100 /var/lib/vz/template/iso/xx.img local --format qcow2` ; (100是VMid) 然后磁盘添加; 设置硬盘启动; 启动后修改密码; ip: 192.168.2.1 修改 ip `vi /etc/config/network`
+pve 安装 `qm importdisk 100 /var/lib/vz/template/iso/xx.img local --format qcow2` ; (100 是 VMid) 然后磁盘添加; 设置硬盘启动; 启动后修改密码; ip: 192.168.2.1 修改 ip `vi /etc/config/network`
 
 ipv6 可能需要 21.02.3 版本
 
@@ -65,6 +65,16 @@ ipv6 可能需要 21.02.3 版本
 - zerotier 零盾 异地组网 内网穿透 vpn
 
 ## 配置
+
+### Passwall
+
+https://bingmeme.github.io/OpenWrt_CN/tips/passwallURLfenliu.html#:~:text=%E7%9B%AE%E5%89%8Dpasswall%20%E8%8A%82%E7%82%B9%E5%88%97%E8%A1%A8%E9%87%8C%20%E5%87%BA%E5%8E%82%E4%BC%9A%E8%87%AA%E5%B8%A6%E4%B8%80%E4%B8%AA%E5%B7%B2%E7%BB%8F%E5%BB%BA%E7%AB%8B%E5%A5%BD%E7%9A%84%E2%80%9C%E5%88%86%E6%B5%81%E6%80%BB%E8%8A%82%E7%82%B9%E2%80%9D%EF%BC%8C%E5%A6%82%E4%B8%8B%E5%9B%BE%EF%BC%9A%20%E5%A6%82%E6%9E%9C%E6%82%A8%E6%89%8B%E8%B4%B1%E5%88%A0%E9%99%A4%E5%BC%84%E6%B2%A1%E4%BA%86%E8%BF%99%E4%B8%AA%20%E5%88%86%E6%B5%81%E6%80%BB%E8%8A%82%E7%82%B9%20%EF%BC%8C%E4%B9%9F%E6%B2%A1%E4%BA%8B%EF%BC%8C%E6%89%8B%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%9B%9E%E6%9D%A5%E7%9A%84%E6%B5%81%E7%A8%8B%E6%98%AF%EF%BC%9A,%E4%B8%8A%E5%9B%BE%E7%9A%84%20%E7%B1%BB%E5%9E%8B%20%E5%8F%AF%E9%80%89Xray%E6%88%96%E8%80%85V2ray%EF%BC%8C%E5%AE%83%E4%BB%AC%E7%9A%84%20%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%20%E9%87%8C%E9%83%BD%E6%9C%89%20%E5%88%86%E6%B5%81%20%EF%BC%8C%E4%BD%BF%E7%94%A8%E6%95%88%E6%9E%9C%E5%B7%AE%E4%B8%8D%E5%A4%9A%E3%80%82
+
+https://www.right.com.cn/forum/thread-8325875-1-1.html
+
+#### 只想特定机器走代理?
+
+可以使用 passwall 的 socks 代理服务器, 在基本设置中=>socks 设置, 直接配置一个 socks 服务器, 在 Windows/Mac 中使用即可
 
 ### uhttpd
 
@@ -157,19 +167,20 @@ ssl 证书目录 `/etc/acme/域名/域名.key和fullchain.cer`， 在 nginx 中�
 
 ### netdata
 
-默认不支持 https 
+默认不支持 https
 
 修改`/usr/lib/lua/luci/view/netdata.htm`
-```js
-if(window.location.hostname.includes('heroking.top')){
-  document.getElementById("netdata").src = "https://" + window.location.hostname + ":8000/netdata/";
-}else{
-  document.getElementById("netdata").src = "http://" + window.location.hostname + ":19999";
-}
 
+```js
+if (window.location.hostname.includes('heroking.top')) {
+  document.getElementById('netdata').src = 'https://' + window.location.hostname + ':8000/netdata/'
+} else {
+  document.getElementById('netdata').src = 'http://' + window.location.hostname + ':19999'
+}
 ```
 
-使用nginx代理网页
+使用 nginx 代理网页
+
 ```shell
 
 server {
@@ -186,8 +197,6 @@ server {
 }
 
 ```
-
-
 
 ### 上网
 
@@ -233,4 +242,4 @@ config interface 'wan'
 
 ## nav
 
-使用github pages 搭建个人导航页
+使用 github pages 搭建个人导航页
