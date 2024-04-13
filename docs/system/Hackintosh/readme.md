@@ -69,6 +69,10 @@ misc/security/securebootmodel disabled?
 - github: H61-i3-3220-GTX650-EFI
 - github: Opencore-IvyBridge-H61-Motherboard
 
+系统运行日志中存在以下问题
+1. (com.apple.wifi.WiFiAgent): Service only ran for 0 seconds. Pushing respawn out by 10 seconds. 
+    - 方式一: 每次开机执行 launchctl unload /System/Library/LaunchAgents/com.apple.wifi.WiFiAgent.plist(使用自动执行app添加shell脚本,在用户登录项目中添加)
+    - 方式二: 在能进去recovery或者时光机器恢复的情况下 sudo mount -uw / ; killall Finder; mv /System/Library/LaunchAgents/com.apple.wifi.WiFiAgent.plist /System/Library/LaunchAgentsIgnored/ ; 后续想要恢复回来: mv Volumes/系统盘名/System/Library/LaunchAgentsIgnored/com.apple.wifi.WiFiAgent.plist Volumes/系统盘名/System/Library/LaunchAgents/
 
 ### 些许记录
 
