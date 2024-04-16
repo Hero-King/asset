@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run docs:dev",
+    "start": "pnpm run docs:dev",
     "nav": "vuepress nav docs -f",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:publish": "npm run docs:build && scp -r ./dist/* aml.heroking.top:/var/www/aml/asset",
+    "docs:publish": "pnpm run docs:build && scp -r ./dist/* aml.heroking.top:/var/www/aml/asset",
     "lint": "prettier --write ."
   },
   "repository": {
@@ -17,6 +17,10 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=10",
+    "pnpm": ">=3"
+},
   "devDependencies": {
     "prettier": "2.8.4",
     "vuepress": "^1.9.9",

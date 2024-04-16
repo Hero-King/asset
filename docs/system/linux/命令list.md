@@ -20,10 +20,7 @@ jobs 查看bash后台  bg fg 命令
 nohub 可以脱机执行  可以 nohub *** &
 systemctl get-default/set-default/list-units(显示目前启动的units)/list-unit-files(显示/usr/lib/systemd/system里面的units)/list-dependencies[--reverse](显示依赖的服务或者被某服务依赖)  --type=??
 /var/log/messages 系统重要日志,崩溃或者添加设备等都可以查看这里的日志
-shsh 更改shell
-last  查看登录历史
-lastb 登录失败信息
-logrotate 日志轮回
+
 umask 文件默认权限 是减去哪些权限
 chattr 文件/目录隐藏属性 chattr [+-=] 参数 文件/目录 参数a 只能增加文件内容 参数i 保护文件(不能删 改名 link 写入 新增)
 lsattr 查看文隐藏属性
@@ -35,3 +32,8 @@ VFS virtual filesystem Switch 内核提供的功能,针对不同文件系统提�
 
 
 ```
+- cd -P path 切换目录到path对应的软连接目录中
+- shsh 更改shell
+- last  查看登录历史
+- lastb 登录失败信息
+- logrotate 日志轮回
