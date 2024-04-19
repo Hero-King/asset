@@ -11,9 +11,7 @@ _book
 *.sln
 *.local
 
-package-lock.json
 yarn.lock
 dist
 .temp
-.cache
-package-lock.json
+.caches
