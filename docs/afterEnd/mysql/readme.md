@@ -1,6 +1,6 @@
-### Mysql 5.7.27 离线安装
+## Mysql 5.7.27 离线安装
 
-#### 下载资源
+### 下载资源
 
 笔者推荐使用国内镜像站下载，官网下载速度有待提高啊
 
@@ -22,4 +22,11 @@ mkdir /var/log/mariadb/ && touch /var/log/mariadb/mariadb.log && chown mysql.mys
 ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码';
 update user set host='%' where user = 'root'; 	#开启root远程登录
 
+```
+
+### Docker安装
+```shell
+docker pull mysql:5.7
+mkdir -p /disk/system/mysql/data 
+docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234qwer% -v /disk/system/mysql/data:/var/lib/mysql -e TZ=Asia/Shanghai mysql:5.7
 ```
