@@ -28,5 +28,5 @@ update user set host='%' where user = 'root'; 	#开启root远程登录
 ```shell
 docker pull mysql:5.7
 mkdir -p /disk/system/mysql/data 
-docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234qwer% -v /disk/system/mysql/data:/var/lib/mysql -e TZ=Asia/Shanghai mysql:5.7
+docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234qwer% -v /disk/system/mysql/data:/var/lib/mysql -e TZ=Asia/Shanghai --restart=on-failure mysql:5.7
 ```

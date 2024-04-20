@@ -35,7 +35,7 @@ ipv6 可能需要 21.02.3 版本
 - accesscontrol 访问时间控制
 - abdlock ABD 广告过滤
 - amule amule 下载工具
-- dockerman docker
+- dockerman docker 执行 /etc/init.d/dockerd 管理docker 设置开启启动: ln -s /etc/init.d/dockerd /etc/rc.d/S100docker
 - kodexplorer 可道云（像 windows 一样管理文件）
 - AdGuard Home 去广告插件(原理 dns 劫持)
 
