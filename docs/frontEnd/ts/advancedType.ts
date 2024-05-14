@@ -149,3 +149,7 @@ const fun = (a, b): number => {
   return 0
 }
 let returnTest: ReturnType<typeof fun> // number
+
+// infer 推导泛型的类型
+type numberPromise = Promise<number>;
+type n = numberPromise extends Promise<infer P> ? P : never; // number
