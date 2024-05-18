@@ -1,27 +1,42 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.3
+// @version      0.1.4
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
 // @grant        none
 // @license      MIT
+// @downloadURL https://update.greasyfork.org/scripts/466261/HeroKing%20Tampermonkey%20Userscript.user.js
+// @updateURL https://update.greasyfork.org/scripts/466261/HeroKing%20Tampermonkey%20Userscript.meta.js
 // ==/UserScript==
 
 ;(function () {
   'use strict'
 
-  console.log('HeroKing scripts run')
-
   const d = document
+  const emptyFun = () => {}
+  function select(params) {
+    return d.querySelector(params)
+  }
+  function selectAll(params) {
+    return d.querySelectorAll(params)
+  }
+  function removeWebLimit() {
+    window.oncontextmenu = window.onkeydown = window.onkeyup = window.onkeypress = d.oncontextmenu = null
+  }
+  const sleep = (time) => {
+    return new Promise((res) => {
+      setTimeout(res, time)
+    })
+  }
 
   if (location.host == 'mongoosejs.net') {
     let advertise = d.querySelector('#layout .container > div:nth-child(1)')
     advertise.parentElement.removeChild(advertise)
   }
 
-  // 无锡人社
+  // wx人社
   if (location.href.startsWith('https://61.160.99.102:8031/WXJXJY')) {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -82,5 +97,120 @@
     oMeta.content = 'upgrade-insecure-requests'
     oMeta.httpEquiv = 'Content-Security-Policy'
     document.getElementsByTagName('head')[0].appendChild(oMeta)
+  }
+
+  if (location.host === 'www.czpx.cn') {
+    // 视频时长记录: 进入页面时调用coursePlayServlet.do, 结束后调用savelearnprogressservlet
+    // 不能多视频, 多页签同时
+    try {
+      sleep(3000).then(() => {
+        console.log('RUnnnnnn')
+        window.check = emptyFun
+        removeWebLimit()
+        if (location.pathname.includes('learnCourseListServlet.do')) {
+          let link = Array.from(selectAll('#ul1 table td a')).find((i) => i.innerHTML == '开始学习' && i.id)
+          // 跳转到章节列表
+          location.href = '/learnCourseChapterServlet.do?' + link.id
+          return
+        } else if (location.pathname.includes('learnCourseChapterServlet.do')) {
+          let link = Array.from(selectAll('#ul1 table td a.orange')).find((i) => i.href.includes('/coursePlayServlet'))
+          link.target = '_self'
+          link?.click()
+          return
+        }
+        let video
+        window.hanadleTime = Number.MAX_SAFE_INTEGER
+        const autoPlay = async () => {
+          autoAnswer()
+          video = select('video')
+          let start = select('#mse > xg-start')
+          if (!video) {
+            start.click()
+            await sleep(1500)
+            video = select('video')
+            !video && console.error('自动播放失败')
+            if (!video) {
+              start.click()
+              video = select('video')
+            }
+            hanadleTime = Date.now() + video.duration * 1000
+            video.muted = true
+          }
+
+          video.addEventListener('loadedmetadata', function () {
+            console.log('loadedmetadata')
+            hanadleTime = Date.now() + this.duration * 1000
+          })
+
+          video.addEventListener('ended', function () {
+            console.log('ended')
+            hanadleTime = Number.MAX_SAFE_INTEGER
+          })
+          video.addEventListener('error', function () {
+            select('#mse .xgplayer-error .xgplayer-error-refresh')?.click()
+          })
+        }
+
+        setInterval(intervalTask, 5000)
+        clickIKnow()
+        autoPlay()
+        window.alert = function (msg) {
+          console.info('===== alert =====', msg)
+          if (msg.includes('获取出错,请刷新页面重试，谢谢！')) {
+            goStudyListAndStu()
+          }
+        }
+        const goStudyListAndStu = async () => {
+          const onlineStuList = Array.from(d.querySelectorAll('a')).filter((i) => i.href.includes('learnCourseListServlet.do'))
+          onlineStuList && onlineStuList[0].click()
+        }
+
+        function intervalTask() {
+          autoAnswer()
+          clickIKnow()
+          manaulEnd()
+        }
+
+        function autoAnswer() {
+          const layer = document.getElementById('window')
+          if (layer && layer.style.display !== 'none') {
+            const pList = layer.querySelectorAll('p')
+            const radioList = layer.querySelectorAll('input[type=radio]')
+            let answer = null
+            pList.forEach((i) => {
+              if (i.align === 'right') {
+                answer = i.innerText.split('：')[1].trim()
+              }
+            })
+            radioList.forEach((i) => {
+              if (i.value === answer) {
+                i.click()
+                d.querySelector('div.layui-layer-btn.layui-layer-btn- > a')?.click() && console.log('完成自动答题')
+              }
+            })
+          }
+        }
+
+        function clickIKnow() {
+          const list = Array.from(d.querySelectorAll('.layui-layer-title')).filter((i) => i.innerHTML.includes('视频播放提示'))
+          if (list && list.length > 0) {
+            const btns = d.querySelectorAll('.layui-layer.layui-layer-dialog div.layui-layer-btn > a')
+            Array.from(btns)
+              .filter((i) => i.innerHTML.includes('知道了'))[0]
+              .click()
+          }
+        }
+
+        function manaulEnd() {
+          if (Date.now() > hanadleTime + 1000 * 5) {
+            video.dispatchEvent(new Event('ended'))
+            console.log(video.src, '=====')
+          }
+        }
+      })
+    } catch (error) {
+      console.error(error)
+      //   location.reload();
+    }
   }
 })()
