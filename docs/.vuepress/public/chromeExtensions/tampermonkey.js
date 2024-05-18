@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.4
+// @version      0.1.5
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
