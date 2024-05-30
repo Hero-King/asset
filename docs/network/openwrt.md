@@ -153,6 +153,10 @@ ssl 证书目录 `/etc/acme/域名/域名.key和fullchain.cer`， 在 nginx 中�
 
 在 ui 中配置好，勾选允许访问内网
 
+#### Vmess协议, 配合NGINX一起使用
+
+<img :src="$withBase('/img/proxy/openwrt_v2ray_server_config.png')"/>
+
 ### minidlna
 
 家庭流媒体， 只需要调整下媒体目录，启用即可 后台监控可以访问网关:8200

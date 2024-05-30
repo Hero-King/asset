@@ -15,3 +15,4 @@ yarn.lock
 dist
 .temp
 .caches
+.DS_Store
