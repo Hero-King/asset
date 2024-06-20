@@ -66,6 +66,14 @@ ipv6 可能需要 21.02.3 版本
 
 ## 配置
 
+### smartdns
+```text
+cname /blog.heroking.top/hero-king.github.io
+cname /pan.heroking.top/hero-king.github.io
+cname /nav.heroking.top/hero-king.github.io
+address /heroking.top/192.168.2.4
+```
+
 ### Passwall
 
 https://bingmeme.github.io/OpenWrt_CN/tips/passwallURLfenliu.html#:~:text=%E7%9B%AE%E5%89%8Dpasswall%20%E8%8A%82%E7%82%B9%E5%88%97%E8%A1%A8%E9%87%8C%20%E5%87%BA%E5%8E%82%E4%BC%9A%E8%87%AA%E5%B8%A6%E4%B8%80%E4%B8%AA%E5%B7%B2%E7%BB%8F%E5%BB%BA%E7%AB%8B%E5%A5%BD%E7%9A%84%E2%80%9C%E5%88%86%E6%B5%81%E6%80%BB%E8%8A%82%E7%82%B9%E2%80%9D%EF%BC%8C%E5%A6%82%E4%B8%8B%E5%9B%BE%EF%BC%9A%20%E5%A6%82%E6%9E%9C%E6%82%A8%E6%89%8B%E8%B4%B1%E5%88%A0%E9%99%A4%E5%BC%84%E6%B2%A1%E4%BA%86%E8%BF%99%E4%B8%AA%20%E5%88%86%E6%B5%81%E6%80%BB%E8%8A%82%E7%82%B9%20%EF%BC%8C%E4%B9%9F%E6%B2%A1%E4%BA%8B%EF%BC%8C%E6%89%8B%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%9B%9E%E6%9D%A5%E7%9A%84%E6%B5%81%E7%A8%8B%E6%98%AF%EF%BC%9A,%E4%B8%8A%E5%9B%BE%E7%9A%84%20%E7%B1%BB%E5%9E%8B%20%E5%8F%AF%E9%80%89Xray%E6%88%96%E8%80%85V2ray%EF%BC%8C%E5%AE%83%E4%BB%AC%E7%9A%84%20%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%20%E9%87%8C%E9%83%BD%E6%9C%89%20%E5%88%86%E6%B5%81%20%EF%BC%8C%E4%BD%BF%E7%94%A8%E6%95%88%E6%9E%9C%E5%B7%AE%E4%B8%8D%E5%A4%9A%E3%80%82
@@ -243,3 +251,22 @@ config interface 'wan'
 ## nav
 
 使用 github pages 搭建个人导航页
+
+## k2p
+### dnsmasq
+```text
+address=/heroking.top/192.168.2.4
+#cname=blog.heroking.top,hero-king.github.io
+#cname=pan.heroking.top,hero-king.github.io
+#cname=nav.heroking.top,hero-king.github.io
+address=/blog.heroking.top/185.199.108.153
+address=/pan.heroking.top/185.199.108.153
+address=/nav.heroking.top/185.199.108.153
+```
+### host
+```text
+127.0.0.1 broadcom.broadcom broadcom
+192.168.2.10 p.to
+192.168.2.10 phicomm.me
+192.168.2.4 nas.heroking.top
+```
