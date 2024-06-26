@@ -7,7 +7,10 @@ export default defineConfig({
   title: 'HeroKing的个人笔记',
   // base: '/', //Vue原型上有 $withBase 取值当前base 部署在非跟目录: /asset/
   dest: './dist', // 设置输出目录
-  head: [['link', { href: 'https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css', rel: 'stylesheet' }]],
+  head: [
+    ['link', { href: 'https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css', rel: 'stylesheet' }],
+    ['script', { src: 'https://hm.baidu.com/hm.js?3691b93bb6fcef0775ef18a936452b97',defer: true  }]
+  ],
 
   plugins: [
     [

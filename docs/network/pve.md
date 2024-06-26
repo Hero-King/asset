@@ -25,7 +25,7 @@ sed -i 's|http://download.proxmox.com|https://mirrors.tuna.tsinghua.edu.cn/proxm
 ## USB
 
 USB 直通有两种方式,一种是绑定插入的 USB 设备 ID,另一种是绑定 USB 端口,
-如果是 USB3.0,需要绑定两个端口,才能兼容3.0设备和2.0设备
+如果是 USB3.0,需要绑定两个端口,才能兼容 3.0 设备和 2.0 设备
 
 ## 群晖
 
@@ -46,6 +46,10 @@ USB 直通有两种方式,一种是绑定插入的 USB 设备 ID,另一种是绑
 ### nginx 功能
 
 登陆门户中 高级配置 nginx
+
+### 磁盘扩容
+
+https://blog.csdn.net/m0_37680500/article/details/132698025
 
 ## 资源管理
 
