@@ -80,6 +80,12 @@ https://bingmeme.github.io/OpenWrt_CN/tips/passwallURLfenliu.html#:~:text=%E7%9B
 
 https://www.right.com.cn/forum/thread-8325875-1-1.html
 
+#### 根据订阅URL查询流量信息
+取响应头中的 subscription-userinfo
+```shell
+curl -sLI -X GET -m 10 -w 'http_code=%{http_code}' -H 'User-Agent: Clash' 订阅URL
+```
+
 #### 只想特定机器走代理?
 
 可以使用 passwall 的 socks 代理服务器, 在基本设置中=>socks 设置, 直接配置一个 socks 服务器, 在 Windows/Mac 中使用即可
