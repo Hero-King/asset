@@ -86,6 +86,19 @@ https://www.right.com.cn/forum/thread-8325875-1-1.html
 curl -sLI -X GET -m 10 -w 'http_code=%{http_code}' -H 'User-Agent: Clash' 订阅URL
 ```
 
+#### PAC
+个人socks服务器放到公网
+- nginx对外分享PAC文件，新建auth目录中存放需要鉴权的内容，使用 query_string进行判断是否403
+  ```
+  location /auth/ {
+    root /web;
+    if ($query_string !~* "aa=bb") {  
+      return 403;
+    }
+  }
+  ```
+- 每日动态更新socks服务器对外暴露的端口和PAC文件中socks端口
+
 #### 只想特定机器走代理?
 
 可以使用 passwall 的 socks 代理服务器, 在基本设置中=>socks 设置, 直接配置一个 socks 服务器, 在 Windows/Mac 中使用即可
