@@ -15,6 +15,7 @@ sed -i 's|http://download.proxmox.com|https://mirrors.tuna.tsinghua.edu.cn/proxm
 - 安装后处理源问题 参考 https://wph.im/245.html
 - 分区合并到同一个 参考 https://zhuanlan.zhihu.com/p/605741611
 - 安装无线网卡驱动 (已不支持 kernel5.15)
+- 设置断电(ping不通路由器)自动关机 <a href="https://www.bilibili.com/read/cv34783885/">ping.sh</a> 
 
 ## 快照
 

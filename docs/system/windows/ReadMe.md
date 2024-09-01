@@ -169,6 +169,7 @@ linux: https://repo.huaweicloud.com/apache/maven/maven-3/3.8.7/binaries/apache-m
 
 官网下载 激活教程: ~~https://www.pycharm6.com/idea.html~~
 使用这个: https://github.com/libin9iOak/ja-netfilter-all
+激活码激活(短期) https://www.idejihuo.cn/
 
 ### 数据库客户端
 

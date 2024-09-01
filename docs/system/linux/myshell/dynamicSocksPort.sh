@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# 生成随机端口号, 通过调用登录->修改端口转发列表->登出接口
+# use: 设置定时任务: 0 5 */2 * * /web/shell/dynamicSocksPort.sh XXX >> /var/log/dynamicSocksPort.log 2>&1
+
 touch /var/log/dynamicSocksPort.log
 # 检查是否传入密码
 if [ -z "$1" ]; then

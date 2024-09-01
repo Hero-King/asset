@@ -43,9 +43,6 @@ ipv6 可能需要 21.02.3 版本
 
 - ttyd web shell
 - v2ray-server
-
-### 常用的包
-
 - netdata (性能检测) `cd /usr/share/netdata/web  chown -R root:root *`
 - acme 自动化 ssl 证书管理
 - aria2 下载工具
