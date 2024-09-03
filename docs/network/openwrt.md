@@ -270,18 +270,20 @@ config interface 'wan'
 
 ## nav
 
-使用 github pages 搭建个人导航页
+使用 github pages 搭建个人导航页, 自定义域名：https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
 
 ## k2p
+内网DNS以k2p-dnsmasq为准
 ### dnsmasq
 ```text
-address=/heroking.top/192.168.2.4
-#cname=blog.heroking.top,hero-king.github.io
-#cname=pan.heroking.top,hero-king.github.io
-#cname=nav.heroking.top,hero-king.github.io
 address=/blog.heroking.top/185.199.108.153
 address=/pan.heroking.top/185.199.108.153
 address=/nav.heroking.top/185.199.108.153
+cname=blog.heroking.top,hero-king.github.io
+cname=pan.heroking.top,hero-king.github.io
+cname=nav.heroking.top,hero-king.github.io
+address=/op.heroking.top/192.168.2.1
+address=/.heroking.top/192.168.2.4
 ```
 ### host
 ```text

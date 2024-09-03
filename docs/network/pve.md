@@ -48,6 +48,15 @@ USB 直通有两种方式,一种是绑定插入的 USB 设备 ID,另一种是绑
 
 登陆门户中 高级配置 nginx
 
+```
+描述	来源	目的地	备注
+qbittorrent	https://qb.heroking.top:8000	http://localhost:8089	
+op-web	https://op.heroking.top:8000	htttps://192.168.2.1:8000	
+k2p-web	https://k2p.heroking.top:8000	https://192.168.2.10	
+pve-web	https://pve.heroking.top:8000	https://192.168.2.2:8006	
+18000端口转发到op	https://*:18000	https://192.168.2.1:8000	外网将18000映射到op的8000；内网也做一下映射
+```
+
 ### 磁盘扩容
 
 https://blog.csdn.net/m0_37680500/article/details/132698025
