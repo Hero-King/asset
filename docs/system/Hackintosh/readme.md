@@ -59,7 +59,28 @@ https://blog.daliansky.net/clover-user-manual.html
 AppleXcpmExtraMsrs 主要是在无原生电源管理的 CPU 上使用，一般是 Haswell-E，Broadwell-E，Skylake-X 这三种 CPU
 misc/security/securebootmodel disabled?
 
-## 安装
+### ATI Radeon Hd5450
+
+显卡驱动： https://blog.csdn.net/wr132/article/details/54837303 / https://www.tonymacx86.com/threads/guide-enabling-ati-radeon-hd-5450.180817/
+声卡驱动： 删除 FakePcIIDIntel_HDMI_AUDIT 和 VoodooHDA.kext , clover-> 设备设置 audio 填写 11
+
+
+
+## OpenCore
+
+官方文档： https://github.com/dortania/OpenCore-Install-Guide
+国光的黑苹果 OC 教程 https://apple.sqlsec.com/
+clover 过度到 oc: https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/Clover-config.md#graphics
+显卡伪冒设备 Id : https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html
+
+ATI hd5450 => deviceId: 68E0 vendor ID: 1002(ATI 显卡都是这个代码)
+OC 的话在 MISC-Security-SecureBootModel 设置成 disabled
+设备属性哪里是否需要添加核心显卡？？
+UEFi/APFS 中 Min Version、Min Date 需要根据 Macos 版本设置
+
+### opencord 引导中不能使用键盘
+
+https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/extended/opencore-issues.html#can-t-select-anything-in-the-picker
 
 ### 最新 Opencore 安装
 
@@ -80,37 +101,12 @@ misc/security/securebootmodel disabled?
 - 启动参数去掉 alcoff
 - 安装完成后续 https://www.mfpud.com/topics/1177/
 
-### ATI Radeon Hd5450
-
-显卡驱动： https://blog.csdn.net/wr132/article/details/54837303 / https://www.tonymacx86.com/threads/guide-enabling-ati-radeon-hd-5450.180817/
-声卡驱动： 删除 FakePcIIDIntel_HDMI_AUDIT 和 VoodooHDA.kext , clover-> 设备设置 audio 填写 11
-
-## Mac 软件
-
-- Intel power Gadget
-- clover configurator
-
-## OpenCore
-
-官方文档： https://github.com/dortania/OpenCore-Install-Guide
-国光的黑苹果 OC 教程 https://apple.sqlsec.com/
-clover 过度到 oc: https://github.com/dortania/OpenCore-Install-Guide/blob/master/clover-conversion/Clover-config.md#graphics
-显卡伪冒设备 Id : https://dortania.github.io/Getting-Started-With-ACPI/Universal/spoof.html
-
-ATI hd5450 => deviceId: 68E0 vendor ID: 1002(ATI 显卡都是这个代码)
-OC 的话在 MISC-Security-SecureBootModel 设置成 disabled
-设备属性哪里是否需要添加核心显卡？？
-UEFi/APFS 中 Min Version、Min Date 需要根据 Macos 版本设置
-
-### opencord 引导中不能使用键盘
-
-https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/extended/opencore-issues.html#can-t-select-anything-in-the-picker
 
 ## docker 安装 Macos
 
 https://hub.docker.com/r/sickcodes/docker-osx
 
-## 用脚本安装 MACOSX
+## Pve中用脚本安装 MACOSX
 
 https://github.com/luchina-gabriel/OSX-PROXMOX
 

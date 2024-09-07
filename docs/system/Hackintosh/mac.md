@@ -16,3 +16,12 @@ ctrl 键是 Mac 的 ctrl;win 键是 command；alt 键是 Mac 的 option
 
 1. 将 control 键设置成 command 位置
 2. 将 command 键设置成 control 位置
+
+## Mac 软件
+
+- Intel power Gadget
+- clover configurator
+- hackintools
+- charles 抓包
+- snipaste 贴图
+- Maccy 剪切板历史
