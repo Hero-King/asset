@@ -268,9 +268,27 @@ config interface 'wan'
 
 ```
 
-## nav
+#### 旁路由设置
 
-使用 github pages 搭建个人导航页, 自定义域名：https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+1. 使用设置向导, 初始化成旁路有模式
+2. 设置DHCP服务器，将设备Mac地址与IP绑定
+3. lan接口中设置DHCP分配的IP范围为100~140; 设置强制, 动态DHCP用来给绑定好ip的设备下发网关和DNS;
+4. 防火墙设置Lan口动态伪装(将经过网关的报文源ip地址修改为网关ip, 使得相应报文经主路由回复给网关而不是其他内网ip) 或者使用自定义规则`iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE` 即可
+5. 暴露在公网中的旁路有还需要设置下述内容
+6. 防火墙自定义规则(允许内网设备访问op, 放行常用服务端口)
+```
+# 允许内网 IP 访问（192.168.0.0/16 网段）
+iptables -A INPUT -s 192.168.0.0/16 -j ACCEPT
+
+# 允许内网 IP 访问（10.0.0.0/8 网段）
+iptables -A INPUT -s 10.0.0.0/8 -j ACCEPT
+
+# 允许内网 IP 访问（172.16.0.0/12 网段）
+iptables -A INPUT -s 172.16.0.0/12 -j ACCEPT
+# 范围端口使用:相连接
+iptables  -A  INPUT -p tcp  -m  multiport --dports  80,443,8000,9000:10000  -j  ACCEPT
+```
+6. 禁用外网访问: 防火墙-区域-lan->wan入站数据设置为拒绝
 
 ## k2p
 内网DNS以k2p-dnsmasq为准
