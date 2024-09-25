@@ -19,5 +19,14 @@
 # AnyDesk
 延迟表现：AnyDesk 以其极低的延迟著称，即使在较差的网络连接下也能保持流畅的控制体验。
 跨平台支持：支持 Windows、Mac、Linux、iOS、Android 和 FreeBSD。
-优点：轻量级、简单易用，提供远程桌面的基础功能，并支持较低的延迟。适合日常办公使用
+优点：轻量级、简单易用，提供远程桌面的基础功能，并支持较低的延迟。适合日常办公使用; 支持多个显示器
 缺点：某些高级功能需要付费版本。
+
+# Mac虚拟屏幕软件
+- DisplayBuddy
+- betterDummy
+- XScreen
+
+# 支持控制端多个显示器的远程桌面软件
+- AnyDesk
+- Teamviewer
