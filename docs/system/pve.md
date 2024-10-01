@@ -65,3 +65,10 @@ https://blog.csdn.net/m0_37680500/article/details/132698025
 
 pve 使用的 noVnc 作为系统界面
 资产网关 Apache Guacamole
+
+
+## 小雅
+
+http://nas.heroking.top:5678/tvbox/my.json
+http://nas.heroking.top:5678/tvbox/juhe.json
+webdav: http://nas.heroking.top:5678 用户名dav
