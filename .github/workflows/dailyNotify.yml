@@ -12,5 +12,5 @@ jobs:
         uses: actions/setup-node@v4
       - run: npm ci
       - name: Run node scripts
-        run: node docs/.vuepress/public/notify/daily.js --token ${{ secrets.PUSHPLUS_TOKEN }} --subUrl ${{ secrets.SUBSCRIPTION_URL }}
+        # run: node docs/.vuepress/public/notify/daily.js --token ${{ secrets.PUSHPLUS_TOKEN }} --subUrl ${{ secrets.SUBSCRIPTION_URL }}
       - run: echo "run success"

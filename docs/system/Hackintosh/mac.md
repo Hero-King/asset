@@ -25,3 +25,4 @@ ctrl 键是 Mac 的 ctrl;win 键是 command；alt 键是 Mac 的 option
 - charles 抓包
 - snipaste 贴图
 - Maccy 剪切板历史
+- photoshop(破解版屏蔽adobe.com|adobe.io|adobe.de|adobestats.io|adobedtm.com)
