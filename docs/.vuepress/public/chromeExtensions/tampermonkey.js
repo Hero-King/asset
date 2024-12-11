@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.5
+// @version      0.1.6
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
-// @grant        none
+// @grant        GM_addStyle
 // @license      MIT
 // @downloadURL https://update.greasyfork.org/scripts/466261/HeroKing%20Tampermonkey%20Userscript.user.js
 // @updateURL https://update.greasyfork.org/scripts/466261/HeroKing%20Tampermonkey%20Userscript.meta.js
@@ -34,6 +34,20 @@
   if (location.host == 'mongoosejs.net') {
     let advertise = d.querySelector('#layout .container > div:nth-child(1)')
     advertise.parentElement.removeChild(advertise)
+  }
+  if (
+    location.host === 'www.douyin.com' &&
+    location.pathname.includes(
+      '/user/MS4wLjABAAAAeIIkCgELXG6XdUxuE9nQ6W4AfS-aoPFbtmnBL8ytcYtBSyurgePBYZXJpB0LJBCT' && location.search.includes('modal_id')
+    )
+  ) {
+    // Inject initial styles
+    GM_addStyle(`
+        video {
+            transform: scale(2);
+            transform-origin: center;
+        }
+    `)
   }
 
   // wx人社
