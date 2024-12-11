@@ -37,9 +37,8 @@
   }
   if (
     location.host === 'www.douyin.com' &&
-    location.pathname.includes(
-      '/user/MS4wLjABAAAAeIIkCgELXG6XdUxuE9nQ6W4AfS-aoPFbtmnBL8ytcYtBSyurgePBYZXJpB0LJBCT' && location.search.includes('modal_id')
-    )
+    location.pathname.includes('/user/MS4wLjABAAAAeIIkCgELXG6XdUxuE9nQ6W4AfS-aoPFbtmnBL8ytcYtBSyurgePBYZXJpB0LJBCT') &&
+    location.search.includes('modal_id')
   ) {
     // Inject initial styles
     GM_addStyle(`
