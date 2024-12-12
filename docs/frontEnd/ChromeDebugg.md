@@ -9,6 +9,8 @@
 - console.time("XXX") timeEnd("XXX") XXX tag 耗时
 - console.dir console.table
 - getEventListeners(DOM 元素) 获取 DOM 元素身上的事件 getEventListeners(window) 获取 window 上绑定的事件
+- 切换Top上下文后，可以在控制台中访问切换后上下文的内容；变量
+- 小眼睛：监听表达式的值
 
 ### Element
 
@@ -27,6 +29,8 @@
 - XHR/Fetch BreakPoints 设置 Ajax 请求断点 URL 包括某个字段进入断点
 - Global Listeners 全局事件列表及注册点
 - Event Listener BreakPoints 指定某个事件断点,当触发事件时, 会自动进入到事件响应函数中
+- debugger时候可以在控制台中访问局部变量
+
 
 ### 快捷键
 
