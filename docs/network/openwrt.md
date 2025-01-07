@@ -38,6 +38,7 @@ ipv6 可能需要 21.02.3 版本
 - dockerman docker 执行 /etc/init.d/dockerd 管理docker 设置开启启动: ln -s /etc/init.d/dockerd /etc/rc.d/S100docker
 - kodexplorer 可道云（像 windows 一样管理文件）
 - AdGuard Home 去广告插件(原理 dns 劫持)
+- openclash 代理
 
 ### 常用的包
 
@@ -100,6 +101,18 @@ curl -sLI -X GET -m 10 -w 'http_code=%{http_code}' -H 'User-Agent: Clash' 订阅
 #### 只想特定机器走代理?
 
 可以使用 passwall 的 socks 代理服务器, 在基本设置中=>socks 设置, 直接配置一个 socks 服务器, 在 Windows/Mac 中使用即可
+
+
+### openclash
+上手
+
+1. 配置订阅中添加订阅地址，使用在线订阅地址转换处理各种路由规则
+2. 由于chatgpt对香港地区不提供服务，需要走国外节点，覆写设置-规则设置-自定义规则中指定chatgpt路由
+```yaml
+rules:
+- DOMAIN-SUFFIX,openai.com,[ss]新加坡
+- DOMAIN-SUFFIX,chatgpt.com,[ss]新加坡
+```
 
 ### uhttpd
 
