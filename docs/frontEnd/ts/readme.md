@@ -115,14 +115,12 @@ tsc ***.ts  xxx.ts ddd.ts	// 编译ts -> js
     } // 默认情况下，从0开始为元素编号。
     let c: Color = Color.Green // 1
 
-    enum Color {
+    enum ColorEnum {
       Red = 1,
       Green,
       Blue
     }
-    let colorName: string = Color[2] // 'Green'
-
-    console.log(colorName) // 显示'Green'因为上面代码里它的值是2
+    let colorName: string = ColorEnum[2] // 'Green'
     ```
 
 7.  Any 不指定类型时 编译器默认 any 类型
@@ -135,18 +133,37 @@ tsc ***.ts  xxx.ts ddd.ts	// 编译ts -> js
 
 11. never 类型表示的是那些永不存在的值的类型。比如那些总是会抛出异常或根本就不会有返回值
 
-12. object
+12. object 表示非原始类型, 不能是 number,string,boolean,symbol,null,undefined,void,never
+
+```ts
+let myObject: object
+myObject = { name: 'Alice', age: 30 } // 合法
+myObject = [1, 2, 3] // 合法
+myObject = function () {} // 合法
+// myObject = 'string'; // 非法，类型 'string' 不能赋值给类型 'object'
+```
 
 13. 字面量类型
 
-```
-let bl: 'male' | 'demale' = 'male'  // bl 只能是这两个字符串
-let person: {name: string, age: number}
+```ts
+let bl: 'male' | 'demale' = 'male' // bl 只能是这两个字符串
+let person: { name: string; age: number }
 
 person = {
-    name: '12',
-    age: 10,
+  name: '12',
+  age: 10
 }
+```
+
+14. Object
+    Object 是最顶层类型,包含所有类型
+
+```ts
+let obj1: Object
+let obj2: object
+
+obj1 = 42 // 合法
+// obj2 = 42; // 非法
 ```
 
 ### 示例
@@ -160,7 +177,7 @@ person = {
 ```ts
 let someValue: any = 'this is a string'
 let strLength: number = (someValue as string).length
-let strLength: number = (<string>someValue).length
+let strLength2: number = (<string>someValue).length
 ```
 
 ## 高级类型
@@ -183,6 +200,46 @@ let strLength: number = (<string>someValue).length
 
 `keyof`操作符后面接一个类型，生成由`string`或者`number`组成的联合字面量类型。
 
+### extends
+
+- 类型继承
+- 泛型约束
+
+  ```ts
+  interface Lengthwise {
+    length: number
+  }
+  function logLength<T extends Lengthwise>(arg: T): T {
+    console.log(arg.length)
+    return arg
+  }
+
+  logLength({ length: 10, value: 3 }) // 输出：10
+  ```
+
+### 条件类型
+T extends U？X：Y这个结构中，T是我们正在检查的类型，U是目标类型，如果 **T能赋值给U** ，那么条件为真，类型选择X，否则选择Y
+```ts
+// 过滤类型
+type Filter<T, U> = T extends U ? never : T;
+type Result = Filter<string | number | boolean, number>; // Result = string | boolean
+
+// 类型检查 
+type CheckType<T> = T extends string ? "string type" : "other type";
+type Result1 = CheckType<string>;  // "string type"
+type Result2 = CheckType<number>;  // "other type"
+```
+
+**新手常常搞混条件类型的应用场景和基本语法，例如认为T extends U中的extends是类型继承(其实是类型约束)**
+
+### infer
+推导泛型的真正类型
+```ts
+// 如果T是函数类型, 从T中提取返回值类型为R, ReturnType类型就是R T不是函数则为any
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any;
+
+```
+
 ### 示例
 
 <<< @/docs/frontEnd/ts/advancedType.ts
@@ -190,6 +247,12 @@ let strLength: number = (<string>someValue).length
 ## 类 Class
 
 定义类
+
+成员有三种属性修饰符
+
+- public 公开属性; 默认的修饰符,表示属性可以在任何地方访问
+- private 私有属性; 只能在类里面访问, 不能在类的实例和子类中访问
+- protected 保护属性; 只能在类内部和子类里面访问, 不能在类的实例中访问
 
 <<< @/docs/frontEnd/ts/class.ts
 
@@ -226,7 +289,7 @@ function buildName(firstName: string, ...restOfName: string[]) {
 interface LabelledValue {
   label: string
   color?: string //可选属性
-  readonly x: number //只读属性
+  readonly x: number //只读属性;只能在声明时或者构造器中赋值!
   sayHi: () => string
   [propName: string]: any // 字符串索引签名
 }
@@ -246,11 +309,12 @@ function printLabel(labelledObj: LabelledValue) {
 
 ### type 和 interface 区别
 
-|          | type                 | interface                |
-| -------- | -------------------- | ------------------------ |
-| 功能     | 类型别名             | 接口类型                 |
-|          | 可以给任意类型起别名 | 只能表示接口类型         |
-| 多次定义 | type 不支持          | 会被视为合并所有声明成员 |
+|          | type                  | interface                   |
+| -------- | --------------------- | --------------------------- |
+| 功能     | 类型别名,相对接口灵活 | 接口类型,多用于声明对象结构 |
+|          | 可以给任意类型起别名  | 只能表示接口类型            |
+| 多次定义 | type 不支持           | 会被视为合并所有声明成员    |
+| 继承     | 不支持                | 支持                        |
 
 ### 示例
 
@@ -259,6 +323,9 @@ function printLabel(labelledObj: LabelledValue) {
 ### 继承接口
 
 ```tsx
+interface Shape {}
+interface PenStroke {}
+// 支持多接口继承
 interface Square extends Shape, PenStroke {
   sideLength: number
 }

@@ -26,6 +26,20 @@ type Lolochild = typeof lolo.child
 //   age: number;
 // }
 
+// 类型别名可以与泛型一起使用,使其更加灵活和更具表达力
+type TypeResponse<T> = {
+  code: number;
+  data: T;
+  message: string;
+};
+
+const userResponse: TypeResponse<{ name: string; age: number }> = {
+  code: 200,
+  data: { name: "John", age: 30 },
+  message: "Success"
+};
+
+
 type keyOfTest = keyof Lolo // "name" | "age" | "child"
 
 const key1: keyOfTest = 'age'
@@ -34,7 +48,7 @@ const key2: keyOfTest = 'child'
 
 enum HttpMethod {
   Get,
-  Post
+  Post = 10
 }
 
 type Methods = typeof HttpMethod
@@ -75,7 +89,7 @@ type inTest = {
  */
 
 /**
- * readonly
+ * Readonly
  * 让传入类型中的所有属性变成都是只读的（不能修改属性）
  */
 
