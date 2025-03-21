@@ -21,4 +21,5 @@ FileReader 对象允许 Web 应用程序异步读取存储在用户计算机上�
 
 ### 参考资料
 
-> https://blog.csdn.net/qq_42190134/article/details/99238039 > https://www.cnblogs.com/ykCoder/p/14156450.html
+> https://blog.csdn.net/qq_42190134/article/details/99238039 
+> https://www.cnblogs.com/ykCoder/p/14156450.html
