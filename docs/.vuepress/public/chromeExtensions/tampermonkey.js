@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.6
+// @version      0.1.7
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
@@ -31,10 +31,21 @@
     })
   }
 
+  // 去除OE 用例textarea禁用
+  if (location.href.includes('/biz/1460/requirement/metersphere/track/plan')) {
+    GM_addStyle(`
+      textarea[disabled] {
+        cursor: auto !important;
+        pointer-events: auto !important;
+      }
+    `)
+  }
+
   if (location.host == 'mongoosejs.net') {
     let advertise = d.querySelector('#layout .container > div:nth-child(1)')
     advertise.parentElement.removeChild(advertise)
   }
+  // PC打开抖音网站时 视频放大一倍
   if (
     location.host === 'www.douyin.com' &&
     location.pathname.includes('/user/MS4wLjABAAAAeIIkCgELXG6XdUxuE9nQ6W4AfS-aoPFbtmnBL8ytcYtBSyurgePBYZXJpB0LJBCT') &&
