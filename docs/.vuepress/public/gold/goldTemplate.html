@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>今日金价</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: #000;
+      }
+      .flex {
+        display: flex;
+        align-items: center;
+      }
+      .logo {
+        flex: none;
+        width: 30px;
+        height: 30px;
+        margin: 0 10px;
+      }
+      .container {
+        margin: 0 auto;
+        height: 100vh;
+        width: 60vw;
+        min-width: 400px;
+        background-color: #0f2027;
+        display: grid;
+      }
+      .con-center {
+        place-self: center;
+        text-align: center;
+        color: #fce2ae;
+      }
+      .large {
+        font-size: 44px;
+        position: relative;
+      }
+      .large::after {
+        content: '';
+        position: absolute;
+        left: -50%;
+        bottom: -4px; /* 距离文字底部的距离 */
+        width: 200%; /* 文字宽度的两倍 */
+        height: 1px;
+        background-color: #81867F; /* 和文字颜色一致 */
+      }
+      h1{
+        line-height: 3;
+      }
+      .main {
+        background-color: #fffcf7;
+        border-radius: 20px;
+        color: black;
+        padding: 30px;
+        padding-top: 0;
+      }
+      h3 {
+        line-height: 3;
+        font-weight: 500;
+      }
+      .gray-border-table {
+        border: 1px solid #e5e7eb;
+        border-collapse: collapse; /* 合并边框 */
+      }
+      th {
+        background: #f8fafc;
+        padding: 10px;
+        font-weight: 600;
+        color: #2d3748;
+        border: 1px solid #e5e7eb;
+      }
+
+      td {
+        padding: 6px;
+        border: 1px solid #e5e7eb;
+      }
+      .bank-name {
+        font-weight: 600;
+        font-size: 18px;
+        color: #000;
+      }
+      .type {
+        color: #efbb1d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="con-center">
+        <div class="title">
+          <span class="large">银行金价</span>
+        </div>
+        <h1 class="desc">{{date}} 银行黄金价格信息</h1>
+        <div class="main">
+          <h3>{{date}} 各大银行价格对比</h3>
+          <table class="gray-border-table" align="center">
+            <thead>
+              <tr>
+                <th>金种</th>
+                <th>买入价(元/克)</th>
+                <th>赎回价(元/克)</th>
+                <th>定期积存(元/克)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bank">
+                  <div class="flex">
+                    <img class="logo" src="./建设银行.png" alt="" srcset="" />
+                    <div>
+                      <p class="bank-name">建设银行</p>
+                      <span class="type">主动积存</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="buy-price">782.22</td>
+                <td class="sell-price">778.22</td>
+                <td>782.22</td>
+              </tr>
+              <tr>
+                <td class="bank">
+                  <div class="flex">
+                    <img class="logo" src="./建设银行.png" alt="" srcset="" />
+                    <div>
+                      <p class="bank-name">建设银行</p>
+                      <span class="type">投资金条</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="buy-price">782.22</td>
+                <td class="sell-price">778.22</td>
+                <td>782.22</td>
+              </tr>
+              <tr>
+                <td class="bank">
+                  <div class="flex">
+                    <img
+                      class="logo"
+                      src="https://tse3-mm.cn.bing.net/th/id/OIP-C.WqT8y-zR04EeBm4c0RWXjAHaHR?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3"
+                      alt=""
+                      srcset=""
+                    />
+                    <div>
+                      <p class="bank-name">工商银行</p>
+                      <span class="type">积存金</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="buy-price">782.22</td>
+                <td class="sell-price">778.22</td>
+                <td>782.22</td>
+              </tr>
+              <tr>
+                <td class="bank">
+                  <div class="flex">
+                    <img
+                      class="logo"
+                      src="https://tse3-mm.cn.bing.net/th/id/OIP-C.WqT8y-zR04EeBm4c0RWXjAHaHR?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3"
+                      alt=""
+                      srcset=""
+                    />
+                    <div>
+                      <p class="bank-name">工商银行</p>
+                      <span class="type">如意金积存</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="buy-price">782.22</td>
+                <td class="sell-price">778.22</td>
+                <td>782.22</td>
+              </tr>
+              <tr>
+                <td class="bank">
+                  <div class="flex">
+                    <img class="logo" src="./招商银行.png" alt="" srcset="" />
+                    <div>
+                      <p class="bank-name">招商银行</p>
+                      <span class="type">投资金条</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="buy-price">782.22</td>
+                <td class="sell-price">778.22</td>
+                <td>782.22</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
