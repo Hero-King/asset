@@ -20,13 +20,14 @@
   "engines": {
     "node": ">=10",
     "pnpm": ">=3"
-},
+  },
   "devDependencies": {
     "prettier": "2.8.4",
     "vuepress": "^1.9.9",
     "vuepress-plugin-auto-sidebar": "^2.3.2"
   },
   "dependencies": {
+    "art-template": "^4.13.4",
     "async-validator": "^1.11.5",
     "axios": "^1.6.3",
     "element-ui": "^2.15.14",
