@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>远程桌面控制 | HeroKing的个人笔记</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <script src="https://hm.baidu.com/hm.js?3691b93bb6fcef0775ef18a936452b97" defer="true"></script>
+    <meta name="description" content="学习犹如逆水行舟,不进则退">
+    
+    <link rel="preload" href="/assets/css/0.styles.4fe2b2c9.css" as="style"><link rel="preload" href="/assets/js/app.dbc686cd.js" as="script"><link rel="preload" href="/assets/js/2.eac21ce5.js" as="script"><link rel="preload" href="/assets/js/1.45e828d6.js" as="script"><link rel="preload" href="/assets/js/81.019edaf1.js" as="script"><link rel="prefetch" href="/assets/js/10.6765a954.js"><link rel="prefetch" href="/assets/js/100.fe1a6ec6.js"><link rel="prefetch" href="/assets/js/11.8bb82943.js"><link rel="prefetch" href="/assets/js/12.01809d41.js"><link rel="prefetch" href="/assets/js/13.09068d54.js"><link rel="prefetch" href="/assets/js/14.bb26fb6e.js"><link rel="prefetch" href="/assets/js/15.9182b3c7.js"><link rel="prefetch" href="/assets/js/16.166da1a0.js"><link rel="prefetch" href="/assets/js/17.80a018c6.js"><link rel="prefetch" href="/assets/js/18.c1668785.js"><link rel="prefetch" href="/assets/js/19.eeeabde6.js"><link rel="prefetch" href="/assets/js/20.5f9c01e4.js"><link rel="prefetch" href="/assets/js/21.42b62d3a.js"><link rel="prefetch" href="/assets/js/22.3b887cc7.js"><link rel="prefetch" href="/assets/js/23.d1f0435a.js"><link rel="prefetch" href="/assets/js/24.66861e00.js"><link rel="prefetch" href="/assets/js/25.58dc40c5.js"><link rel="prefetch" href="/assets/js/26.530b82b9.js"><link rel="prefetch" href="/assets/js/27.671e8f86.js"><link rel="prefetch" href="/assets/js/28.a025ec3f.js"><link rel="prefetch" href="/assets/js/29.56aee928.js"><link rel="prefetch" href="/assets/js/3.745c9486.js"><link rel="prefetch" href="/assets/js/30.efbefddd.js"><link rel="prefetch" href="/assets/js/31.a7f92165.js"><link rel="prefetch" href="/assets/js/32.cc6bc473.js"><link rel="prefetch" href="/assets/js/33.5a0d7935.js"><link rel="prefetch" href="/assets/js/34.241a587f.js"><link rel="prefetch" href="/assets/js/35.24e5c0f3.js"><link rel="prefetch" href="/assets/js/36.d39f15d6.js"><link rel="prefetch" href="/assets/js/37.10073ad8.js"><link rel="prefetch" href="/assets/js/38.488023b4.js"><link rel="prefetch" href="/assets/js/39.46a6961d.js"><link rel="prefetch" href="/assets/js/4.74a062a6.js"><link rel="prefetch" href="/assets/js/40.028a8398.js"><link rel="prefetch" href="/assets/js/41.bf449de4.js"><link rel="prefetch" href="/assets/js/42.90604587.js"><link rel="prefetch" href="/assets/js/43.9ccd38e1.js"><link rel="prefetch" href="/assets/js/44.8d712ba8.js"><link rel="prefetch" href="/assets/js/45.08008593.js"><link rel="prefetch" href="/assets/js/46.dc289880.js"><link rel="prefetch" href="/assets/js/47.af46daac.js"><link rel="prefetch" href="/assets/js/48.bcadcb04.js"><link rel="prefetch" href="/assets/js/49.d36b1513.js"><link rel="prefetch" href="/assets/js/5.c6edbe4c.js"><link rel="prefetch" href="/assets/js/50.39cbba95.js"><link rel="prefetch" href="/assets/js/51.6b877498.js"><link rel="prefetch" href="/assets/js/52.991dfa97.js"><link rel="prefetch" href="/assets/js/53.5aa5c796.js"><link rel="prefetch" href="/assets/js/54.7e83e4fb.js"><link rel="prefetch" href="/assets/js/55.7cef0c39.js"><link rel="prefetch" href="/assets/js/56.54e20409.js"><link rel="prefetch" href="/assets/js/57.9d54949d.js"><link rel="prefetch" href="/assets/js/58.2d780311.js"><link rel="prefetch" href="/assets/js/59.b0ab8a8c.js"><link rel="prefetch" href="/assets/js/6.c83fdbd0.js"><link rel="prefetch" href="/assets/js/60.8b5b71fb.js"><link rel="prefetch" href="/assets/js/61.92ca9a04.js"><link rel="prefetch" href="/assets/js/62.05e7f842.js"><link rel="prefetch" href="/assets/js/63.54508338.js"><link rel="prefetch" href="/assets/js/64.10b5b748.js"><link rel="prefetch" href="/assets/js/65.8aaec075.js"><link rel="prefetch" href="/assets/js/66.75cd08b8.js"><link rel="prefetch" href="/assets/js/67.f4530b2f.js"><link rel="prefetch" href="/assets/js/68.cd13aff5.js"><link rel="prefetch" href="/assets/js/69.ee335487.js"><link rel="prefetch" href="/assets/js/7.4ac7aa67.js"><link rel="prefetch" href="/assets/js/70.0c23693c.js"><link rel="prefetch" href="/assets/js/71.f78cc92b.js"><link rel="prefetch" href="/assets/js/72.929ad236.js"><link rel="prefetch" href="/assets/js/73.5cbd6529.js"><link rel="prefetch" href="/assets/js/74.41754f92.js"><link rel="prefetch" href="/assets/js/75.d8dc1d1e.js"><link rel="prefetch" href="/assets/js/76.354c0628.js"><link rel="prefetch" href="/assets/js/77.470fb027.js"><link rel="prefetch" href="/assets/js/78.1c6e2674.js"><link rel="prefetch" href="/assets/js/79.3c42e8ef.js"><link rel="prefetch" href="/assets/js/80.d5d9d73f.js"><link rel="prefetch" href="/assets/js/82.bcf811ec.js"><link rel="prefetch" href="/assets/js/83.ec6b27a7.js"><link rel="prefetch" href="/assets/js/84.74be5017.js"><link rel="prefetch" href="/assets/js/85.dbd8c232.js"><link rel="prefetch" href="/assets/js/86.04140380.js"><link rel="prefetch" href="/assets/js/87.1febc91a.js"><link rel="prefetch" href="/assets/js/88.112a9655.js"><link rel="prefetch" href="/assets/js/89.bf8a2aed.js"><link rel="prefetch" href="/assets/js/90.f7f5adda.js"><link rel="prefetch" href="/assets/js/91.6a6d6923.js"><link rel="prefetch" href="/assets/js/92.13de53bc.js"><link rel="prefetch" href="/assets/js/93.36b35fb4.js"><link rel="prefetch" href="/assets/js/94.5e115d3b.js"><link rel="prefetch" href="/assets/js/95.b886a162.js"><link rel="prefetch" href="/assets/js/96.3b74dcba.js"><link rel="prefetch" href="/assets/js/97.6c3ca067.js"><link rel="prefetch" href="/assets/js/98.35f5298d.js"><link rel="prefetch" href="/assets/js/99.9416486d.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.f7f71fb4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.4fe2b2c9.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">HeroKing的个人笔记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="afterEnd" class="dropdown-title"><span class="title">afterEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="afterEnd" class="mobile-dropdown-title"><span class="title">afterEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/afterEnd/mongodb/" class="nav-link">
+  Mongodb
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/mysql/" class="nav-link">
+  Mysql
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/nginx/" class="nav-link">
+  Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/redis/" class="nav-link">
+  Redis
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/JMS/" class="nav-link">
+  JMS
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/" class="nav-link">
+  After End
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithms" class="dropdown-title"><span class="title">algorithms</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithms" class="mobile-dropdown-title"><span class="title">algorithms</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/algorithms/" class="nav-link">
+  Algorithms
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="frontEnd" class="dropdown-title"><span class="title">frontEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="frontEnd" class="mobile-dropdown-title"><span class="title">frontEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontEnd/autojs/" class="nav-link">
+  Autojs
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/css/" class="nav-link">
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/demo/" class="nav-link">
+  Demo
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/" class="nav-link">
+  Front End
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/ts/" class="nav-link">
+  Ts
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="life" class="dropdown-title"><span class="title">life</span> <span class="arrow down"></span></button> <button type="button" aria-label="life" class="mobile-dropdown-title"><span class="title">life</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/life/" class="nav-link">
+  Life
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="network" class="dropdown-title"><span class="title">network</span> <span class="arrow down"></span></button> <button type="button" aria-label="network" class="mobile-dropdown-title"><span class="title">network</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/network/" class="nav-link">
+  Network
+</a></li><li class="dropdown-item"><!----> <a href="/network/proxy/" class="nav-link">
+  Proxy
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="software" class="dropdown-title"><span class="title">software</span> <span class="arrow down"></span></button> <button type="button" aria-label="software" class="mobile-dropdown-title"><span class="title">software</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/software/ftp/" class="nav-link">
+  Ftp
+</a></li><li class="dropdown-item"><!----> <a href="/software/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/software/samba/" class="nav-link">
+  Samba
+</a></li><li class="dropdown-item"><!----> <a href="/software/" class="nav-link router-link-active">
+  Software
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="system" class="dropdown-title"><span class="title">system</span> <span class="arrow down"></span></button> <button type="button" aria-label="system" class="mobile-dropdown-title"><span class="title">system</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/system/Hackintosh/" class="nav-link">
+  Hackintosh
+</a></li><li class="dropdown-item"><!----> <a href="/system/linux/" class="nav-link">
+  Linux
+</a></li><li class="dropdown-item"><!----> <a href="/system/" class="nav-link">
+  System
+</a></li><li class="dropdown-item"><!----> <a href="/system/windows/" class="nav-link">
+  Windows
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="afterEnd" class="dropdown-title"><span class="title">afterEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="afterEnd" class="mobile-dropdown-title"><span class="title">afterEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/afterEnd/mongodb/" class="nav-link">
+  Mongodb
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/mysql/" class="nav-link">
+  Mysql
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/nginx/" class="nav-link">
+  Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/redis/" class="nav-link">
+  Redis
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/JMS/" class="nav-link">
+  JMS
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/" class="nav-link">
+  After End
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithms" class="dropdown-title"><span class="title">algorithms</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithms" class="mobile-dropdown-title"><span class="title">algorithms</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/algorithms/" class="nav-link">
+  Algorithms
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="frontEnd" class="dropdown-title"><span class="title">frontEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="frontEnd" class="mobile-dropdown-title"><span class="title">frontEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontEnd/autojs/" class="nav-link">
+  Autojs
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/css/" class="nav-link">
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/demo/" class="nav-link">
+  Demo
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/" class="nav-link">
+  Front End
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/ts/" class="nav-link">
+  Ts
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="life" class="dropdown-title"><span class="title">life</span> <span class="arrow down"></span></button> <button type="button" aria-label="life" class="mobile-dropdown-title"><span class="title">life</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/life/" class="nav-link">
+  Life
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="network" class="dropdown-title"><span class="title">network</span> <span class="arrow down"></span></button> <button type="button" aria-label="network" class="mobile-dropdown-title"><span class="title">network</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/network/" class="nav-link">
+  Network
+</a></li><li class="dropdown-item"><!----> <a href="/network/proxy/" class="nav-link">
+  Proxy
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="software" class="dropdown-title"><span class="title">software</span> <span class="arrow down"></span></button> <button type="button" aria-label="software" class="mobile-dropdown-title"><span class="title">software</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/software/ftp/" class="nav-link">
+  Ftp
+</a></li><li class="dropdown-item"><!----> <a href="/software/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/software/samba/" class="nav-link">
+  Samba
+</a></li><li class="dropdown-item"><!----> <a href="/software/" class="nav-link router-link-active">
+  Software
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="system" class="dropdown-title"><span class="title">system</span> <span class="arrow down"></span></button> <button type="button" aria-label="system" class="mobile-dropdown-title"><span class="title">system</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/system/Hackintosh/" class="nav-link">
+  Hackintosh
+</a></li><li class="dropdown-item"><!----> <a href="/system/linux/" class="nav-link">
+  Linux
+</a></li><li class="dropdown-item"><!----> <a href="/system/" class="nav-link">
+  System
+</a></li><li class="dropdown-item"><!----> <a href="/system/windows/" class="nav-link">
+  Windows
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Software</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/software/" aria-current="page" class="sidebar-link">软件</a></li><li><a href="/software/BastionHost.html" class="sidebar-link">堡垒机</a></li><li><a href="/software/ESXI.html" class="sidebar-link">ESXi 安装使用</a></li><li><a href="/software/RemoteDesktop.html" aria-current="page" class="active sidebar-link">远程桌面控制</a></li><li><a href="/software/vscode.html" class="sidebar-link">Vscode 使用</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="远程桌面控制"><a href="#远程桌面控制" class="header-anchor">#</a> 远程桌面控制</h1> <ul><li>常用服务商: 向日葵(网速限制);Teamviewer; 不推荐使用</li></ul> <h1 id="parsec"><a href="#parsec" class="header-anchor">#</a> Parsec</h1> <p>延迟表现：Parsec 是专门为低延迟设计的，尤其适合游戏和视频流媒体传输。它支持高帧率（可达 60Hz 或更高）和高分辨率显示，同时保持极低的延迟表现。
+跨平台支持：支持 Windows、Mac、Linux、Android 和 Raspberry Pi。
+优点：极低的延迟，适合需要高帧率和快速响应的操作，如视频编辑、游戏或图形密集型任务。
+缺点：对于广泛的远程桌面管理可能不是最佳选择，但对于高性能需求场景非常强大。</p> <h1 id="nomachine"><a href="#nomachine" class="header-anchor">#</a> NoMachine</h1> <p>延迟表现：NoMachine 在低延迟和高质量图像传输方面表现出色，特别是在局域网内，几乎没有可感知的延迟。
+跨平台支持：支持 Windows、Mac、Linux、Android 和 iOS。
+优点：支持高分辨率显示（4K）和 60fps 视频传输，适合需要低延迟、高画质的用户。还能实现本地设备（如 USB、打印机、麦克风等）的远程共享。
+缺点：界面稍微复杂，初次使用需要一些设置。不支持Mac键位映射; 不能屏蔽windows的win键位</p> <h1 id="rustdesk"><a href="#rustdesk" class="header-anchor">#</a> RustDesk</h1> <p>延迟表现：RustDesk 提供类似于 TeamViewer 和 AnyDesk 的简单用户界面，但专注于低延迟和高效率的远程控制，适合个人和企业用户。
+跨平台支持：支持 Windows、Mac、Linux、iOS 和 Android。
+优点：开源且支持自建服务器，提供更高的隐私保障和稳定的连接，适合在局域网和广域网中使用。
+缺点：功能较为基础，适合不需要高级功能的用户。需要自己搭建服务端</p> <h1 id="anydesk"><a href="#anydesk" class="header-anchor">#</a> AnyDesk</h1> <p>延迟表现：AnyDesk 以其极低的延迟著称，即使在较差的网络连接下也能保持流畅的控制体验。
+跨平台支持：支持 Windows、Mac、Linux、iOS、Android 和 FreeBSD。
+优点：轻量级、简单易用，提供远程桌面的基础功能，并支持较低的延迟。适合日常办公使用; 支持多个显示器
+缺点：某些高级功能需要付费版本。</p> <h1 id="mac虚拟屏幕软件"><a href="#mac虚拟屏幕软件" class="header-anchor">#</a> Mac虚拟屏幕软件</h1> <ul><li>DisplayBuddy</li> <li>betterDummy</li> <li>XScreen</li></ul> <h1 id="支持控制端多个显示器的远程桌面软件"><a href="#支持控制端多个显示器的远程桌面软件" class="header-anchor">#</a> 支持控制端多个显示器的远程桌面软件</h1> <ul><li>AnyDesk</li> <li>Teamviewer</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/software/ESXI.html" class="prev">
+        ESXi 安装使用
+      </a></span> <span class="next"><a href="/software/vscode.html">
+        Vscode 使用
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.dbc686cd.js" defer></script><script src="/assets/js/2.eac21ce5.js" defer></script><script src="/assets/js/1.45e828d6.js" defer></script><script src="/assets/js/81.019edaf1.js" defer></script>
+  </body>
+</html>

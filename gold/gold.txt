@@ -1,0 +1,14 @@
+访问建设银行https://ccb.com/chn/home/gold_new/gjssy/index.shtml网页，获取个人黄金积存主动积存和定期积存的买入和赎回价格，取投资金条50g的金价
+访问工商银行https://mybank.icbc.com.cn/icbc/newperbank/perbank3/gold/goldaccrual_query_out.jsp，获取积存金和如意金积存的买入和赎回价格
+访问招商银行https://gold.cmbchina.com/Products/ProductDetail?PrdCode=FJ088GLD9002K0010，获取经典款招行金投资金条价格，计算出每克的金价
+在结果中添加日期信息，价格字段转换为数字类型，写入到飞书电子表格(银行黄金价格信息表)中
+
+
+读取飞书电子表格-https://vcn1g949ylrk.feishu.cn/sheets/Tav0swEd2hCzNKt7F7zct8UhnNe 结构和数据,第一行和第二行分别为字段英文和中文,第三行开始为真实数据，
+访问建设银行https://ccb.com/chn/home/gold_new/gjssy/index.shtml网页，获取个人黄金积存主动积存(重命名为主动积存)和个人黄金积存定期积存(重命名为定期积存)的买入和赎回价格，获取投资金条50g(重命名为投资金条)的买入价
+访问工商银行https://mybank.icbc.com.cn/icbc/newperbank/perbank3/gold/goldaccrual_query_out.jsp，获取积存金和如意金积存的买入和赎回价格 
+访问招商银行https://gold.cmbchina.com/Products/ProductDetail?PrdCode=FJ088GLD9002K0010，获取经典款招行金投资金条价格，计算出每克的金价,名称就写投资金条
+在表中追加或者更新今日数据,如果存在当天数据,需要删除该部分数据
+使用dataList变量保存今日数据,date变量保存当前日期
+然后拉取 https://blog.heroking.top/gold/goldTemplate.html 模板使用art-template模板引擎渲染,使用浏览器打开渲染厚的页面,截图.container 元素保存为图片
+

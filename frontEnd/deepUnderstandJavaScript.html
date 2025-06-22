@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>深入理解 javascript | HeroKing的个人笔记</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <script src="https://hm.baidu.com/hm.js?3691b93bb6fcef0775ef18a936452b97" defer="true"></script>
+    <meta name="description" content="学习犹如逆水行舟,不进则退">
+    
+    <link rel="preload" href="/assets/css/0.styles.4fe2b2c9.css" as="style"><link rel="preload" href="/assets/js/app.dbc686cd.js" as="script"><link rel="preload" href="/assets/js/2.eac21ce5.js" as="script"><link rel="preload" href="/assets/js/1.45e828d6.js" as="script"><link rel="preload" href="/assets/js/42.90604587.js" as="script"><link rel="prefetch" href="/assets/js/10.6765a954.js"><link rel="prefetch" href="/assets/js/100.fe1a6ec6.js"><link rel="prefetch" href="/assets/js/11.8bb82943.js"><link rel="prefetch" href="/assets/js/12.01809d41.js"><link rel="prefetch" href="/assets/js/13.09068d54.js"><link rel="prefetch" href="/assets/js/14.bb26fb6e.js"><link rel="prefetch" href="/assets/js/15.9182b3c7.js"><link rel="prefetch" href="/assets/js/16.166da1a0.js"><link rel="prefetch" href="/assets/js/17.80a018c6.js"><link rel="prefetch" href="/assets/js/18.c1668785.js"><link rel="prefetch" href="/assets/js/19.eeeabde6.js"><link rel="prefetch" href="/assets/js/20.5f9c01e4.js"><link rel="prefetch" href="/assets/js/21.42b62d3a.js"><link rel="prefetch" href="/assets/js/22.3b887cc7.js"><link rel="prefetch" href="/assets/js/23.d1f0435a.js"><link rel="prefetch" href="/assets/js/24.66861e00.js"><link rel="prefetch" href="/assets/js/25.58dc40c5.js"><link rel="prefetch" href="/assets/js/26.530b82b9.js"><link rel="prefetch" href="/assets/js/27.671e8f86.js"><link rel="prefetch" href="/assets/js/28.a025ec3f.js"><link rel="prefetch" href="/assets/js/29.56aee928.js"><link rel="prefetch" href="/assets/js/3.745c9486.js"><link rel="prefetch" href="/assets/js/30.efbefddd.js"><link rel="prefetch" href="/assets/js/31.a7f92165.js"><link rel="prefetch" href="/assets/js/32.cc6bc473.js"><link rel="prefetch" href="/assets/js/33.5a0d7935.js"><link rel="prefetch" href="/assets/js/34.241a587f.js"><link rel="prefetch" href="/assets/js/35.24e5c0f3.js"><link rel="prefetch" href="/assets/js/36.d39f15d6.js"><link rel="prefetch" href="/assets/js/37.10073ad8.js"><link rel="prefetch" href="/assets/js/38.488023b4.js"><link rel="prefetch" href="/assets/js/39.46a6961d.js"><link rel="prefetch" href="/assets/js/4.74a062a6.js"><link rel="prefetch" href="/assets/js/40.028a8398.js"><link rel="prefetch" href="/assets/js/41.bf449de4.js"><link rel="prefetch" href="/assets/js/43.9ccd38e1.js"><link rel="prefetch" href="/assets/js/44.8d712ba8.js"><link rel="prefetch" href="/assets/js/45.08008593.js"><link rel="prefetch" href="/assets/js/46.dc289880.js"><link rel="prefetch" href="/assets/js/47.af46daac.js"><link rel="prefetch" href="/assets/js/48.bcadcb04.js"><link rel="prefetch" href="/assets/js/49.d36b1513.js"><link rel="prefetch" href="/assets/js/5.c6edbe4c.js"><link rel="prefetch" href="/assets/js/50.39cbba95.js"><link rel="prefetch" href="/assets/js/51.6b877498.js"><link rel="prefetch" href="/assets/js/52.991dfa97.js"><link rel="prefetch" href="/assets/js/53.5aa5c796.js"><link rel="prefetch" href="/assets/js/54.7e83e4fb.js"><link rel="prefetch" href="/assets/js/55.7cef0c39.js"><link rel="prefetch" href="/assets/js/56.54e20409.js"><link rel="prefetch" href="/assets/js/57.9d54949d.js"><link rel="prefetch" href="/assets/js/58.2d780311.js"><link rel="prefetch" href="/assets/js/59.b0ab8a8c.js"><link rel="prefetch" href="/assets/js/6.c83fdbd0.js"><link rel="prefetch" href="/assets/js/60.8b5b71fb.js"><link rel="prefetch" href="/assets/js/61.92ca9a04.js"><link rel="prefetch" href="/assets/js/62.05e7f842.js"><link rel="prefetch" href="/assets/js/63.54508338.js"><link rel="prefetch" href="/assets/js/64.10b5b748.js"><link rel="prefetch" href="/assets/js/65.8aaec075.js"><link rel="prefetch" href="/assets/js/66.75cd08b8.js"><link rel="prefetch" href="/assets/js/67.f4530b2f.js"><link rel="prefetch" href="/assets/js/68.cd13aff5.js"><link rel="prefetch" href="/assets/js/69.ee335487.js"><link rel="prefetch" href="/assets/js/7.4ac7aa67.js"><link rel="prefetch" href="/assets/js/70.0c23693c.js"><link rel="prefetch" href="/assets/js/71.f78cc92b.js"><link rel="prefetch" href="/assets/js/72.929ad236.js"><link rel="prefetch" href="/assets/js/73.5cbd6529.js"><link rel="prefetch" href="/assets/js/74.41754f92.js"><link rel="prefetch" href="/assets/js/75.d8dc1d1e.js"><link rel="prefetch" href="/assets/js/76.354c0628.js"><link rel="prefetch" href="/assets/js/77.470fb027.js"><link rel="prefetch" href="/assets/js/78.1c6e2674.js"><link rel="prefetch" href="/assets/js/79.3c42e8ef.js"><link rel="prefetch" href="/assets/js/80.d5d9d73f.js"><link rel="prefetch" href="/assets/js/81.019edaf1.js"><link rel="prefetch" href="/assets/js/82.bcf811ec.js"><link rel="prefetch" href="/assets/js/83.ec6b27a7.js"><link rel="prefetch" href="/assets/js/84.74be5017.js"><link rel="prefetch" href="/assets/js/85.dbd8c232.js"><link rel="prefetch" href="/assets/js/86.04140380.js"><link rel="prefetch" href="/assets/js/87.1febc91a.js"><link rel="prefetch" href="/assets/js/88.112a9655.js"><link rel="prefetch" href="/assets/js/89.bf8a2aed.js"><link rel="prefetch" href="/assets/js/90.f7f5adda.js"><link rel="prefetch" href="/assets/js/91.6a6d6923.js"><link rel="prefetch" href="/assets/js/92.13de53bc.js"><link rel="prefetch" href="/assets/js/93.36b35fb4.js"><link rel="prefetch" href="/assets/js/94.5e115d3b.js"><link rel="prefetch" href="/assets/js/95.b886a162.js"><link rel="prefetch" href="/assets/js/96.3b74dcba.js"><link rel="prefetch" href="/assets/js/97.6c3ca067.js"><link rel="prefetch" href="/assets/js/98.35f5298d.js"><link rel="prefetch" href="/assets/js/99.9416486d.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.f7f71fb4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.4fe2b2c9.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">HeroKing的个人笔记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="afterEnd" class="dropdown-title"><span class="title">afterEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="afterEnd" class="mobile-dropdown-title"><span class="title">afterEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/afterEnd/mongodb/" class="nav-link">
+  Mongodb
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/mysql/" class="nav-link">
+  Mysql
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/nginx/" class="nav-link">
+  Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/redis/" class="nav-link">
+  Redis
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/JMS/" class="nav-link">
+  JMS
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/" class="nav-link">
+  After End
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithms" class="dropdown-title"><span class="title">algorithms</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithms" class="mobile-dropdown-title"><span class="title">algorithms</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/algorithms/" class="nav-link">
+  Algorithms
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="frontEnd" class="dropdown-title"><span class="title">frontEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="frontEnd" class="mobile-dropdown-title"><span class="title">frontEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontEnd/autojs/" class="nav-link">
+  Autojs
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/css/" class="nav-link">
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/demo/" class="nav-link">
+  Demo
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/" class="nav-link router-link-active">
+  Front End
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/ts/" class="nav-link">
+  Ts
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="life" class="dropdown-title"><span class="title">life</span> <span class="arrow down"></span></button> <button type="button" aria-label="life" class="mobile-dropdown-title"><span class="title">life</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/life/" class="nav-link">
+  Life
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="network" class="dropdown-title"><span class="title">network</span> <span class="arrow down"></span></button> <button type="button" aria-label="network" class="mobile-dropdown-title"><span class="title">network</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/network/" class="nav-link">
+  Network
+</a></li><li class="dropdown-item"><!----> <a href="/network/proxy/" class="nav-link">
+  Proxy
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="software" class="dropdown-title"><span class="title">software</span> <span class="arrow down"></span></button> <button type="button" aria-label="software" class="mobile-dropdown-title"><span class="title">software</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/software/ftp/" class="nav-link">
+  Ftp
+</a></li><li class="dropdown-item"><!----> <a href="/software/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/software/samba/" class="nav-link">
+  Samba
+</a></li><li class="dropdown-item"><!----> <a href="/software/" class="nav-link">
+  Software
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="system" class="dropdown-title"><span class="title">system</span> <span class="arrow down"></span></button> <button type="button" aria-label="system" class="mobile-dropdown-title"><span class="title">system</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/system/Hackintosh/" class="nav-link">
+  Hackintosh
+</a></li><li class="dropdown-item"><!----> <a href="/system/linux/" class="nav-link">
+  Linux
+</a></li><li class="dropdown-item"><!----> <a href="/system/" class="nav-link">
+  System
+</a></li><li class="dropdown-item"><!----> <a href="/system/windows/" class="nav-link">
+  Windows
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="afterEnd" class="dropdown-title"><span class="title">afterEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="afterEnd" class="mobile-dropdown-title"><span class="title">afterEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/afterEnd/mongodb/" class="nav-link">
+  Mongodb
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/python/" class="nav-link">
+  Python
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/mysql/" class="nav-link">
+  Mysql
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/nginx/" class="nav-link">
+  Nginx
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/redis/" class="nav-link">
+  Redis
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/JMS/" class="nav-link">
+  JMS
+</a></li><li class="dropdown-item"><!----> <a href="/afterEnd/" class="nav-link">
+  After End
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithms" class="dropdown-title"><span class="title">algorithms</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithms" class="mobile-dropdown-title"><span class="title">algorithms</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/algorithms/" class="nav-link">
+  Algorithms
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="frontEnd" class="dropdown-title"><span class="title">frontEnd</span> <span class="arrow down"></span></button> <button type="button" aria-label="frontEnd" class="mobile-dropdown-title"><span class="title">frontEnd</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontEnd/autojs/" class="nav-link">
+  Autojs
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/css/" class="nav-link">
+  Css
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/demo/" class="nav-link">
+  Demo
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/" class="nav-link router-link-active">
+  Front End
+</a></li><li class="dropdown-item"><!----> <a href="/frontEnd/ts/" class="nav-link">
+  Ts
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="life" class="dropdown-title"><span class="title">life</span> <span class="arrow down"></span></button> <button type="button" aria-label="life" class="mobile-dropdown-title"><span class="title">life</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/life/" class="nav-link">
+  Life
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="network" class="dropdown-title"><span class="title">network</span> <span class="arrow down"></span></button> <button type="button" aria-label="network" class="mobile-dropdown-title"><span class="title">network</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/network/" class="nav-link">
+  Network
+</a></li><li class="dropdown-item"><!----> <a href="/network/proxy/" class="nav-link">
+  Proxy
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="software" class="dropdown-title"><span class="title">software</span> <span class="arrow down"></span></button> <button type="button" aria-label="software" class="mobile-dropdown-title"><span class="title">software</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/software/ftp/" class="nav-link">
+  Ftp
+</a></li><li class="dropdown-item"><!----> <a href="/software/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/software/samba/" class="nav-link">
+  Samba
+</a></li><li class="dropdown-item"><!----> <a href="/software/" class="nav-link">
+  Software
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="system" class="dropdown-title"><span class="title">system</span> <span class="arrow down"></span></button> <button type="button" aria-label="system" class="mobile-dropdown-title"><span class="title">system</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/system/Hackintosh/" class="nav-link">
+  Hackintosh
+</a></li><li class="dropdown-item"><!----> <a href="/system/linux/" class="nav-link">
+  Linux
+</a></li><li class="dropdown-item"><!----> <a href="/system/" class="nav-link">
+  System
+</a></li><li class="dropdown-item"><!----> <a href="/system/windows/" class="nav-link">
+  Windows
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Front End</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/frontEnd/" aria-current="page" class="sidebar-link">前端</a></li><li><a href="/frontEnd/ChromeDebugg.html" class="sidebar-link">Chrome 调试技巧</a></li><li><a href="/frontEnd/FullStackDeveloper.html" class="sidebar-link">全栈</a></li><li><a href="/frontEnd/H5.html" class="sidebar-link">H5</a></li><li><a href="/frontEnd/HighPerformanceBrowserNetworking.html" class="sidebar-link">Web 性能权威指南</a></li><li><a href="/frontEnd/compressImage.html" class="sidebar-link">前端图片压缩</a></li><li><a href="/frontEnd/deepUnderstandJavaScript.html" aria-current="page" class="active sidebar-link">深入理解 javascript</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/frontEnd/deepUnderstandJavaScript.html#深入理解-javascript" class="sidebar-link">深入理解 javascript</a></li><li class="sidebar-sub-header"><a href="/frontEnd/deepUnderstandJavaScript.html#设计模式" class="sidebar-link">设计模式</a></li></ul></li><li><a href="/frontEnd/echarts.html" class="sidebar-link">echarts</a></li><li><a href="/frontEnd/githubPage.html" class="sidebar-link">Github Page</a></li><li><a href="/frontEnd/glsl.html" class="sidebar-link">GLSL 中文手册</a></li><li><a href="/frontEnd/monitor.html" class="sidebar-link">前端监控</a></li><li><a href="/frontEnd/npm.html" class="sidebar-link">npm</a></li><li><a href="/frontEnd/project.html" class="sidebar-link">前端工程</a></li><li><a href="/frontEnd/thingjs.html" class="sidebar-link">thingjs</a></li><li><a href="/frontEnd/uniapp.html" class="sidebar-link">Uniapp</a></li><li><a href="/frontEnd/vite.html" class="sidebar-link">Vite</a></li><li><a href="/frontEnd/vuecli.html" class="sidebar-link">VueCli</a></li><li><a href="/frontEnd/webpack.html" class="sidebar-link">webpack</a></li><li><a href="/frontEnd/workday.html" class="sidebar-link">工时评估</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="深入理解-javascript"><a href="#深入理解-javascript" class="header-anchor">#</a> 深入理解 javascript</h2> <p>参考链接： 汤姆大叔 https://www.cnblogs.com/TomXu/archive/2011/12/28/2286877.html
+W3C https://www.w3cschool.cn/deep_learn_javascript/deep_learn_javascript-1sry284r.html</p> <h3 id="编写高质量-javascript-代码的基本要点"><a href="#编写高质量-javascript-代码的基本要点" class="header-anchor">#</a> 编写高质量 JavaScript 代码的基本要点</h3> <ul><li>避免使用全局变量</li> <li>合理使用 hasOwnProperty</li></ul> <div class="language- extra-class"><pre class="language-text"><code>// 1.
+// for-in 循环
+for (var i in man) {
+   if (man.hasOwnProperty(i)) { // 过滤
+      console.log(i, &quot;:&quot;, man[i]);
+   }
+}
+/* 控制台显示结果
+hands : 2
+legs : 2
+heads : 1
+*/
+// 2.
+// 反面例子:
+// for-in loop without checking hasOwnProperty()
+for (var i in man) {
+   console.log(i, &quot;:&quot;, man[i]);
+}
+/*
+控制台显示结果
+hands : 2
+legs : 2
+heads : 1
+clone: function()
+*/
+</code></pre></div><ul><li>parseInt()下的数值转换总是指定基数参数。</li></ul> <div class="language- extra-class"><pre class="language-text"><code>var month = &quot;06&quot;,
+    year = &quot;09&quot;;
+month = parseInt(month, 10);
+year = parseInt(year, 10);
+</code></pre></div><ul><li>使用一个下划线前缀来表示一个私有属性或方法</li></ul> <h3 id="揭秘命名函数表达式"><a href="#揭秘命名函数表达式" class="header-anchor">#</a> 揭秘命名函数表达式</h3> <p>var f = function foo(){
+return typeof foo; // foo 是在内部作用域内有效
+};
+// foo 在外部用于是不可见的
+typeof foo; // &quot;undefined&quot;
+f(); // &quot;function&quot;</p> <ul><li>JScript 的内存管理</li></ul> <div class="language- extra-class"><pre class="language-text"><code>  var f = (function(){
+    if (true) {
+      return function g(){};
+    }
+    return function g(){};
+  })();
+  我们知道，这个匿名函数调用返回的函数（带有标识符g的函数），然后赋值给了外部的f。我们也知道，命名函数表达式会导致产生多余的函数对象，而该对象与返回的函数对象不是一回事。所以这个多余的g函数就死在了返回函数的闭包中了，因此内存问题就出现了。这是因为if语句内部的函数与g是在同一个作用域中被声明的。这种情况下 ，除非我们显式断开对g函数的引用，否则它一直占着内存不放。
+    var f = (function(){
+        var f, g;
+        if (true) {
+          f = function g(){};
+        }
+        else {
+          f = function g(){};
+        }
+        // 设置g为null以后它就不会再占内存了
+        g = null;
+        return f;
+  })();
+
+  其实，如果我们不想要这个描述性名字的话，我们就可以用最简单的形式来做，也就是在函数内部声明一个函数（而不是函数表达式），然后返回该函数
+</code></pre></div><ul><li>自执行函数</li></ul> <div class="language- extra-class"><pre class="language-text"><code>// 下面2个括弧()都会立即执行
+
+(function () { /* code */ } ()); // 推荐使用这个
+(function () { /* code */ })(); // 但是这个也是可以用的
+</code></pre></div><h3 id="原型链"><a href="#原型链" class="header-anchor">#</a> 原型链</h3> <p>原型对象也是普通的对象，并且也有可能有自己的原型，如果一个原型对象的原型不为 null 的话，我们就称之为原型链（prototype chain）。</p> <h3 id="执行上下文栈"><a href="#执行上下文栈" class="header-anchor">#</a> 执行上下文栈</h3> <p>在 ECMASscript 中的代码有三种类型：global, function 和 eval。</p> <p>每一种代码的执行都需要依赖自身的上下文。当然 global 的上下文可能涵盖了很多的 function 和 eval 的实例。函数的每一次调用，都会进入函数执行中的上下文,并且来计算函数中变量等的值。eval 函数的每一次执行，也会进入 eval 执行中的上下文，判断应该从何处获取变量的值。</p> <p>注意，一个 function 可能产生无限的上下文环境，因为一个函数的调用（甚至递归）都产生了一个新的上下文环境。</p> <p>一个执行上下文可以激活另一个上下文，就好比一个函数调用了另一个函数(或者全局的上下文调用了一个全局函数)，然后一层一层调用下去。逻辑上来说，这种实现方式是栈，我们可以称之为<strong>上下文堆栈</strong>。</p> <h3 id="执行上下文-execution-context"><a href="#执行上下文-execution-context" class="header-anchor">#</a> 执行上下文(Execution Context)</h3> <p>一个执行的上下文可以抽象的理解为 object。每一个执行的上下文都有一系列的属性（我们称为上下文状态），他们用来追踪关联代码的执行进度。主要有这三个属性 (变量对象(variable object)，this 指针(this value)，作用域链(scope chain) ),除了这 3 个所需要的属性,执行上下文根据具体实现还可以具有任意额外属性。</p> <ul><li>变量对象 变量对象(variable object) 是与执行上下文相关的 数据作用域(scope of data) 。
+它是与上下文关联的特殊对象，用于存储被定义在上下文中的 变量(variables) 和 函数声明(function declarations) 。函数表达式[function expression]是不包含在 VO[variable object]里面的</li> <li>作用域链 是一个对象列表(list of objects) ，用以检索上下文代码中出现的 标识符(identifiers)标示符[Identifiers]可以理解为变量名称、函数声明和普通参数。 。作用域链的原理和原型链很类似，如果这个变量在自己的作用域中没有，那么它会寻找父级的，直到最顶层。</li></ul> <h3 id="闭包"><a href="#闭包" class="header-anchor">#</a> 闭包</h3> <p>是一系列代码块（在 ECMAScript 中是函数），并且静态保存所有父级的作用域。通过这些保存的作用域来搜寻到函数中的自由变量。</p> <h2 id="设计模式"><a href="#设计模式" class="header-anchor">#</a> 设计模式</h2> <p>代码参见 browserwork.html -工厂模式</p> <ul><li>建造者模式<br>
+工厂模式主要是为了创建对象实例或者类族,建造者创建对象时更为复杂,关心创建的过程</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/frontEnd/compressImage.html" class="prev">
+        前端图片压缩
+      </a></span> <span class="next"><a href="/frontEnd/echarts.html">
+        echarts
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.dbc686cd.js" defer></script><script src="/assets/js/2.eac21ce5.js" defer></script><script src="/assets/js/1.45e828d6.js" defer></script><script src="/assets/js/42.90604587.js" defer></script>
+  </body>
+</html>
