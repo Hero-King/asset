@@ -52,7 +52,7 @@
         line-height: 3;
       }
       .main {
-        background-color: #fffcf7;
+        background-color: white;
         border-radius: 20px;
         color: black;
         padding: 30px;
@@ -94,9 +94,9 @@
         <div class="title">
           <span class="large">银行金价</span>
         </div>
-        <h1 class="desc">{{date}} 银行黄金价格信息</h1>
+        <h1 class="desc">{{ date }} 银行黄金价格信息</h1>
         <div class="main">
-          <h3>{{date}} 各大银行价格对比</h3>
+          <h3>{{ date }} 各大银行价格对比</h3>
           <table class="gray-border-table" align="center">
             <thead>
               <tr>
@@ -116,17 +116,22 @@
                     {{else if $value.bank.includes('招商银行')}}
                     <img class="logo" src="./招商银行.png" alt="" srcset="" />
                     {{else if $value.bank.includes('工商银行')}}
-                    <img class="logo" src="https://tse3-mm.cn.bing.net/th/id/OIP-C.WqT8y-zR04EeBm4c0RWXjAHaHR?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3" alt="" srcset="" />
+                    <img
+                      class="logo"
+                      src="https://tse3-mm.cn.bing.net/th/id/OIP-C.WqT8y-zR04EeBm4c0RWXjAHaHR?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3"
+                      alt=""
+                      srcset=""
+                    />
                     {{/if}}
                     <div>
-                      <p class="bank-name">{{$value.bank}}</p>
-                      <span class="type">{{$value.product}}</span>
+                      <p class="bank-name">{{ $value.bank }}</p>
+                      <span class="type">{{ $value.product }}</span>
                     </div>
                   </div>
                 </td>
-                <td class="buy-price">{{$value.buyPrice}}</td>
-                <td class="sell-price">{{$value.sellPrice}}</td>
-                <td>{{$value.fixedPrice}}</td>
+                <td class="buy-price">{{ $value.buyPrice }}</td>
+                <td class="sell-price">{{ $value.sellPrice }}</td>
+                <td>{{ $value.fixedPrice }}</td>
               </tr>
               {{/each}}
             </tbody>
