@@ -11,13 +11,18 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'yarn'  # 自动缓存 yarn 依赖
+        cache: 'pnpm'  # 指定 pnpm 缓存
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2  # 安装 pnpm
+      with:
+        version: 8  # 指定 pnpm 版本
 
     - name: Install dependencies
-      run: yarn install
+      run: pnpm install --frozen-lockfile  # 使用 pnpm 安装依赖
 
     - name: Build VuePress site
-      run: yarn docs:build
+      run: pnpm run docs:build  # 使用 pnpm 执行构建脚本
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
