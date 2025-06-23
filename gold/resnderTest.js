@@ -1,45 +1,50 @@
 var template = require('art-template')
 var fs = require('fs')
 var data = {
+  date: '2025-06-23',
   dataList: [
     {
-      bank: '中国建设银行',
+      date: '2025-06-23',
+      bank: '建设银行',
       product: '主动积存',
-      buyPrice: '782.22',
-      sellPrice: '778.22',
-      fixedPrice: '782.22'
+      buyPrice: 781.29,
+      sellPrice: 777.29,
+      regularBuyPrice: 781.84
     },
     {
-      bank: '中国建设银行',
-      product: '实物金投资金条50g',
-      buy_price: '794.40',
-      sell_price: '',
-      fixed_price: ''
+      date: '2025-06-23',
+      bank: '建设银行',
+      product: '投资金条',
+      buyPrice: 793.20,
+      sellPrice: null,
+      regularBuyPrice: null
     },
     {
-      bank: '中国工商银行',
+      date: '2025-06-23',
+      bank: '工商银行',
       product: '积存金',
-      buy_price: '779.73',
-      sell_price: '779.73',
-      fixed_price: '778.99'
+      buyPrice: 779.19,
+      sellPrice: 779.19,
+      regularBuyPrice: 779.73
     },
     {
-      bank: '中国工商银行',
+      date: '2025-06-23',
+      bank: '工商银行',
       product: '如意金积存',
-      buy_price: '793.06',
-      sell_price: '774.73',
-      fixed_price: ''
+      buyPrice: 793.19,
+      sellPrice: 774.86,
+      regularBuyPrice: null
     },
     {
+      date: '2025-06-23',
       bank: '招商银行',
-      product: '经典款招行金投资金条',
-      buy_price: '796.92',
-      sell_price: '',
-      fixed_price: ''
+      product: '投资金条',
+      buyPrice: 799.49,
+      sellPrice: null,
+      regularBuyPrice: null
     }
   ]
 }
-var html = template(__dirname + '/goldTemplate', data)
-
+var html = template(__dirname + '/goldTemplate.art', data)
 
 fs.writeFileSync(__dirname + '/gold.html', html)
