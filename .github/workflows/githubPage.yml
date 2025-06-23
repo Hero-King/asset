@@ -5,16 +5,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v4
 
     - name: Set up Node.js 18
-      uses: actions/setup-node@v4  # 使用最新版本的 setup-node
+      uses: actions/setup-node@v4
       with:
-        node-version: '18'  # 指定 Node.js 版本为 18
+        node-version: '18'
+        cache: 'yarn'  # 自动缓存 yarn 依赖
 
-    - name: vuepress-deploy
-      uses: jenkey2011/vuepress-deploy@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        BUILD_SCRIPT: yarn && yarn docs:build
-        BUILD_DIR: dist
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Build VuePress site
+      run: yarn docs:build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
