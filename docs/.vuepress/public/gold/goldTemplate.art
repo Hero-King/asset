@@ -131,7 +131,7 @@
                 </td>
                 <td class="buy-price">{{ $value.buyPrice }}</td>
                 <td class="sell-price">{{ $value.sellPrice }}</td>
-                <td>{{ $value.fixedPrice }}</td>
+                <td>{{ $value.regularBuyPrice }}</td>
               </tr>
               {{/each}}
             </tbody>

@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "prettier": "2.8.4",
+    "puppeteer-core": "^24.10.2",
     "vuepress": "^1.9.9",
     "vuepress-plugin-auto-sidebar": "^2.3.2"
   },
