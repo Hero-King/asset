@@ -31,7 +31,7 @@ const main = async () => {
     const dataList = [].concat(ccb, icbc, cmb)
     console.log(dataList, 'dataList')
     renderTemplate({ dataList, date: toDay })
-    screenshotContainer(`file://${resultHtmlPath}`, '.container')
+    await screenshotContainer(`file://${resultHtmlPath}`, '.container')
     fs.writeFileSync(__dirname + `/${toDay}银行金价.json`, JSON.stringify(dataList, null, 2))
 
     function getCommonFields(bank, product) {
@@ -120,7 +120,9 @@ const main = async () => {
     console.error('抓取过程中出现错误:', error)
     // 确保浏览器总是关闭
   } finally {
-    if (browser) await browser.close()
+    if (browser) {
+      browser.close()
+    }
   }
 }
 

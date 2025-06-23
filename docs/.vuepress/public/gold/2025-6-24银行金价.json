@@ -4,8 +4,8 @@
     "bank": "建设银行",
     "product": "主动积存",
     "regularBuyPrice": "781.84",
-    "sellPrice": "782.4",
-    "buyPrice": "786.4"
+    "sellPrice": "783",
+    "buyPrice": "787"
   },
   {
     "date": "2025-6-24",
@@ -13,7 +13,7 @@
     "product": "投资金条",
     "regularBuyPrice": "-",
     "sellPrice": "-",
-    "buyPrice": "798.30"
+    "buyPrice": "798.80"
   },
   {
     "date": "2025-6-24",
