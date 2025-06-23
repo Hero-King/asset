@@ -7,18 +7,18 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Set up Node.js 18
+    - name: Set up Node.js 23
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '23'
 
     - name: Install pnpm
       uses: pnpm/action-setup@v2  # 安装 pnpm
       with:
-        version: 8  # 指定 pnpm 版本
+        version: 10  # 指定 pnpm 版本
 
     - name: Install dependencies
-      run: pnpm install --frozen-lockfile  # 使用 pnpm 安装依赖
+      run: pnpm install  # 使用 pnpm 安装依赖
 
     - name: Build VuePress site
       run: pnpm run docs:build  # 使用 pnpm 执行构建脚本
