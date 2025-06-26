@@ -81,13 +81,13 @@ const main = async () => {
       const ruyiSellPriceText = await getElementText('#sellprice_080020000501')
       return [
         {
-          ...getCommonFields('中国工商银行', '主动积存'),
+          ...getCommonFields('工商银行', '主动积存'),
           buyPrice: buyPriceText,
           sellPrice: sellPriceText,
           regularBuyPrice: regularBuyPriceText
         },
         {
-          ...getCommonFields('中国工商银行', '如意金积存'),
+          ...getCommonFields('工商银行', '如意金积存'),
           buyPrice: ruyiBuyPriceText,
           sellPrice: ruyiSellPriceText
         }
@@ -102,7 +102,7 @@ const main = async () => {
       return [
         {
           ...getCommonFields('招商银行', '投资金条'),
-          buyPrice: buyPriceText.replace(',', '') / 10
+          buyPrice: (buyPriceText.replace(',', '') / 10).toFixed(2),
         }
       ]
     }
