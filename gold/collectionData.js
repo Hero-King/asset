@@ -5,6 +5,9 @@ const resultHtmlPath = __dirname + '/gold.html'
 const date = new Date()
 const toDay = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 
+/**
+ * @type {puppeteer.Browser}
+ */
 let browser
 const main = async () => {
   try {
@@ -33,6 +36,7 @@ const main = async () => {
     renderTemplate({ dataList, date: toDay })
     await screenshotContainer(`file://${resultHtmlPath}`, '.container')
     fs.writeFileSync(__dirname + `/${toDay}银行金价.json`, JSON.stringify(dataList, null, 2))
+    // sendRedBook()
 
     function getCommonFields(bank, product) {
       return {
@@ -102,7 +106,7 @@ const main = async () => {
       return [
         {
           ...getCommonFields('招商银行', '投资金条'),
-          buyPrice: (buyPriceText.replace(',', '') / 10).toFixed(2),
+          buyPrice: (buyPriceText.replace(',', '') / 10).toFixed(2)
         }
       ]
     }
