@@ -1,9 +1,15 @@
 const puppeteer = require('puppeteer-core')
 var template = require('art-template')
+const path = require('path')
+
 var fs = require('fs')
 const resultHtmlPath = __dirname + '/gold.html'
 const date = new Date()
 const toDay = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+const pngFilePath = path.join(__dirname, `./${toDay}银行金价.png`)
+
+const userDataDir = path.join(__dirname, 'RedbookUserData')
+const publishPageUrl = 'https://creator.xiaohongshu.com/publish/publish?source=official&from=menu&target=video'
 
 /**
  * @type {puppeteer.Browser}
@@ -15,7 +21,8 @@ const main = async () => {
       executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
       headless: false,
       devtools: false,
-      defaultViewport: { width: 1920, height: 1080 } // 设置初始窗口大小
+      defaultViewport: { width: 1920, height: 1080 }, // 设置初始窗口大小
+      userDataDir: userDataDir // ✅ 启用用户数据目录自动保存状态
     })
 
     const page = await browser.newPage()
@@ -32,11 +39,11 @@ const main = async () => {
     const icbc = await getIcbcData()
     const cmb = await getCmbData()
     const dataList = [].concat(ccb, icbc, cmb)
-    console.log(dataList, 'dataList')
+    // console.log(dataList, 'dataList')
     renderTemplate({ dataList, date: toDay })
     await screenshotContainer(`file://${resultHtmlPath}`, '.container')
     fs.writeFileSync(__dirname + `/${toDay}银行金价.json`, JSON.stringify(dataList, null, 2))
-    // sendRedBook()
+    await sendRedBook(page, `${toDay}银行金价来了~`)
 
     function getCommonFields(bank, product) {
       return {
@@ -118,7 +125,7 @@ const main = async () => {
       // 获取元素句柄
       const element = await page.$(selector)
       // 截取元素并保存为 PNG
-      await element.screenshot({ path: __dirname + `/${toDay}银行金价.png` })
+      await element.screenshot({ path: pngFilePath })
     }
   } catch (error) {
     console.error('抓取过程中出现错误:', error)
@@ -136,4 +143,78 @@ function renderTemplate(data) {
   var html = template(__dirname + '/goldTemplate.art', data)
 
   fs.writeFileSync(resultHtmlPath, html)
+}
+
+// 小红书发布
+
+async function sendRedBook(page, title) {
+  await page.goto(publishPageUrl, { waitUntil: 'networkidle2' })
+
+  // 判断是否已经登录（根据页面元素判断）
+  const isLoggedIn = page.url().includes('publish/publish') && (await page.$('.name-box')) !== null
+
+  if (!isLoggedIn) {
+    console.log('未登录，请手动登录一次')
+    await login(page)
+  } else {
+    console.log('检测到已登录状态')
+  }
+
+  await publishNote(page, title, '银行金价每日收集', [pngFilePath])
+}
+
+async function login(page) {
+  //   await page.goto(publishPageUrl, { waitUntil: 'networkidle2' });
+
+  // 等待登录框出现，并模拟点击登录按钮（根据实际页面结构调整）
+  await page.waitForSelector('div.login-box-container')
+
+  await page.waitForNavigation({ waitUntil: 'networkidle2' })
+
+  console.log('登录成功并已保存用户数据到:', userDataDir)
+}
+
+/**
+ *
+ * @param {puppeteer.Page} page
+ * @param {*} title
+ * @param {*} content
+ * @param {*} imagePaths
+ */
+async function publishNote(page, title, content, imagePaths) {
+  console.log(arguments)
+
+  await page.waitForSelector('#web div.header > div')
+  await page.locator('#web div.header > div:last-child').click()
+  const fileElement = await page.waitForSelector('#web > div.outarea.upload-c div.upload-wrapper input.upload-input')
+
+  for (const imagePath of imagePaths) {
+    await fileElement.uploadFile(imagePath)
+  }
+  console.log('file uploaded')
+
+  //   输入标题
+  await page.locator('.post-page .titleInput input.d-text').fill(title)
+
+  const conentSelector = '#quillEditor .ql-editor'
+  await page.type(conentSelector, content + '\n')
+  await page.type(conentSelector, '#如意积存金', { delay: 100 })
+  await page.locator('#quill-mention-item-0').click()
+  await page.type(conentSelector, '#银行黄金', { delay: 100 })
+  await page.locator('#quill-mention-item-0').click()
+  await page.type(conentSelector, '#银行金价', { delay: 100 })
+  await page.locator('#quill-mention-item-0').click()
+  await page.type(conentSelector, '#今日金价')
+  await page.locator('#quill-mention-item-0').click()
+
+  //   选择合集
+  await page.click('.collection-container .d-select')
+  await page.waitForSelector('.d-select.focus', { visible: true })
+  await page.click(`body > .d-dropdown .d-options .item:first-child`)
+
+  // 发表
+  await page.click('.post-page .submit button:first-child')
+  await page.waitForNavigation({ waitUntil: 'networkidle2' })
+
+  console.log('笔记发布成功')
 }

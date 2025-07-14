@@ -16,3 +16,5 @@ dist
 .temp
 .caches
 .DS_Store
+
+docs/.vuepress/public/gold/RedbookUserData

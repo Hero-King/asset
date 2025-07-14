@@ -1,105 +1,66 @@
+/**
+ * 小红书自动发布图片脚本
+ * 使用 userDataDir保存Chrome本地数据，避免每次登录
+ */
+
 const puppeteer = require('puppeteer-core')
 const fs = require('fs')
 const path = require('path')
 
-const { username, password, cookiePath } = {
-  username: 'your-username',
-  password: 'your-password',
-  cookiePath: path.join(__dirname, 'cookies-debug.json')
-}
+const userDataDir = path.join(__dirname, 'RedbookUserData')
 const publishPageUrl = 'https://creator.xiaohongshu.com/publish/publish?source=official&from=menu&target=video'
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+async function login(page) {
+  //   await page.goto(publishPageUrl, { waitUntil: 'networkidle2' });
+
+  // 等待登录框出现，并模拟点击登录按钮（根据实际页面结构调整）
+  await page.waitForSelector('div.login-box-container')
+
+  await page.waitForNavigation({ waitUntil: 'networkidle2' })
+
+  console.log('登录成功并已保存用户数据到:', userDataDir)
+}
+
 /**
  *
  * @param {puppeteer.Page} page
- * @param {puppeteer.BrowserContext} context
+ * @param {*} title
+ * @param {*} content
+ * @param {*} imagePaths
  */
-async function login(page, context) {
-  await page.goto(publishPageUrl, { waitUntil: 'networkidle2' })
-  console.log('进入哪里了', page.url())
-
-  await page.waitForSelector('div.login-box-container')
-  console.log('已经打开登录页')
-  await sleep(3000)
-  console.log("等待三秒");
-  
-  await page.waitForNavigation({ waitUntil: 'networkidle2' })
-
-  //   const client = await page.target().createCDPSession()
-  //   const { cookies } = await client.send('Network.getCookies', {
-  //     urls: ['https://creator.xiaohongshu.com']
-  //   })
-
-  // 使用 page.cookies() 获取当前页面的所有 Cookie
-  const cookies = await context.cookies()
-  console.log(cookies, '获取到的cookies', cookies.length)
-
-  fs.writeFileSync(cookiePath, JSON.stringify(cookies, null, 2))
-  console.log('登录成功并已保存 Cookie')
-}
-
-/**
- * 加载 Cookie
- * @param {puppeteer.BrowserContext} context
- * @param {import('puppeteer').Page} page
- * @param {string} cookiePath
- */
-async function loadCookies(context, page, cookiePath) {
-  if (!fs.existsSync(cookiePath)) {
-    console.log('未找到 Cookie 文件，需首次登录')
-    return false
-  }
-
-  const cookies = JSON.parse(fs.readFileSync(cookiePath, 'utf-8'))
-  const cookie = cookies.map((c) => ({
-    name: c.name,
-    value: c.value,
-    // domain: c.domain,
-    domain: '.xiaohongshu.com',
-    path: c.path,
-    // secure: c.secure,
-    // httpOnly: c.httpOnly,
-    // sameSite: c.sameSite || 'None',
-    // expires: c.expires ? Math.floor(c.expires) : Date.now() + 86400e3
-  }))
-  try {
-    await context.setCookie(...cookie)
-    // await page.reload()
-    console.log((await context.cookies()).length);
-    
-  } catch (error) {
-    console.log(error)
-    return false
-  }
-
-  await page.goto(publishPageUrl, { waitUntil: 'networkidle2' })
-
-  const isLoggedIn = page.url().includes('publish/publish') && (await page.$('.user-avatar')) !== null
-
-  if (!isLoggedIn) {
-    console.log('Cookie 已失效，请重新登录')
-    return false
-  }
-
-  console.log('登录状态有效')
-  return true
-}
-
 async function publishNote(page, title, content, imagePaths) {
   console.log(arguments)
-  return
 
-  await page.waitForSelector('input.title-input')
-  await page.type('input.title-input', title)
-  await page.type('.note-textarea', content)
+  await page.waitForSelector('#web div.header > div')
+  await page.locator('#web div.header > div:last-child').click()
+  const fileElement = await page.waitForSelector('#web > div.outarea.upload-c div.upload-wrapper input.upload-input')
 
-  const inputUploadHandle = await page.$('input.upload-input')
   for (const imagePath of imagePaths) {
-    await inputUploadHandle.uploadFile(imagePath)
-    await page.waitForTimeout(1000)
+    await fileElement.uploadFile(imagePath)
   }
+  console.log('file uploaded')
 
-  await page.click('.publish-button')
+  //   输入标题
+  await page.locator('.post-page .titleInput input.d-text').fill(title)
+
+  const conentSelector = '#quillEditor .ql-editor'
+  await page.type(conentSelector, content + '\n')
+  await page.type(conentSelector, '#如意积存金', { delay: 100 })
+  await page.locator('#quill-mention-item-0').click()
+  await page.type(conentSelector, '#银行黄金', { delay: 100 })
+  await page.locator('#quill-mention-item-0').click()
+  await page.type(conentSelector, '#银行金价', { delay: 100 })
+  await page.locator('#quill-mention-item-0').click()
+  await page.type(conentSelector, '#今日金价')
+  await page.locator('#quill-mention-item-0').click()
+
+  //   选择合集
+  await page.click('.collection-container .d-select')
+  await page.waitForSelector('.d-select.focus', { visible: true })
+  await page.click(`body > .d-dropdown .d-options .item:first-child`)
+
+  // 发表
+  await page.click('.post-page .submit button:first-child')
   await page.waitForNavigation({ waitUntil: 'networkidle2' })
 
   console.log('笔记发布成功')
@@ -110,23 +71,26 @@ async function publishNote(page, title, content, imagePaths) {
     executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     headless: false,
     devtools: true,
+    defaultViewport: null,
+    userDataDir: userDataDir // ✅ 启用用户数据目录自动保存状态
   })
 
-  const context = browser.defaultBrowserContext()
+  const page = await browser.newPage()
 
-  const page = await context.newPage()
+  await page.goto(publishPageUrl, { waitUntil: 'networkidle2' })
 
-  let isLoggedIn = await loadCookies(context, page, cookiePath)
+  // 判断是否已经登录（根据页面元素判断）
+  const isLoggedIn = page.url().includes('publish/publish') && (await page.$('.name-box')) !== null
 
-  return 
   if (!isLoggedIn) {
-    await login(page, context)
-    isLoggedIn = true
+    console.log('未登录，请手动登录一次')
+    await login(page)
+  } else {
+    console.log('检测到已登录状态')
   }
 
-  if (isLoggedIn) {
-    await publishNote(page, '我的测试标题', '这是自动发布的笔记内容', ['/path/to/image1.jpg', '/path/to/image2.jpg'])
-  }
+  // 发布笔记（可选）
+  await publishNote(page, '2025-7-14银行金价', '价格有所上升', [path.join(__dirname, '2025-7-14银行金价.png')])
 
-  await browser.close()
+  //   await browser.close();
 })()
