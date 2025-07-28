@@ -11,6 +11,7 @@ const pngFilePath = path.join(__dirname, `./${toDay}银行金价.png`)
 const userDataDir = path.join(__dirname, 'RedbookUserData')
 const publishPageUrl = 'https://creator.xiaohongshu.com/publish/publish?source=official&from=menu&target=video'
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 /**
  * @type {puppeteer.Browser}
  */
@@ -65,7 +66,15 @@ const main = async () => {
       const buyPriceText = await getElementText('#initiativeBuyPrice')
       const sellPriceText = await getElementText('#initiativeSellPrice')
       const regularBuyPriceText = await getElementText('#regularBuyPrice')
-      const physicalPriceText = await getElementText('#physicalPreciousMetalList div.txt > h3')
+
+      await page.goto('https://ccb.com/chn/home/gold_new/cpjs/swgjs/flsx/index.shtml?toLink=swgjs_list', {
+        waitUntil: 'networkidle2' // 等待网络请求基本完成
+      })
+      const search = await page.locator('#swgjs_list  div.fenlei_choose input[type=text]')
+      await search.fill('投资金条50')
+      await page.locator('#swgjs_ss').click()
+      await sleep(1500)
+      const physicalPriceText = await getElementText('#product-list > div > ul > li > h3')
 
       return [
         {
@@ -76,7 +85,7 @@ const main = async () => {
         },
         {
           ...getCommonFields('建设银行', '投资金条'),
-          buyPrice: physicalPriceText.replace('￥', '')
+          buyPrice: parseFloat(physicalPriceText.replace('￥', ''))
         }
       ]
     }
