@@ -192,6 +192,8 @@ curl -fsSL https://code-server.dev/install.sh | sh
 #### 配置
 
 - NGINX 转发 必须 Https 才能支持 serviceWork
+> https://coder.com/docs/tutorials/reverse-proxy-nginx  需要设置 CODER_ACCESS_URL变量; 否则nginx配置需要添加 proxy_set_header Origin "";  # 避免 code-server 验证 Origin 失败
+
 
 ```
     server {
