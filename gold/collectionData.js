@@ -27,7 +27,7 @@ const main = async () => {
     })
 
     const page = await browser.newPage()
-    await page.setDefaultTimeout(60000) // 设置默认超时时间为60秒
+    await page.setDefaultTimeout(10000) // 设置默认超时时间为10秒
 
     // 使用辅助函数安全地获取元素文本
     async function getElementText(selector) {
@@ -194,7 +194,7 @@ async function publishNote(page, title, content, imagePaths) {
   console.log(arguments)
 
   await page.waitForSelector('#web div.header > div')
-  await page.locator('#web div.header > div:last-child').click()
+  await page.locator('#web div.header > div:nth-child(3)').click()
   const fileElement = await page.waitForSelector('#web > div.outarea.upload-c div.upload-wrapper input.upload-input')
 
   for (const imagePath of imagePaths) {
@@ -203,7 +203,7 @@ async function publishNote(page, title, content, imagePaths) {
   console.log('file uploaded')
 
   //   输入标题
-  await page.locator('.post-page .titleInput input.d-text').fill(title)
+  await page.locator('.post-page .title-container input.d-text').fill(title)
 
   const conentSelector = '#quillEditor .ql-editor'
   await page.type(conentSelector, content + '\n')
