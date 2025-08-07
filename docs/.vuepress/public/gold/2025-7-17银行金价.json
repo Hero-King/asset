@@ -1,0 +1,42 @@
+[
+  {
+    "date": "2025-7-17",
+    "bank": "建设银行",
+    "product": "主动积存",
+    "regularBuyPrice": "774.24",
+    "sellPrice": "767.78",
+    "buyPrice": "771.78"
+  },
+  {
+    "date": "2025-7-17",
+    "bank": "建设银行",
+    "product": "投资金条",
+    "regularBuyPrice": "-",
+    "sellPrice": "-",
+    "buyPrice": "782.40"
+  },
+  {
+    "date": "2025-7-17",
+    "bank": "工商银行",
+    "product": "主动积存",
+    "regularBuyPrice": "769.55",
+    "sellPrice": "772.21",
+    "buyPrice": "769.55"
+  },
+  {
+    "date": "2025-7-17",
+    "bank": "工商银行",
+    "product": "如意金积存",
+    "regularBuyPrice": "-",
+    "sellPrice": "762.58",
+    "buyPrice": "780.56"
+  },
+  {
+    "date": "2025-7-17",
+    "bank": "招商银行",
+    "product": "投资金条",
+    "regularBuyPrice": "-",
+    "sellPrice": "-",
+    "buyPrice": "784.42"
+  }
+]

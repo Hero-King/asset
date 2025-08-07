@@ -18,3 +18,4 @@ dist
 .DS_Store
 
 docs/.vuepress/public/gold/RedbookUserData
+docs/.vuepress/public/gold/*银行金价.png
