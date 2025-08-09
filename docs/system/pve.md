@@ -1,5 +1,12 @@
 # PVE
 
+## 网卡wol唤醒
+```
+# pve7版本关闭防火墙 /etc/network/if-up.d/wol
+#!/bin/sh
+ethtool -s enp3s0 wol g
+```
+
 ## 安装
 
 华硕安装 8.0.2 系统卡死在 loading driver, 使用 7.4 安装成功
