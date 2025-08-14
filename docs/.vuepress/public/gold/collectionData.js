@@ -36,14 +36,14 @@ const main = async () => {
       return await element.evaluate((el) => el.textContent.trim() || 'N/A')
     }
 
-    const ccb = await getCcbData()
-    const icbc = await getIcbcData()
-    const cmb = await getCmbData()
-    const dataList = [].concat(ccb, icbc, cmb)
-    // console.log(dataList, 'dataList')
-    renderTemplate({ dataList, date: toDay })
-    await screenshotContainer(`file://${resultHtmlPath}`, '.container')
-    fs.writeFileSync(__dirname + `/${toDay}银行金价.json`, JSON.stringify(dataList, null, 2))
+    // const ccb = await getCcbData()
+    // const icbc = await getIcbcData()
+    // const cmb = await getCmbData()
+    // const dataList = [].concat(ccb, icbc, cmb)
+    // // console.log(dataList, 'dataList')
+    // renderTemplate({ dataList, date: toDay })
+    // await screenshotContainer(`file://${resultHtmlPath}`, '.container')
+    // fs.writeFileSync(__dirname + `/${toDay}银行金价.json`, JSON.stringify(dataList, null, 2))
     await sendRedBook(page, `${toDay}银行金价来了~`)
 
     function getCommonFields(bank, product) {
@@ -191,8 +191,6 @@ async function login(page) {
  * @param {*} imagePaths
  */
 async function publishNote(page, title, content, imagePaths) {
-  console.log(arguments)
-
   await page.waitForSelector('#web div.header > div')
   await page.locator('#web div.header > div:nth-child(3)').click()
   const fileElement = await page.waitForSelector('#web > div.outarea.upload-c div.upload-wrapper input.upload-input')
@@ -205,16 +203,18 @@ async function publishNote(page, title, content, imagePaths) {
   //   输入标题
   await page.locator('.post-page .title-container input.d-text').fill(title)
 
-  const conentSelector = '#quillEditor .ql-editor'
+  const conentSelector = '.edit-container .editor-content'
+  const tipSelector = '#creator-editor-topic-container .item:first-child'
+  await page.locator(conentSelector).click()
   await page.type(conentSelector, content + '\n')
   await page.type(conentSelector, '#如意积存金', { delay: 100 })
-  await page.locator('#quill-mention-item-0').click()
+  await page.locator(tipSelector).click()
   await page.type(conentSelector, '#银行黄金', { delay: 100 })
-  await page.locator('#quill-mention-item-0').click()
+  await page.locator(tipSelector).click()
   await page.type(conentSelector, '#银行金价', { delay: 100 })
-  await page.locator('#quill-mention-item-0').click()
+  await page.locator(tipSelector).click()
   await page.type(conentSelector, '#今日金价')
-  await page.locator('#quill-mention-item-0').click()
+  await page.locator(tipSelector).click()
 
   //   选择合集
   await page.click('.collection-container .d-select')
