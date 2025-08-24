@@ -11,10 +11,6 @@ module.exports = [
         "link": "/afterEnd/python/"
       },
       {
-        "text": "Mysql",
-        "link": "/afterEnd/mysql/"
-      },
-      {
         "text": "Nginx",
         "link": "/afterEnd/nginx/"
       },
@@ -55,6 +51,10 @@ module.exports = [
       {
         "text": "Demo",
         "link": "/frontEnd/demo/"
+      },
+      {
+        "text": "Express",
+        "link": "/frontEnd/express/"
       },
       {
         "text": "Front End",
