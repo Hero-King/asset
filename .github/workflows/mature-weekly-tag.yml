@@ -1,18 +1,22 @@
-name: 每周自动打标签（原生Git版）
+name: 每周自动打标签（权限修复版）
 on:
   schedule:
-    - cron: '0 8 * * 0'  # 北京时间16:00
-  workflow_dispatch:
+    - cron: '0 8 * * 0'  # 北京时间每周日16:00
+  workflow_dispatch:  # 手动触发测试
+
+# 关键：声明推送标签所需的权限
+permissions:
+  contents: write  # 允许读写仓库内容（包括标签）
 
 jobs:
   create-weekly-tag:
     runs-on: ubuntu-latest
     steps:
-      - name: 检出代码
+      - name: 检出代码（带令牌，确保权限传递）
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 拉取所有历史
-          token: ${{ secrets.GITHUB_TOKEN }}  # 用于推送标签
+          fetch-depth: 0  # 拉取完整历史
+          token: ${{ secrets.GITHUB_TOKEN }}  # 显式传递令牌
 
       - name: 配置Git身份
         run: |
@@ -24,15 +28,15 @@ jobs:
           TAG_NAME="weekly-$(TZ='Asia/Shanghai' date +%Y%m%d)"
           echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
 
-      - name: 检查标签是否存在，不存在则创建并推送
+      - name: 检查标签是否存在，创建并推送
         run: |
-          # 检查远程是否存在该标签
-          if git ls-remote --exit-code --tags origin ${{ env.TAG_NAME }}; then
-            echo "标签 ${{ env.TAG_NAME }} 已存在，跳过"
+          # 检查远程仓库是否已存在该标签（避免本地缓存干扰）
+          if git ls-remote --exit-code --tags origin "refs/tags/${{ env.TAG_NAME }}"; then
+            echo "✅ 标签 ${{ env.TAG_NAME }} 已存在，无需重复创建"
           else
             # 创建带注释的标签
-            git tag -a ${{ env.TAG_NAME }} -m "每周快照: $(TZ='Asia/Shanghai' date +%Y-%m-%d)"
-            # 推送标签到远程
-            git push origin ${{ env.TAG_NAME }}
-            echo "标签 ${{ env.TAG_NAME }} 已创建并推送"
+            git tag -a "${{ env.TAG_NAME }}" -m "每周代码快照: $(TZ='Asia/Shanghai' date +%Y-%m-%d)"
+            # 推送标签到远程（使用https协议，确保令牌生效）
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git "${{ env.TAG_NAME }}"
+            echo "✅ 标签 ${{ env.TAG_NAME }} 已创建并推送成功"
           fi
