@@ -27,7 +27,7 @@ Vite 默认的类型定义是写给它的 Node.js API ,要将其补充到一个 
 - @vitejs/plugin-vue-jsx 提供对 JSX / TSX 支持
 
 ## css
-- 导入 .css 文件将会把内容插入到 <style> 标签中 
+- 导入 .css 文件将会把内容插入到 `<style>` 标签中 
 - 能够自动读取项目目录下 css预处理器配置文件 比如 `postcss.config.js`
 - 任何以 .module.css 为后缀名的 CSS 文件都被认为是一个 CSS modules 文件, 导入这样的文件会返回一个相应的模块对象
     ```ts

@@ -24,6 +24,9 @@ importers:
         specifier: ^1.2.8
         version: 1.2.8
     devDependencies:
+      markdown-it-plantuml:
+        specifier: ^1.4.1
+        version: 1.4.1
       prettier:
         specifier: 2.8.4
         version: 2.8.4
@@ -3350,6 +3353,9 @@ packages:
 
   markdown-it-emoji@1.4.0:
     resolution: {integrity: sha512-QCz3Hkd+r5gDYtS2xsFXmBYrgw6KuWcJZLCEkdfAuwzZbShCmCfta+hwAMq4NX/4xPzkSHduMKgMkkPUJxSXNg==}
+
+  markdown-it-plantuml@1.4.1:
+    resolution: {integrity: sha512-13KgnZaGYTHBp4iUmGofzZSBz+Zj6cyqfR0SXUIc9wgWTto5Xhn7NjaXYxY0z7uBeTUMlc9LMQq5uP4OM5xCHg==}
 
   markdown-it-table-of-contents@0.4.4:
     resolution: {integrity: sha512-TAIHTHPwa9+ltKvKPWulm/beozQU41Ab+FIefRaQV1NRnpzwcV9QOe6wXQS5WLivm5Q/nlo0rl6laGkMDZE7Gw==}
@@ -9284,6 +9290,8 @@ snapshots:
   markdown-it-container@2.0.0: {}
 
   markdown-it-emoji@1.4.0: {}
+
+  markdown-it-plantuml@1.4.1: {}
 
   markdown-it-table-of-contents@0.4.4: {}
 

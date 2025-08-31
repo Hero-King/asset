@@ -23,6 +23,7 @@
     "pnpm": ">=3"
   },
   "devDependencies": {
+    "markdown-it-plantuml": "^1.4.1",
     "prettier": "2.8.4",
     "puppeteer-core": "^24.10.2",
     "vuepress": "^1.9.9",

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vuepress/config'
 import nav from './nav.js'
+import markdownPlantuml from 'markdown-it-plantuml'
 
 // 搭建网站参考链接: https://github.com/shanyuhai123/documents/blob/master/docs/.vuepress/config/navConf.ts
 export default defineConfig({
@@ -9,8 +10,15 @@ export default defineConfig({
   dest: './dist', // 设置输出目录
   head: [
     ['link', { href: 'https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css', rel: 'stylesheet' }],
-    ['script', { src: 'https://hm.baidu.com/hm.js?3691b93bb6fcef0775ef18a936452b97',defer: true  }]
+    ['script', { src: 'https://hm.baidu.com/hm.js?3691b93bb6fcef0775ef18a936452b97', defer: true }]
   ],
+
+  markdown: {
+    extendMarkdown: md => {
+      // 使用更多的 markdown-it 插件!
+      md.use(markdownPlantuml)
+    }
+  },
 
   plugins: [
     [
