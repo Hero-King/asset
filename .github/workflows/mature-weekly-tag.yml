@@ -1,0 +1,27 @@
+name: 每周自动打标签
+
+# 定时触发：每周日下午4点（北京时间）+ 手动触发
+on:
+  schedule:
+    # 北京时间16:00 = UTC 08:00，每周日
+    - cron: '0 8 * * 0'
+  workflow_dispatch:  # 允许手动测试
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 必须拉取完整历史
+
+      - name: 自动创建每周标签
+        uses: anothrNick/github-tag-action@v1.67.0  # 社区成熟Action，版本固定确保稳定
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 内置Token，无需额外配置
+          DEFAULT_BUMP: none  # 关闭自动版本 bump（不使用语义化版本）
+          CUSTOM_TAG: weekly-$(date -u -d '8 hours' +%Y%m%d)  # 生成北京时间标签（UTC+8）
+          TAG_MESSAGE: "每周自动快照: $(date -u -d '8 hours' +%Y-%m-%d)"  # 标签描述
+          RELEASE_BRANCHES: master  # 仅在指定分支打标签（按需修改）
+          CREATE_TAG_IF_MISSING: true  # 标签不存在时才创建（避免重复）

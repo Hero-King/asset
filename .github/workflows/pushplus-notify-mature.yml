@@ -1,0 +1,49 @@
+name: Pushplus消息通知
+
+# 触发条件：
+# 1. 每周日下午4点10分（标签创建后10分钟）
+# 2. 手动触发
+# 3. 标签工作流成功后自动触发
+on:
+  schedule:
+    - cron: '10 8 * * 0'  # 北京时间16:10（UTC 08:10）
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["每周自动打标签"]  # 关联标签工作流
+    types: [completed]
+
+jobs:
+  send-pushplus:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: 检出代码（用于获取历史标签）
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 准备通知内容
+        id: get-content
+        run: |
+          # 获取当前周标签（北京时间）
+          CURRENT_TAG="weekly-$(TZ='Asia/Shanghai' date +%Y%m%d)"
+          # 获取上一周标签
+          PREVIOUS_TAG=$(git tag --list 'weekly-*' | sort -r | sed -n '2p')
+          
+          # 构建消息内容
+          if [ -n "$PREVIOUS_TAG" ]; then
+            CONTENT="✅ 本周代码标签已创建：$CURRENT_TAG\n\n查看差异：\ngit diff $PREVIOUS_TAG $CURRENT_TAG\n\n仓库地址：${{ github.event.repository.html_url }}"
+          else
+            CONTENT="✅ 首个每周代码标签已创建：$CURRENT_TAG\n\n仓库地址：${{ github.event.repository.html_url }}"
+          fi
+          
+          echo "CURRENT_TAG=$CURRENT_TAG" >> $GITHUB_ENV
+          echo "CONTENT=$CONTENT" >> $GITHUB_ENV
+
+      - name: 发送Pushplus通知
+        uses: jan-bar/pushplus-action@v1.1.0  # 成熟Action，固定版本确保稳定
+        with:
+          token: ${{ secrets.PUSHPLUS_TOKEN }}  # 从Secrets获取token
+          title: "每周代码标签提醒：${{ env.CURRENT_TAG }}"  # 通知标题
+          content: ${{ env.CONTENT }}  # 通知内容
+          template: "txt"  # 消息模板（支持txt/html/markdown等）
