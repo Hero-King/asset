@@ -1,49 +1,58 @@
-name: Pushplus消息通知
+name: Pushplus消息通知（原生API版）
 
-# 触发条件：
-# 1. 每周日下午4点10分（标签创建后10分钟）
-# 2. 手动触发
-# 3. 标签工作流成功后自动触发
 on:
   schedule:
-    - cron: '10 8 * * 0'  # 北京时间16:10（UTC 08:10）
-  workflow_dispatch:
+    - cron: '10 8 * * 0'  # 北京时间每周日16:10（标签创建后10分钟）
+  workflow_dispatch:  # 手动触发测试
   workflow_run:
-    workflows: ["每周自动打标签"]  # 关联标签工作流
+    workflows: ["每周自动打标签"]  # 标签工作流成功后触发
     types: [completed]
 
 jobs:
-  send-pushplus:
+  send-notification:
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: 检出代码（用于获取历史标签）
+      - name: 检出代码（用于获取标签历史）
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: 准备通知内容
-        id: get-content
+        id: prepare-content
         run: |
           # 获取当前周标签（北京时间）
           CURRENT_TAG="weekly-$(TZ='Asia/Shanghai' date +%Y%m%d)"
-          # 获取上一周标签
+          # 获取上一周标签（按名称倒序，取第二个）
           PREVIOUS_TAG=$(git tag --list 'weekly-*' | sort -r | sed -n '2p')
           
           # 构建消息内容
           if [ -n "$PREVIOUS_TAG" ]; then
-            CONTENT="✅ 本周代码标签已创建：$CURRENT_TAG\n\n查看差异：\ngit diff $PREVIOUS_TAG $CURRENT_TAG\n\n仓库地址：${{ github.event.repository.html_url }}"
+            CONTENT="✅ 本周代码标签已创建：$CURRENT_TAG\n\n查看差异命令：\ngit diff $PREVIOUS_TAG $CURRENT_TAG\n\n仓库地址：${{ github.event.repository.html_url }}"
           else
             CONTENT="✅ 首个每周代码标签已创建：$CURRENT_TAG\n\n仓库地址：${{ github.event.repository.html_url }}"
           fi
           
+          # 输出到环境变量（注意转义特殊字符）
           echo "CURRENT_TAG=$CURRENT_TAG" >> $GITHUB_ENV
-          echo "CONTENT=$CONTENT" >> $GITHUB_ENV
+          echo "CONTENT=$(echo "$CONTENT" | sed 's/"/\\"/g')" >> $GITHUB_ENV  # 转义双引号
 
       - name: 发送Pushplus通知
-        uses: jan-bar/pushplus-action@v1.1.0  # 成熟Action，固定版本确保稳定
-        with:
-          token: ${{ secrets.PUSHPLUS_TOKEN }}  # 从Secrets获取token
-          title: "每周代码标签提醒：${{ env.CURRENT_TAG }}"  # 通知标题
-          content: ${{ env.CONTENT }}  # 通知内容
-          template: "txt"  # 消息模板（支持txt/html/markdown等）
+        run: |
+          # 直接调用Pushplus API（无需第三方依赖）
+          curl -X POST "http://www.pushplus.plus/send" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "token": "${{ secrets.PUSHPLUS_TOKEN }}",
+              "title": "每周代码标签提醒：${{ env.CURRENT_TAG }}",
+              "content": "${{ env.CONTENT }}",
+              "template": "txt"
+            }'
+
+      - name: 检查发送结果
+        if: failure()
+        run: |
+          echo "❌ 消息发送失败，请检查："
+          echo "1. Pushplus Token是否正确配置（Secrets中的PUSHPLUS_TOKEN）"
+          echo "2. 网络连接是否正常"
+          exit 1
