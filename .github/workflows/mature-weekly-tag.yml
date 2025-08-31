@@ -19,9 +19,11 @@ jobs:
       - name: 自动创建每周标签
         uses: anothrNick/github-tag-action@1.67.0  # 社区成熟Action，版本固定确保稳定
         env:
+          INITIAL_VERSION: 0.0.0  # 明确指定初始版本，解决无标签时的错误
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 内置Token，无需额外配置
           DEFAULT_BUMP: none  # 关闭自动版本 bump（不使用语义化版本）
           CUSTOM_TAG: weekly-$(date -u -d '8 hours' +%Y%m%d)  # 生成北京时间标签（UTC+8）
           TAG_MESSAGE: "每周自动快照: $(date -u -d '8 hours' +%Y-%m-%d)"  # 标签描述
           RELEASE_BRANCHES: master  # 仅在指定分支打标签（按需修改）
-          CREATE_TAG_IF_MISSING: true  # 标签不存在时才创建（避免重复）
+          CREATE_TAG_IF_MISSING: true  # 标签不存在时创建
+          SKIP_UNLESS_CHANGED: false  # 即使没有代码变更也创建标签（确保每周都有标签）
