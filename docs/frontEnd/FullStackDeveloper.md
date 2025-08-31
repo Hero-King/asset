@@ -19,11 +19,11 @@
 - TypeORM 是一个面向 TypeScript 和 JavaScript 的 ORM 框架，它支持多种数据库，包括 MySQL、PostgreSQL、SQLite 和 Microsoft SQL Server。它提供了实体映射、关联关系、事务支持等功能。
 - Sequelize: Sequelize 是一个基于 Promise 的 ORM 框架，支持多种数据库，包括 MySQL、PostgreSQL、SQLite 和 MSSQL。它提供了丰富的功能，包括模型定义、关联关系、事务支持、数据验证等
 
-## 技术选型
+# 技术选型
 
 - nestjs + typeorm + mysql 进阶后端开发 `npm install --save @nestjs/typeorm typeorm mysql2`
 
-### Nestjs
+# Nestjs
 
 查看帮助 `nest --help`
 
@@ -112,3 +112,6 @@
 可以把 NestJS 处理请求的过程想象成一个洋葱模型（Onion Model），请求从外一层层进入，响应则从内一层层返回
 
 <img :src="$withBase('/img/frontEnd/nestjsRequestHandler.svg')">
+
+
+## Typeorm

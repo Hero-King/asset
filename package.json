@@ -23,6 +23,7 @@
     "pnpm": ">=3"
   },
   "devDependencies": {
+    "express": "^5.1.0",
     "markdown-it-plantuml": "^1.4.1",
     "prettier": "2.8.4",
     "puppeteer-core": "^24.10.2",
@@ -34,6 +35,7 @@
     "async-validator": "^1.11.5",
     "axios": "^1.6.3",
     "element-ui": "^2.15.14",
-    "minimist": "^1.2.8"
+    "minimist": "^1.2.8",
+    "nacos": "^2.6.0"
   }
 }
