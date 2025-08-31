@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0  # 必须拉取完整历史
 
       - name: 自动创建每周标签
-        uses: anothrNick/github-tag-action@v1.67.0  # 社区成熟Action，版本固定确保稳定
+        uses: anothrNick/github-tag-action@1.67.0  # 社区成熟Action，版本固定确保稳定
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 内置Token，无需额外配置
           DEFAULT_BUMP: none  # 关闭自动版本 bump（不使用语义化版本）
