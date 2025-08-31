@@ -1,29 +1,38 @@
-name: 每周自动打标签
-
-# 定时触发：每周日下午4点（北京时间）+ 手动触发
+name: 每周自动打标签（原生Git版）
 on:
   schedule:
-    # 北京时间16:00 = UTC 08:00，每周日
-    - cron: '0 8 * * 0'
-  workflow_dispatch:  # 允许手动测试
+    - cron: '0 8 * * 0'  # 北京时间16:00
+  workflow_dispatch:
 
 jobs:
-  tag:
+  create-weekly-tag:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 必须拉取完整历史
+          fetch-depth: 0  # 拉取所有历史
+          token: ${{ secrets.GITHUB_TOKEN }}  # 用于推送标签
 
-      - name: 自动创建每周标签
-        uses: anothrNick/github-tag-action@1.67.0  # 社区成熟Action，版本固定确保稳定
-        env:
-          INITIAL_VERSION: 0.0.0  # 明确指定初始版本，解决无标签时的错误
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 内置Token，无需额外配置
-          DEFAULT_BUMP: none  # 关闭自动版本 bump（不使用语义化版本）
-          CUSTOM_TAG: weekly-$(date -u -d '8 hours' +%Y%m%d)  # 生成北京时间标签（UTC+8）
-          TAG_MESSAGE: "每周自动快照: $(date -u -d '8 hours' +%Y-%m-%d)"  # 标签描述
-          RELEASE_BRANCHES: master  # 仅在指定分支打标签（按需修改）
-          CREATE_TAG_IF_MISSING: true  # 标签不存在时创建
-          SKIP_UNLESS_CHANGED: false  # 即使没有代码变更也创建标签（确保每周都有标签）
+      - name: 配置Git身份
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: 生成标签名称（北京时间）
+        run: |
+          TAG_NAME="weekly-$(TZ='Asia/Shanghai' date +%Y%m%d)"
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
+      - name: 检查标签是否存在，不存在则创建并推送
+        run: |
+          # 检查远程是否存在该标签
+          if git ls-remote --exit-code --tags origin ${{ env.TAG_NAME }}; then
+            echo "标签 ${{ env.TAG_NAME }} 已存在，跳过"
+          else
+            # 创建带注释的标签
+            git tag -a ${{ env.TAG_NAME }} -m "每周快照: $(TZ='Asia/Shanghai' date +%Y-%m-%d)"
+            # 推送标签到远程
+            git push origin ${{ env.TAG_NAME }}
+            echo "标签 ${{ env.TAG_NAME }} 已创建并推送"
+          fi
