@@ -1,0 +1,63 @@
+@startuml Nacos 服务注册发现原理
+
+
+actor 服务提供者 as Provider
+participant "Nacos 客户端" as SDK
+participant "Nacos 服务器" as Server
+actor 服务消费者 as Consumer
+
+' 样式定义
+skinparam participant {
+  BackgroundColor #f0f8ff
+  BorderColor #2c3e50
+}
+skinparam actor {
+  BackgroundColor #e8f4fd
+  BorderColor #2980b9
+}
+skinparam note {
+  BackgroundColor #fff3cd
+  BorderColor #f39c12
+}
+
+== 1. 服务注册流程 ==
+Provider -> SDK: 调用 registerInstance()
+SDK -> Server: HTTP POST /nacos/v1/ns/instance\n(服务名、IP、端口、元数据)
+Server -> Server: 1. 校验请求\n2. 存储实例到注册表\n3. 标记为"健康"
+Server --> SDK: 返回注册成功 (200 OK)
+SDK --> Provider: 注册完成回调
+
+== 2. 心跳保活机制 ==
+note over SDK, Server: 客户端每5秒发送心跳，证明服务存活
+loop 每5秒执行
+  SDK -> Server: HTTP PUT /nacos/v1/ns/instance/beat\n(实例唯一标识)
+  Server -> Server: 1. 更新心跳时间\n2. 15秒未收到→标记"不健康"\n3. 30秒未收到→剔除实例
+  Server --> SDK: 返回心跳确认
+end
+
+== 3. 服务订阅流程 ==
+Consumer -> SDK: 调用 subscribe(serviceName, listener)
+SDK -> Server: HTTP GET /nacos/v1/ns/instance/list\n(拉取初始实例列表)
+Server --> SDK: 返回实例列表 + MD5哈希值
+SDK -> SDK: 1. 缓存到本地内存\n2. 注册订阅关系
+SDK --> Consumer: 订阅成功，返回初始实例
+
+== 4. 实例变更推送（推拉结合） ==
+note over Server, SDK: 推模式（实时）+ 拉模式（校验）
+Server -> Server: 检测到实例变化（如下线）
+Server --> SDK: 主动推送变更 (HTTP/UDP) 【推模式】
+SDK -> SDK: 1. 更新本地缓存\n2. 计算新MD5
+SDK --> Consumer: 触发 listener 回调（新实例列表）
+
+loop 每10秒执行 【拉模式校验】
+  SDK -> Server: HTTP GET /nacos/v1/ns/instance/list\n(携带本地MD5)
+  Server -> Server: 对比MD5判断是否变更
+  alt 有变更
+    Server --> SDK: 返回新实例列表 + 新MD5
+    SDK -> SDK: 更新缓存
+    SDK --> Consumer: 触发 listener 回调
+  else 无变更
+    Server --> SDK: 返回 304 Not Modified
+  end
+end
+@enduml
