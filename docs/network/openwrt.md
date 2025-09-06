@@ -107,6 +107,7 @@ curl -sLI -X GET -m 10 -w 'http_code=%{http_code}' -H 'User-Agent: Clash' 订阅
 上手
 
 1. 配置订阅中添加订阅地址，使用在线订阅地址转换处理各种路由规则
+  - 使用[自定义模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)转换 分组特别细致,可解决2痛点问题
 2. 由于chatgpt对香港地区不提供服务，需要走国外节点，覆写设置-规则设置-自定义规则中指定chatgpt路由
 ```yaml
 rules:
