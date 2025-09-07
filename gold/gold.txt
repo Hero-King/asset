@@ -1,0 +1,20 @@
+
+读取飞书电子表格(https://vcn1g949ylrk.feishu.cn/sheets/Tav0swEd2hCzNKt7F7zct8UhnNe) 结构和数据,第一行和第二行分别为字段英文和中文,第三行开始为真实数据，
+访问建设银行 https://ccb.com/chn/home/gold_new/gjssy/index.shtml，获取个人黄金积存-主动积存价格,产品重命名为主动积存,价格放在买入价列中;获取个人黄金积存-定期积存价格,价格放在赎回价列中;获取投资金条50g的买入价,产品重命名为投资金条,价格放在买入价列中, 这些价格都在我给你提供的页面中;
+访问工商银行 https://mybank.icbc.com.cn/icbc/newperbank/perbank3/gold/goldaccrual_query_out.jsp，获取积存金买入/赎回/定期积存价格,如意金积存的买入和赎回价格
+访问招商银行 https://gold.cmbchina.com/Products/ProductDetail?PrdCode=FJ088GLD9002K0010，获取经典款招行金投资金条价格，计算出每克的金价,产品名称重写成投资金条
+在表中追加今日数据
+使用dataList变量保存今日数据,date变量保存当前日期
+然后拉取 https://blog.heroking.top/gold/goldTemplate.html 内容使用Jinja2模板引擎渲染,使用浏览器打开渲染后的页面,截图.container 元素保存为图片
+
+
+我需要一组今天金价数据补充到飞书电子表格(https://vcn1g949ylrk.feishu.cn/sheets/Tav0swEd2hCzNKt7F7zct8UhnNe)中,字段有date(日期) bank(银行) product(产品)  buyPrice(买入价(元/克)) sellPrice(赎回价(元/克)) regularBuyPrice(定期积存(元/克)) 其中实物金条只有买入价
+我会告诉你怎么获取这些数据
+建设银行需要使用浏览器访问网页(https://ccb.com/chn/home/gold_new/gjssy/index.shtml),产品为主动积存,买入价取id为initiativeBuyPrice的Dom元素内容, 赎回价取id为initiativeSellPrice的Dom元素内容, 定期积存取id为regularBuyPrice的Dom元素内容;第二个产品为投资金条,你需要找到id为physicalPreciousMetalList的DOM元素,孩子节点中有投资金条(50克)这条数据的金价作为买入价
+访问工商银行 https://mybank.icbc.com.cn/icbc/newperbank/perbank3/gold/goldaccrual_query_out.jsp，获取积存金买入/赎回/定期积存价格,如意金积存的买入和赎回价格
+访问招商银行 https://gold.cmbchina.com/Products/ProductDetail?PrdCode=FJ088GLD9002K0010，获取经典款招行金投资金条价格，计算出每克的金价,产品名称重写成投资金条
+使用dataList变量保存今日数据,date变量保存当前日期
+然后拉取 https://blog.heroking.top/gold/goldTemplate.html 内容使用Jinja2模板引擎渲染, 使用浏览器打开渲染后的页面,将类名为container的DOM元素保存为图片
+
+
+读取飞书电子表格(https://vcn1g949ylrk.feishu.cn/sheets/Tav0swEd2hCzNKt7F7zct8UhnNe)中的今天和昨天的数据,简要分析下增加或降低幅度,阅读几篇金价最新消息,帮我分析下后续走势
