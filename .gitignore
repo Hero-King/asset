@@ -15,6 +15,7 @@ yarn.lock
 dist
 .temp
 .caches
+.cache
 .DS_Store
 
 docs/.vuepress/public/gold/RedbookUserData

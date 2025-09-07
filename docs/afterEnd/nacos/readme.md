@@ -73,11 +73,12 @@ end
 
 服务注册: 
 
-<<< docs/afterEnd/nacos/service-provider.js
+@[code js](./service-provider.js)
 
 消费者服务发现
 
-<<< docs/afterEnd/nacos/service-consumer.js
+@[code js](./service-consumer.js)
+
 
 ## 动态配置
 ```plantuml

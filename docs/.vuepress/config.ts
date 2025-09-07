@@ -1,54 +1,25 @@
-import { defineConfig } from 'vuepress/config'
-import nav from './nav.js'
-import markdownPlantuml from 'markdown-it-plantuml'
+import { defineUserConfig } from "vuepress";
+import { viteBundler } from "@vuepress/bundler-vite";
+import theme from "./theme";
 
-// 搭建网站参考链接: https://github.com/shanyuhai123/documents/blob/master/docs/.vuepress/config/navConf.ts
-export default defineConfig({
-  description: '学习犹如逆水行舟,不进则退',
-  title: 'HeroKing的个人笔记',
-  // base: '/', //Vue原型上有 $withBase 取值当前base 部署在非跟目录: /asset/
-  dest: './dist', // 设置输出目录
-  head: [
-    ['link', { href: 'https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css', rel: 'stylesheet' }],
-    ['script', { src: 'https://hm.baidu.com/hm.js?3691b93bb6fcef0775ef18a936452b97', defer: true }]
-  ],
+export default defineUserConfig({
+  base: "/",
 
-  markdown: {
-    extendMarkdown: md => {
-      // 使用更多的 markdown-it 插件!
-      md.use(markdownPlantuml)
-    }
-  },
+  lang: "zh-CN",
+  title: "HeroKing博客",
+  description: "学习犹如逆水行舟",
 
-  plugins: [
-    [
-      // https://shanyuhai123.github.io/vuepress-plugin-auto-sidebar/zh/#%E4%BB%8B%E7%BB%8D
-      'vuepress-plugin-auto-sidebar',
-      {
-        title: {
-          // 更多选项:
-          // `default`、`lowercase`、`uppercase`、`capitalize`、`camelcase`、`kebabcase`、`titlecase`
-          mode: 'titlecase'
-        },
-        git: {
-          trackStatus: 'add'
-        }
-      }
-    ]
-  ],
+  theme,
 
-  configureWebpack: {
-    resolve: {
-      alias: {
-        '@public': './public'
-      }
-    }
-  },
+  // 和 PWA 一起启用
+  // shouldPrefetch: false,
 
-  themeConfig: {
-    nav: nav
-    // 为以下路由添加侧边栏
-    // sidebarDepth: 1,
-    // displayAllHeaders: true // 默认值：false 显示所有页面的标题链接
-  }
-})
+  bundler: viteBundler({
+    viteOptions: {
+      server: {
+        allowedHosts: [".heroking.top"],
+      },
+    },
+    vuePluginOptions: {},
+  }),
+});

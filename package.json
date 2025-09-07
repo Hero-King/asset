@@ -1,41 +1,36 @@
 {
   "name": "asset",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "HeroKing Blog",
+  "version": "2.0.0",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
-    "start": "pnpm run docs:dev",
-    "nav": "vuepress nav docs -f",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "docs:build": "vuepress-vite build docs",
+    "docs:clean-dev": "vuepress-vite dev docs --clean-cache",
+    "docs:dev": "vuepress-vite dev docs",
+    "docs:update-package": "pnpm dlx vp-update",
     "gold": "node docs/.vuepress/public/gold/collectionData.js",
-    "docs:publish": "pnpm run docs:build && scp -r ./dist/* aml.heroking.top:/var/www/aml/asset",
     "lint": "prettier --write ."
   },
   "repository": {
     "type": "git",
     "url": "https://gitee.com/Hero-King/asset.git"
   },
-  "author": "",
-  "license": "ISC",
-  "engines": {
-    "node": ">=10",
-    "pnpm": ">=3"
-  },
   "devDependencies": {
-    "express": "^5.1.0",
-    "markdown-it-plantuml": "^1.4.1",
-    "prettier": "2.8.4",
-    "puppeteer-core": "^24.10.2",
-    "vuepress": "^1.9.9",
-    "vuepress-plugin-auto-sidebar": "^2.3.2"
+    "@vuepress/bundler-vite": "2.0.0-rc.24",
+    "flowchart.ts": "^3.0.1",
+    "markmap-lib": "^0.18.12",
+    "markmap-toolbar": "^0.18.12",
+    "markmap-view": "^0.18.12",
+    "mermaid": "^11.11.0",
+    "sass-embedded": "^1.89.2",
+    "vue": "^3.5.17",
+    "vuepress": "2.0.0-rc.24",
+    "vuepress-theme-hope": "2.0.0-rc.94"
   },
-  "dependencies": {
-    "art-template": "^4.13.4",
-    "async-validator": "^1.11.5",
-    "axios": "^1.6.3",
-    "element-ui": "^2.15.14",
-    "minimist": "^1.2.8",
-    "nacos": "^2.6.0"
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

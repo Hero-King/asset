@@ -1,9 +1,9 @@
-### ESXi 安装使用
+# 虚拟机
 
 内网穿透:
 映射端口 443tcp 可以网页访问 需要使用 vmware 客户端访问图形界面映射 tcp902
 
-#### 什么是 vsphere?
+### 什么是 vsphere?
 
 VMware 的产品,是直接安装在裸机上面,然后在其 OS 基础上面去安装虚拟机; 有 C/S 架构和 B/S 架构
 
@@ -32,13 +32,13 @@ vsphere 有两个核心 ESXi 服务器和 vCenter Server . ESXi 是 hypervsior,�
 
 左边传统架构如果只消耗 20%资源,那么其他全部浪费了 而后面可以装 4 到 5 个这样的虚拟机达到资源利用最大化 补充: 超重量级的数据业务不可以虚拟化,其他很多情况都可以虚拟化
 
-#### 什么是 VMware ESXi？
+### 什么是 VMware ESXi
 
 VMware ESXi 是 VMware 的裸机虚拟机管理程序。VMware ESXi 是以 ISO 形式提供的软件，可直接安装在物理硬件上，如 Windows 或 Linux 操作系统。ESXi 安装占用空间小，大小为 144 MB。甚至可以在 USB pendrive 上安装 ESXi。VMWare ESXi 允许您在其中创建多个虚拟机，以在单个物理硬件中运行多个操作系统，如 windows，linux，solaris，macOS 等。它使您能够在虚拟机之上运行工作负载，从而可以整合多个物理硬件，从而将工作负载运行到更少的物理硬件中。
 
 在 vSphere 5 之前，vSphere 有 2 个虚拟机管理程序 ESX 和 ESXi。随着 vSphere 5.0 的发布，ESXi 是唯一的虚拟机管理程序。
 
-#### 什么是 virtual machine
+### 什么是 virtual machine
 
 在 ESXI 上面去创建虚拟机,这时候虚拟机已经和底层硬件没有关联; 他的体现形式是文件夹(VM folder) 现在想移动机器,只要移动文件夹即可
 
@@ -49,7 +49,7 @@ VMware ESXi 是 VMware 的裸机虚拟机管理程序。VMware ESXi 是以 ISO �
 - .log
 - .vmdk 磁盘文件
 
-#### 安装 ESXI
+### 安装 ESXI
 
 可以安装到 U 盘 内存 硬盘 远程主机 启动加载进内存,安装在哪里不重要
 
@@ -84,7 +84,7 @@ ESXI安装aliddns脚本需要修改一些文件 ; 暂不考虑修改esxi
 公网中通过域名访问路由器(SSH连接)  ping -6 server(ESXI主机名).lan(局域网域名)查看ESXI主机ipv6地址获取其公网ip
 ```
 
-#### 安装 VirtualBox6.1
+### 安装 VirtualBox6.1
 
 VirtualBox 几乎可以虚拟化主机的所有硬件
 
@@ -104,7 +104,7 @@ Please install the Linux kernel header files
 拓展包安装要注意版本    如果安装错了先卸载  vboxmanage extpack -h
 ```
 
-#### virtualbox 常用命令
+### virtualbox 常用命令
 
 https://www.linuxidc.com/Linux/2012-01/51362.htm
 
@@ -150,7 +150,7 @@ VRDP 使用
 
 使用 VBoxHeadless 启动虚拟机 这样虚拟机就不需要图形界面了
 
-#### 安装虚拟机 winserver
+### 安装虚拟机 winserver
 
 https://www.virtualbox.org/manual/UserManual.html#startingvboxonlinux 7.1.3
 
@@ -194,7 +194,7 @@ vboxmanage modifyvm WindowsServer --boot1 disk --boot2 dvd --boot3 none --boot4 
  vboxmanage startvm name --type=headless
 ```
 
-#### 支持导入导出
+### 支持导入导出
 
 文件格式是 ovf
 
@@ -237,7 +237,7 @@ nat模式 : 外网想要访问虚拟机服务需要 端口转发:  		     https:
     具体操作是打开机器的网络编辑器  vmnet8 nat模式 去掉使用DHCP服务     nat设置中设置端口转发
 ```
 
-### 安装 X11 支持（还是这个牛逼）
+## 安装 X11 支持（还是这个牛逼）
 
 ```
 vim /etc/ssh/sshd_config 开启AllowTcpForwarding yes   X11DisplayOffset 10  [ X11UseLocalhost no   //网上很多说这里保持默认不需要修改 ]
@@ -246,18 +246,18 @@ yum install -y xorg-x11-xauth           #安装x11组件包
 yum -y install wqy-zenhei-fonts*        #安装中文字库
 ```
 
-### 端口转发工具 rinetd
+## 端口转发工具 rinetd
 
-### Vcenter
+## Vcenter
 
 集中管理多台装了 Esxi 的服务器, 是系统软件
 
-### 磁盘
+## 磁盘
 
 精简制备 用多少就占用磁盘多少大小
 厚制备 直接占用磁盘指定的大小
 
-### 网络
+## 网络
 
 从底往上
 显示硬件网卡 Vmware 可以看到设备 名称是 vmnic0 ... (一块网卡有一个或者多个接口(网口)) 这些网卡接口最终是和真实交换机端口物理网线连接
@@ -266,7 +266,7 @@ yum -y install wqy-zenhei-fonts*        #安装中文字库
 
 虚拟交换机跟虚拟机虚拟网卡连接的是 端口组 (用来划分流量的,就是把交换机的端口分组使用,方便管理/分流/负载均衡等) 统一端口组下面机器配置同一网段可互相通信 不同端口组下面机器使用相同 vlanID 可以通信
 
-### 安装黑苹果
+## 安装黑苹果
 
 镜像格式：dmg 是 macos 系统的镜像格式，官方镜像就是这个格式（msdn 上面有苹果镜像了）但是 vmware 不识别这个镜像，需要转换成 cdr（mac 下的启动镜像）或者 iso 镜像（这两个一样的，可以直接改拓展名）
 
