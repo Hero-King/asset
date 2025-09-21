@@ -2,7 +2,7 @@ name: Pushplus消息通知（原生API版）
 
 on:
   schedule:
-    - cron: '10 8 * * 0'  # 北京时间每周日16:10（标签创建后10分钟）
+    - cron: '30 8 * * 0'  # 北京时间每周日16:30
   workflow_dispatch:  # 手动触发测试
   workflow_run:
     workflows: ["每周自动打标签"]  # 标签工作流成功后触发
