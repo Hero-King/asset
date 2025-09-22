@@ -20,13 +20,12 @@
     ];
   - 值提供者, 注入常量值 providers: [
     {
-      provide: CatsService,
-      useValue: { aa: 'bb', 'cc': 'some 引用'},
+    provide: CatsService,
+    useValue: { aa: 'bb', 'cc': 'some 引用'},
     },
-  ];
-  - 工厂提供者useFactory,允许动态创建提供者,为工厂函数返回的值
+    ];
+  - 工厂提供者 useFactory,允许动态创建提供者,为工厂函数返回的值
   - 别名提供者：useExisting
-  
 - module@Module: nest 组织应用的方式, 应用至少需要有一个根模块
   - providers: 将由 Nest 注入器实例化并且至少可以在该模块中共享的提供程序
   - controllers: 此模块中定义的必须实例化的控制器集
@@ -96,7 +95,36 @@ export class AppModule {}
 
   - 验证：使用 class-validator 库验证 DTO（数据传输对象），无效时自动抛出 BadRequestException。
 
+    ```ts
+    import { IsString, IsInt } from 'class-validator'
+    const install = 'npm i class-validator class-transformer'
+    export class CreateCatDto {
+      @IsString()
+      name: string
+      @IsInt()
+      age: number
+      @IsString()
+      breed: string
+    }
+    // 启用全局作用域管道
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true, // 自动移除非DTO字段
+        forbidNonWhitelisted: true, // 禁止非DTO字段
+        transform: true // 自动类型转换
+      })
+    )
+    ```
+
   - 转换：将路径参数 :id 从字符串转换为数字 (ParseIntPipe)。
+
+    ```ts
+    // ParseIntPipe实例化的责任交给框架并启用依赖注入, 也可以手动实例化
+    // async findOne(@Param('id', ParseIntPipe) id: number) {
+    async findOne(@Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: number) {
+      return this.catsService.findOne(id);
+    }
+    ```
 
 - 特点：通常用于控制器路由处理程序的参数级别。
 
@@ -121,29 +149,29 @@ export class AppModule {}
 ```mermaid
 
 flowchart TD
-    A[入站请求] --> B[全局中间件]
-    B --> C[模块路由中间件]
-    C --> D{守卫决定?}
+  A[入站请求] --> B[全局中间件]
+  B --> C[模块路由中间件]
+  C --> D{守卫决定?}
 
-    D -- 是 --> E[拦截器前置逻辑]
-    E --> F[管道: 转换/验证]
-    F --> G[控制器方法]
-    G --> H[服务层]
-    H --> I[控制器返回数据]
-    I --> J[拦截器后置逻辑<br>包装响应]
+  D -- 是 --> E[拦截器前置逻辑]
+  E --> F[管道: 转换/验证]
+  F --> G[控制器方法]
+  G --> H[服务层]
+  H --> I[控制器返回数据]
+  I --> J[拦截器后置逻辑<br>包装响应]
 
-    D -- 否 --> K[抛出未授权异常]
+  D -- 否 --> K[抛出未授权异常]
 
-    J --> L{是否有异常?}
-    L -- 是 --> M[异常过滤器]
-    M --> N[返回错误响应]
+  J --> L{是否有异常?}
+  L -- 是 --> M[异常过滤器]
+  M --> N[返回错误响应]
 
-    L -- 否 --> O[返回成功响应]
+  L -- 否 --> O[返回成功响应]
 
-    K --> M
-    subgraph 异常处理路径
-        K
-        M
-        N
-    end
+  K --> M
+  subgraph 异常处理路径
+      K
+      M
+      N
+  end
 ```
