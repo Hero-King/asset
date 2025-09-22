@@ -12,6 +12,21 @@
 
 - 控制器@Controller: 路由, 处理传入的请求并向客户端返回响应, 必须属于某一个模块
 - 提供器@providers: 由 Nestjs 容器管理的 js 类, 框架负责实例化, 管理其生命周期, 作为依赖注入的类
+  - 标准提供者: providers: [CatsService] 相当于 providers: [
+    {
+    provide: CatsService,
+    useClass: CatsService,
+    },
+    ];
+  - 值提供者, 注入常量值 providers: [
+    {
+      provide: CatsService,
+      useValue: { aa: 'bb', 'cc': 'some 引用'},
+    },
+  ];
+  - 工厂提供者useFactory,允许动态创建提供者,为工厂函数返回的值
+  - 别名提供者：useExisting
+  
 - module@Module: nest 组织应用的方式, 应用至少需要有一个根模块
   - providers: 将由 Nest 注入器实例化并且至少可以在该模块中共享的提供程序
   - controllers: 此模块中定义的必须实例化的控制器集
@@ -31,7 +46,15 @@
 
 - 共享模块: 使用 @Module.exports 导出 `js类`, 其他需要使用的模块中 @Module.import
 - 全局模块: 在模块上使用@Global()注解, 其他模块直接注入`js类`即可, 不需要在@Module.import
-- 动态模块: 编写模块类, 实现 forRoot 静态方法, 返回模块配置对象即可
+- 动态模块: 编写模块类, 实现 forRoot 静态方法, 返回模块配置对象即可, 比如:
+
+```ts
+@Module({
+  imports: [DatabaseModule.forRoot([User])],
+  exports: [DatabaseModule] // 需重新导出动态模块时，可在导出数组中省略 forRoot() 方法调用
+})
+export class AppModule {}
+```
 
 ## 中间件 (Middleware)
 
@@ -124,4 +147,3 @@ flowchart TD
         N
     end
 ```
-
