@@ -3,16 +3,18 @@
 DELIMITER //
 
 -- 主存储过程：刷新年化收益率
-CREATE PROCEDURE `RefreshAnnualizedYield`(IN calc_date DATE)
+DROP PROCEDURE IF EXISTS RefreshAnnualizedYield;
+
+DELIMITER //
+
+CREATE PROCEDURE RefreshAnnualizedYield(IN calc_date DATE)
 BEGIN
     DECLARE done INT DEFAULT FALSE;
     DECLARE v_product_code VARCHAR(50);
-    DECLARE v_product_name VARCHAR(200);
-    DECLARE v_sale_platform VARCHAR(100);
     
-    -- 获取所有产品的游标
+    -- 只获取产品代码，不获取名称和平台
     DECLARE product_cursor CURSOR FOR 
-        SELECT DISTINCT product_code, product_name, sale_platform  FROM financial_product_netvalues;
+        SELECT DISTINCT product_code FROM financial_products WHERE is_active = TRUE;
     
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     
@@ -25,26 +27,30 @@ BEGIN
     
     -- 循环处理每个产品
     read_loop: LOOP
-        FETCH product_cursor INTO v_product_code, v_product_name, v_sale_platform;
+        FETCH product_cursor INTO v_product_code;
         IF done THEN
             LEAVE read_loop;
         END IF;
         
-        -- 计算并插入各维度年化
-        CALL CalculateAndUpsertYield(v_product_code, v_product_name, v_sale_platform, calc_date, '7', 7);
-        CALL CalculateAndUpsertYield(v_product_code, v_product_name, v_sale_platform, calc_date, '30', 30);
-        CALL CalculateAndUpsertYield(v_product_code, v_product_name, v_sale_platform, calc_date, '90', 90);
+        -- 只传递产品代码，不传递名称和平台
+        CALL CalculateAndUpsertYield(v_product_code, calc_date, '7', 7);
+        CALL CalculateAndUpsertYield(v_product_code, calc_date, '30', 30);
+        CALL CalculateAndUpsertYield(v_product_code, calc_date, '90', 90);
         
     END LOOP;
     
     CLOSE product_cursor;
 END //
 
+DELIMITER ;
+
 -- 子存储过程：计算单个产品单个维度的年化
-CREATE PROCEDURE `CalculateAndUpsertYield`(
+DROP PROCEDURE IF EXISTS CalculateAndUpsertYield;
+
+DELIMITER //
+
+CREATE PROCEDURE CalculateAndUpsertYield(
     IN p_product_code VARCHAR(50),
-    IN p_product_name VARCHAR(200),
-    IN p_sale_platform VARCHAR(100),
     IN p_calc_date DATE,
     IN p_yield_type VARCHAR(10),
     IN p_target_days INT
@@ -57,6 +63,16 @@ proc_block: BEGIN
     DECLARE v_start_net_value DECIMAL(12,6);
     DECLARE v_annualized_yield DECIMAL(8,4);
     DECLARE v_actual_days INT;
+    DECLARE v_product_exists INT;
+    
+    -- 检查产品是否存在且有效
+    SELECT COUNT(*) INTO v_product_exists 
+    FROM financial_products 
+    WHERE product_code = p_product_code AND is_active = TRUE;
+    
+    IF v_product_exists = 0 THEN
+        LEAVE proc_block;
+    END IF;
     
     -- 1. 获取计算截止日期（计算日期之前的最新净值日期）
     SELECT MAX(value_date) INTO v_end_date
@@ -111,12 +127,12 @@ proc_block: BEGIN
         -- 核心年化计算公式
         SET v_annualized_yield = (POW(v_end_net_value / v_start_net_value, 365 / v_actual_days) - 1) * 100;
         
-        -- 8. 插入或更新年化数据表
+        -- 8. 插入或更新年化数据表（不再存储product_name和sale_platform）
         INSERT INTO product_annualized_yield 
-            (product_code, product_name, sale_platform, calculation_date, yield_type, annualized_yield, 
+            (product_code, calculation_date, yield_type, annualized_yield, 
              start_date, end_date)
         VALUES 
-            (p_product_code, p_product_name, p_sale_platform, p_calc_date, p_yield_type, v_annualized_yield, 
+            (p_product_code, p_calc_date, p_yield_type, v_annualized_yield, 
              v_start_date, v_end_date)
         ON DUPLICATE KEY UPDATE
             annualized_yield = v_annualized_yield,
