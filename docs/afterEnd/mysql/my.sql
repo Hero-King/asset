@@ -117,8 +117,8 @@ proc_block: BEGIN
     WHERE product_code = p_product_code 
     AND value_date = v_end_date;
     
-    -- 6. 计算实际经过的自然日天数（包含首尾）
-    SET v_actual_days = DATEDIFF(v_end_date, v_start_date) + 1;
+    -- 6. 计算持有的自然日天数, (startDate, endDate]
+    SET v_actual_days = DATEDIFF(v_end_date, v_start_date);
     
     -- 7. 如果有足够数据，则计算年化
     IF v_start_net_value IS NOT NULL AND v_end_net_value IS NOT NULL 
