@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.7
+// @version      0.1.8
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
@@ -261,5 +261,108 @@
           }, 1000 * 60)
         }
       })
+  }
+
+  if (location.host === 'dsim.intra.didiglobal.com') {
+    const getServiceList = (params) => {
+      const queryString = new URLSearchParams(params).toString()
+      return fetch(`http://dsim.intra.didiglobal.com/api/envmanager/detail/getServiceList?${queryString}`, {
+        body: null,
+        method: 'GET'
+      }).then((res) => res.json())
+    }
+
+    const getPackageList = (params) => {
+      const queryString = new URLSearchParams(params).toString()
+      return fetch(`http://dsim.intra.didiglobal.com/api/envmanager/services/queryPackageList?${queryString}`, {
+        body: null,
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include'
+      }).then((res) => res.json())
+    }
+
+    const checkDeploy = (body) => {
+      return fetch('http://dsim.intra.didiglobal.com/api/deploy/checkDeploy', {
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(body),
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include'
+      }).then((res) => res.json())
+    }
+
+    const deploy = (body) => {
+      return fetch('http://dsim.intra.didiglobal.com/api/deploy/batchDeploy', {
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(body),
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include'
+      }).then((res) => res.json())
+    }
+
+    const dsimDeploy = async (env, branch, usn = 'fintech-fe-b-tech-global_pixiu_web') => {
+      const bizLine = 0
+      const serviceListRes = await getServiceList({
+        bizLine,
+        env,
+        pageNum: 1,
+        pageSize: 10,
+        usn
+      })
+      const deployInfo = {
+        bizLine,
+        env,
+        branch,
+        usn
+      }
+      const webServiceInfo = serviceListRes.code == 0 ? serviceListRes.data.list[0] : null
+      const params = JSON.parse(JSON.stringify(deployInfo))
+      if (webServiceInfo) {
+        if (webServiceInfo.defaultBranch !== branch) {
+          console.log(`当前分支为${webServiceInfo.defaultBranch},将切换到${branch}`)
+        }
+        const packageListRes = await getPackageList(params)
+        if (packageListRes.code == 0) {
+          const packageInfo = packageListRes.data.packageLists[0]
+          deployInfo.services = [
+            {
+              usn,
+              branch,
+              lightweightDeploy: false,
+              serviceId: webServiceInfo.serviceId,
+              serviceType: webServiceInfo.serviceType,
+              ...packageInfo
+            }
+          ]
+          //   存在新的部署包
+          if (packageInfo.commit !== webServiceInfo.defaultCommit) {
+            console.log(`存在新的部署包, 详情:${packageInfo.commit}, 将进行部署`)
+            const checkRes = await checkDeploy(deployInfo)
+            if (checkRes.code == 0) {
+              const deployRes = await deploy(deployInfo)
+              if (deployRes.code == 0) {
+                console.log('部署成功')
+              } else {
+                console.error('部署失败')
+              }
+            } else {
+              console.error('部署检查失败')
+            }
+          } else {
+            console.log('无新的部署包')
+          }
+        }
+      } else {
+        console.error('USN 不存在')
+      }
+    }
+
+    window.dsimDeploy = dsimDeploy
   }
 })()
