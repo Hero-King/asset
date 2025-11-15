@@ -77,19 +77,17 @@ EOF
 # 创建执行脚本
 cat > /etc/webhook/actions.sh << 'EOF'
 #!/bin/sh
-# Webhook 执行脚本 - 参数传递版本
+# Webhook 执行脚本 - 包含部署功能
 
 LOG_FILE="/var/log/webhook_actions.log"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> $LOG_FILE
-    logger -t Webhook "$1"
+    logger -t "Webhook" "$1"
 }
 
 main() {
-    # 从第一个参数获取 action
     action="$1"
-    
     if [ -z "$action" ]; then
         log "错误: 未收到动作参数"
         echo "错误: 未收到动作参数"
@@ -114,13 +112,14 @@ main() {
             log "执行: 测试连接"
             echo "Webhook 测试成功"
             echo "时间: $(date)"
-            echo "参数传递正常"
             ;;
-        "list_services")
-            log "执行: 列出服务"
-            echo "=== 服务状态 ==="
-            /etc/init.d/network status
+            
+        # 部署相关操作
+        "deploy_pull_restart")
+            log "执行: 完整部署 - 拉取镜像并重启"
+            /etc/webhook/deploy_nest_mysql.sh pull_and_restart
             ;;
+            
         *)
             log "未知动作: $action"
             echo "错误: 未知动作 '$action'"
@@ -128,13 +127,8 @@ main() {
     esac
 }
 
-# 记录脚本调用信息
 log "Webhook脚本被调用，参数: $*"
-
-# 调用主函数
 main "$@"
-
-# 记录脚本完成
 exit_code=$?
 log "脚本执行完成，退出码: $exit_code"
 exit $exit_code
@@ -197,3 +191,84 @@ echo 'complete'
 EOF
 
 chmod +x /root/test.sh
+
+# 新增fn os docker部署脚本
+
+cat > /etc/webhook/deploy_nest_mysql.sh << 'EOF'
+#!/bin/sh
+# Docker 部署脚本
+
+LOG_FILE="/var/log/webhook_deploy.log"
+REMOTE_USER="HeroKing"
+REMOTE_HOST="192.168.1.3"
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> $LOG_FILE
+    logger -t "Webhook-Deploy" "$1"
+}
+
+deploy() {
+    local action="$1"
+    
+    log "开始部署操作: $action"
+    echo "开始部署 nest-mysql 应用..."
+    
+    case "$action" in
+        "pull_and_restart")
+            echo "拉取最新镜像并重启容器..."
+            log "执行: 拉取镜像并重启"
+            
+            # SSH 命令执行部署
+            ssh_command="
+                set -e
+                cd /vol1/1000/HeroKing/docker/nestjs
+                echo '[远程] 开始部署...'
+                echo '[远程] 拉取最新镜像...'
+                docker compose pull
+                echo '[远程] 重启容器...'
+                docker compose up -d
+                echo '[远程] 检查容器状态...'
+                docker compose ps
+                echo '[远程] 部署完成'
+            "
+            
+            if ssh "${REMOTE_USER}@${REMOTE_HOST}" "$ssh_command"; then
+                log "部署成功"
+                echo "部署完成: 镜像已更新并容器已重启"
+            else
+                log "部署失败: SSH 命令执行错误"
+                echo "错误: 部署失败，请检查日志"
+                return 1
+            fi
+            ;;
+            
+        *)
+            log "未知部署操作: $action"
+            echo "错误: 未知操作 '$action'"
+            return 1
+            ;;
+    esac
+    
+    return 0
+}
+
+# 主函数
+main() {
+    local action="${1:-status}"
+    
+    log "部署脚本调用，操作: $action"
+    
+    # 执行部署
+    if deploy "$action"; then
+        log "部署操作完成: $action"
+        echo "操作完成"
+    else
+        log "部署操作失败: $action"
+        echo "操作失败"
+        exit 1
+    fi
+}
+
+main "$@"
+EOF
+
+chmod +x /etc/webhook/deploy_nest_mysql.sh
