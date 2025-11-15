@@ -281,6 +281,10 @@ server {
 
 ```
 
+### webhooks
+查看 myshell/webhooks/webhook_install.sh 查看安装脚本
+
+
 ### 上网
 
 #### 单臂路由
