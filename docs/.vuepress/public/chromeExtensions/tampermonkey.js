@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.8
+// @version      0.1.9
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
-// @grant        GM_addStyle
+// @grant        none
 // @license      MIT
 // @downloadURL https://update.greasyfork.org/scripts/466261/HeroKing%20Tampermonkey%20Userscript.user.js
 // @updateURL https://update.greasyfork.org/scripts/466261/HeroKing%20Tampermonkey%20Userscript.meta.js
