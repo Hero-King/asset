@@ -5,9 +5,9 @@ export const setupSentry = (app: App, router: any) => {
   // 初始化 Sentry
   app.config.globalProperties.Sentry = Sentry.init({
     app,
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: false,
     // 1. 标识和认证您的 Sentry 项目
-    dsn: 'https://fa8f1872d0b65fe5e1aaec2a205f8751@o4507548567207936.ingest.us.sentry.io/4510406498189312',
+    dsn: '',
 
     // 3. 环境区分（开发/生产）：仅生产环境上报错误（避免开发时冗余日志）
     environment: process.env.NODE_ENV,
