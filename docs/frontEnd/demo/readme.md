@@ -36,12 +36,12 @@
 
 ![日志|200*200](/img/gsyApp/日志.png) -->
 
-## Sentry
+## Sentry Demo
 
-<div>
+<!-- <div>
     <button @click="throwError">throw new Error</button>
     <button @click="captureError">使用SDK API手动捕获错误和其他事件</button>
-  </div>
+  </div> -->
 
 <script>
 export default {
