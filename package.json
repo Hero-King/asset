@@ -32,5 +32,8 @@
     "onlyBuiltDependencies": [
       "esbuild"
     ]
+  },
+  "dependencies": {
+    "@sentry/vue": "^10.26.0"
   }
 }
