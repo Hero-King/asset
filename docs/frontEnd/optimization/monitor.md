@@ -61,7 +61,7 @@
 - 通俗理解：比如 “前端某组件 undefined 报错”，100 个用户触发了同样的错误，Sentry 不会生成 100 个独立通知，而是聚合为 1 个 Issue，显示 “100 次事件，影响 50 个用户”。
 - 聚合规则：
   - 默认：基于「错误消息 + 堆栈跟踪 + 上下文」自动计算 fingerprint（指纹），指纹相同则归为同一 Issue；
-  - 自定义：可通过代码设置 fingerprint: ['{{ error.type }}', '{{ request.url }}']，手动指定聚合维度（如按错误类型 + 请求 URL 聚合）。
+  - 自定义：可通过代码设置 fingerprint: [`error.type`, `request.url`]，手动指定聚合维度（如按错误类型 + 请求 URL 聚合）。
 - 状态管理：每个 Issue 有明确状态，支持团队协作：
   - Unresolved（未解决）：新发现的问题；
   - In Progress（处理中）：开发者正在排查；
@@ -105,7 +105,7 @@
 6. DSN（Data Source Name）
 
 - 定义：数据上报的唯一标识 URL，相当于 Sentry Project 的 “地址”，SDK 通过 DSN 知道将 Event 上报到哪个 Project。
-- 格式：https://<public-key>@<sentry-host>/<project-id>（如 https://abc123.sentry.io/456）。
+- 格式：https://`public-key`@`sentry-host`/`project-id`（如 https://abc123.sentry.io/456）。
 - 获取方式：Sentry 项目 →「Project Settings → Client Keys (DSN)」。
 - 安全注意：
   - DSN 包含 public-key（公钥），无敏感信息，可直接写在前端代码中；
