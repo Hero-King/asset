@@ -25,6 +25,12 @@
   function removeWebLimit() {
     window.oncontextmenu = window.onkeydown = window.onkeyup = window.onkeypress = d.oncontextmenu = null
   }
+  function addStyle(string) {
+    // 替代 GM_addStyle 的标准方法
+    const style = document.createElement('style')
+    style.textContent = string
+    document.head.appendChild(style)
+  }
   const sleep = (time) => {
     return new Promise((res) => {
       setTimeout(res, time)
@@ -33,7 +39,7 @@
 
   // 去除OE 用例textarea禁用
   if (location.href.includes('/biz/1460/requirement/metersphere/track/plan')) {
-    GM_addStyle(`
+    addStyle(`
       textarea[disabled] {
         cursor: auto !important;
         pointer-events: auto !important;
@@ -52,7 +58,7 @@
     location.search.includes('modal_id')
   ) {
     // Inject initial styles
-    GM_addStyle(`
+    addStyle(`
         video {
             transform: scale(2);
             transform-origin: center;
