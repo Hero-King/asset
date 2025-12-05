@@ -221,16 +221,16 @@ deploy() {
             ssh_command="
                 set -e
                 cd /vol1/1000/HeroKing/docker/nestjs
-                echo \"[\$(date '+%Y-%m-%d %H:%M:%S')] [远程] 开始部署...\" >> deploy_remote.log
+                echo \"[\$(date '+%Y-%m-%d %H:%M:%S')] [远程] 开始部署...\" >> ~/deploy_remote.log
                 
                 # 执行命令并将所有输出追加到远程日志文件
-                echo '[远程] 拉取最新镜像...' >> deploy_remote.log
-                docker compose pull >> deploy_remote.log 2>&1
-                echo '[远程] 重启容器...' >> deploy_remote.log
-                docker compose up -d >> deploy_remote.log 2>&1
-                echo '[远程] 检查容器状态...' >> deploy_remote.log
-                docker compose ps >> deploy_remote.log 2>&1
-                echo '[远程] 部署完成' >> deploy_remote.log
+                echo '[远程] 拉取最新镜像...' >> ~/deploy_remote.log
+                docker compose pull >> ~/deploy_remote.log 2>&1
+                echo '[远程] 重启容器...' >> ~/deploy_remote.log
+                docker compose up -d >> ~/deploy_remote.log 2>&1
+                echo '[远程] 检查容器状态...' >> ~/deploy_remote.log
+                docker compose ps >> ~/deploy_remote.log 2>&1
+                echo '[远程] 部署完成' >> ~/deploy_remote.log
             "
             
             if ssh "${REMOTE_USER}@${REMOTE_HOST}" "$ssh_command"; then
