@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.9
+// @version      0.1.10
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
@@ -25,6 +25,16 @@
   function removeWebLimit() {
     window.oncontextmenu = window.onkeydown = window.onkeyup = window.onkeypress = d.oncontextmenu = null
   }
+  function findVueInstance(element) {
+    if (element.__vue__) {
+      return element.__vue__.$root.constructor
+    }
+    for (let i = 0; i < element.children.length; i++) {
+      const childVue = findVueInstance(element.children[i])
+      if (childVue) return childVue
+    }
+    return null
+  }
   function addStyle(string) {
     // 替代 GM_addStyle 的标准方法
     const style = document.createElement('style')
@@ -45,6 +55,16 @@
         pointer-events: auto !important;
       }
     `)
+  }
+  if (location.host === '127.0.0.1:1024') {
+    const rootElement = document.getElementById('app') || document.body
+    window.vueConstructor = findVueInstance(rootElement)
+    if (window.vueConstructor) {
+      window.__VUE_DEVTOOLS_GLOBAL_HOOK__?.emit('init', vueConstructor)
+      window.__VUE_DEVTOOLS_MANUALLY_INITIALIZED__ = true
+      console.log('✅ Vue DevTools initialized using Vue instance constructor')
+    }
+    return 
   }
 
   if (location.host == 'mongoosejs.net') {
