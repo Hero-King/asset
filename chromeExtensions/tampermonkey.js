@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.10
+// @version      0.1.11
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
@@ -57,14 +57,16 @@
     `)
   }
   if (location.host === '127.0.0.1:1024') {
-    const rootElement = document.getElementById('app') || document.body
-    window.vueConstructor = findVueInstance(rootElement)
-    if (window.vueConstructor) {
-      window.__VUE_DEVTOOLS_GLOBAL_HOOK__?.emit('init', vueConstructor)
-      window.__VUE_DEVTOOLS_MANUALLY_INITIALIZED__ = true
-      console.log('✅ Vue DevTools initialized using Vue instance constructor')
-    }
-    return 
+    setTimeout(() => {
+      const rootElement = document.getElementById('app') || document.body
+      window.vueConstructor = findVueInstance(rootElement)
+      if (window.vueConstructor) {
+        window.__VUE_DEVTOOLS_GLOBAL_HOOK__?.emit('init', vueConstructor)
+        window.__VUE_DEVTOOLS_MANUALLY_INITIALIZED__ = true
+        console.log('✅ Vue DevTools initialized using Vue instance constructor')
+      }
+      return
+    }, 5000)
   }
 
   if (location.host == 'mongoosejs.net') {
