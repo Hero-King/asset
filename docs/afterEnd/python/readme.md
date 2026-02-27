@@ -219,15 +219,21 @@ float(x) 将 x 转换到一个浮点数
 - type(var)
 - isinstance(var, type)
 
-逻辑运算符
-and x and y 布尔"与" - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。 (a and b) 返回 20。
-or x or y 布尔"或" - 如果 x 是非 0，它返回 x 的值，否则它返回 y 的计算值。 (a or b) 返回 10。
-not not x 布尔"非" - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。 not(a and b) 返回 False
-成员运算符
+### 逻辑运算符
+
+- and x and y 布尔"与" - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。 (a and b) 返回 20。
+- or x or y 布尔"或" - 如果 x 是非 0，它返回 x 的值，否则它返回 y 的计算值。 (a or b) 返回 10。
+- not not x 布尔"非" - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。 not(a and b) 返回 False
+
+### 成员运算符
+
 测试实例中包含了一系列的成员，包括字符串，列表或元组。
-in 如果在指定的序列中找到值返回 True，否则返回 False。 x 在 y 序列中 , 如果 x 在 y 序列中返回 True。
-not in 如果在指定的序列中没有找到值返回 True，否则返回 False。 x 不在 y 序列中 , 如果 x 不在 y 序列中返回 True。
-身份运算符
+
+- in 如果在指定的序列中找到值返回 True，否则返回 False。 x 在 y 序列中 , 如果 x 在 y 序列中返回 True.
+- not in 如果在指定的序列中没有找到值返回 True，否则返回 False。 x 不在 y 序列中 , 如果 x 不在 y 序列中返回 True。
+
+### 身份运算符
+
 身份运算符用于比较两个对象的存储单元
 is is 是判断两个标识符是不是引用自一个对象 x is y, 类似 id(x) == id(y) , 如果引用的是同一个对象则返回 True，否则返回 False
 is not is not 是判断两个标识符是不是引用自不同对象 x is not y ， 类似 id(a) != id(b)。如果引用的不是同一个对象则返回结果 True，否则返回 False。
@@ -239,6 +245,7 @@ is 与 == 区别：
 
 定义一个函数
 你可以定义一个由自己想要功能的函数，以下是简单的规则：
+
 函数代码块以 def 关键词开头，后接函数标识符名称和圆括号()。
 任何传入参数和自变量必须放在圆括号中间。圆括号之间可以用于定义参数。
 函数的第一行语句可以选择性地使用文档字符串—用于存放函数说明。
