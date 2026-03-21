@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.11
+// @version      0.1.12
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @include        *
@@ -56,7 +56,7 @@
       }
     `)
   }
-  if (location.host === '127.0.0.1:1024') {
+  if (location.hostname === '127.0.0.1') {
     setTimeout(() => {
       const rootElement = document.getElementById('app') || document.body
       window.vueConstructor = findVueInstance(rootElement)
@@ -64,6 +64,17 @@
         window.__VUE_DEVTOOLS_GLOBAL_HOOK__?.emit('init', vueConstructor)
         window.__VUE_DEVTOOLS_MANUALLY_INITIALIZED__ = true
         console.log('✅ Vue DevTools initialized using Vue instance constructor')
+
+        // 拦截 console.error，过滤掉 Vue key重复的错误
+        const originalConsoleError = console.error
+        console.error = function (...args) {
+          const errorMsg = args.join(' ')
+          if (errorMsg.includes('Duplicate keys') || errorMsg.includes('重复的 key') || errorMsg.includes('[Vue warn]: Duplicate')) {
+            console.warn.apply(console, args)
+            return
+          }
+          originalConsoleError.apply(console, args)
+        }
       }
       return
     }, 5000)
