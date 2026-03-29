@@ -3,6 +3,8 @@ services:
     image: mysql:8.0
     container_name: mysql
     restart: always
+    command: 
+      - --default-time-zone=+08:00
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-1234qwer%}
       - TZ=Asia/Shanghai  # 东八区时区
@@ -34,9 +36,32 @@ services:
     networks:
       - shared-network
 
+  # 新增 RabbitMQ 服务
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin123
+    ports:
+      - "5673:5672"   # AMQP 协议端口
+      - "15672:15672" # 管理界面端口
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - shared-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_running"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
 volumes:
   mysql-data:
   redis-data:
+  rabbitmq-data: # 新增卷
 
 networks:
   shared-network:
