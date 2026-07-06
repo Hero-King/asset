@@ -34,8 +34,8 @@ BEGIN
         
         -- 只传递产品代码，不传递名称和平台
         CALL CalculateAndUpsertYield(v_product_code, calc_date, '7', 7);
+        CALL CalculateAndUpsertYield(v_product_code, calc_date, '14', 14);
         CALL CalculateAndUpsertYield(v_product_code, calc_date, '30', 30);
-        CALL CalculateAndUpsertYield(v_product_code, calc_date, '90', 90);
         
     END LOOP;
     
@@ -157,3 +157,60 @@ FROM product_annualized_yield
 WHERE calculation_date = (SELECT MAX(calculation_date) FROM product_annualized_yield)
 GROUP BY product_code, product_name, sale_platform
 ORDER BY MAX(CASE WHEN yield_type = '7' THEN annualized_yield END) DESC
+
+
+-- 持仓产品收益
+SELECT 
+    h.user_id AS "用户ID",
+    p.product_code AS "产品代码",
+    p.product_name AS "产品名称",
+    h.holdings AS "持仓份额",
+    -- 收益计算：(当前净值 - 上次净值) * 份额
+    IFNULL((nv_now.net_value - nv_prev.net_value) * h.holdings, 0) AS "昨日收益",
+    -- 年化数据行转列
+    MAX(CASE WHEN y.yield_type = '7' THEN y.annualized_yield END) AS "近7日年化(%)",
+    MAX(CASE WHEN y.yield_type = '30' THEN y.annualized_yield END) AS "近30日年化(%)",
+    MAX(CASE WHEN y.yield_type = '90' THEN y.annualized_yield END) AS "近90日年化(%)",
+    DATE_FORMAT(p.latest_value_date, '%Y-%m-%d') AS "最后更新"
+FROM financial_products p
+-- 1. 关联持仓表 (INNER JOIN 锁定用户持有的产品)
+INNER JOIN user_product_holdings h ON p.product_code = h.product_code
+-- 2. 关联当前净值 (精准匹配产品表中的最后更新日期)
+LEFT JOIN financial_product_netvalues nv_now 
+    ON p.product_code = nv_now.product_code AND nv_now.value_date = p.latest_value_date
+-- 3. 关联上一次净值 (利用索引查找该日期之前的最新一条)
+LEFT JOIN financial_product_netvalues nv_prev 
+    ON p.product_code = nv_prev.product_code 
+    AND nv_prev.value_date = (
+        SELECT MAX(value_date) 
+        FROM financial_product_netvalues 
+        WHERE product_code = p.product_code AND value_date < p.latest_value_date
+    )
+-- 4. 关联年化率表
+LEFT JOIN product_annualized_yield y 
+    ON p.product_code = y.product_code AND y.calculation_date = p.latest_value_date
+-- 5. 过滤条件：可根据 Grafana 变量选择单用户或多用户
+-- WHERE (h.user_id = '$user_id' )  -- 如果是 Grafana 变量，请按此格式编写
+GROUP BY 
+    h.user_id, 
+    p.product_code, 
+    p.product_name, 
+    h.holdings, 
+    nv_now.net_value, 
+    nv_prev.net_value, 
+    p.latest_value_date
+ORDER BY "昨日收益" DESC;
+
+-- 购入产品年化曲线
+-- 简化版本，使用关联查询获取产品名称
+SELECT 
+    y.calculation_date as time,
+    y.annualized_yield,
+    CONCAT(p.product_code, ' - ', p.product_name) as metric
+FROM prod.product_annualized_yield y
+JOIN prod.financial_products p ON y.product_code = p.product_code
+INNER JOIN user_product_holdings h ON y.product_code = h.product_code
+WHERE  y.yield_type = '$yield_type'
+AND y.calculation_date >= $__timeFrom()
+AND y.calculation_date <= $__timeTo()
+ORDER BY y.calculation_date, p.product_code;

@@ -35,6 +35,7 @@ M3U 文件可以直接在文本编辑器中打开和修改，并且可以通过�
 1. https://饭太硬.top/tv
 2. 自己配置了明明的直播源`备用`: https://blog.heroking.top/tv/tv.json (只有直播)
 3. `https://op.heroking.top:8000/tv` 已使用302重定向到指定的源地址
+3. `https://op.heroking.top:8000/live` 已使用302重定向到指定的源地址,如https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/v6.m3u
 
 #### 直播源
 
