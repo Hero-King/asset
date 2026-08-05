@@ -30,6 +30,7 @@ read -r -s -p "Proxy password: " PROXY_PASS < /dev/tty
 echo ""
 
 # === 4. Inject proxy env vars (current process + child processes) ===
+# curl honors these natively, no extra wiring needed (unlike PowerShell)
 PROXY_HOST_PORT="${PROXY_ADDR#http://}"
 PROXY_HOST_PORT="${PROXY_HOST_PORT#https://}"
 PROXY_URL="http://${PROXY_USER}:${PROXY_PASS}@${PROXY_HOST_PORT}"
@@ -55,15 +56,57 @@ if [[ ! "$HTTP_CODE" =~ ^(200|401|403|407)$ ]]; then
 fi
 echo "Proxy reachable (HTTP $HTTP_CODE)"
 
-# === 6. Install functions ===
+# === 6. Helpers ===
+# Persist ~/.local/bin into the appropriate shell rc file
+persist_local_bin_path() {
+  local LOCAL_BIN="$HOME/.local/bin"
+  local RC_FILE=""
+
+  # Pick rc file based on user's login shell ($SHELL)
+  case "${SHELL:-}" in
+    */zsh)  RC_FILE="$HOME/.zshrc" ;;
+    */bash) RC_FILE="$HOME/.bashrc" ;;
+    */fish) RC_FILE="$HOME/.config/fish/config.fish" ;;
+    *)      RC_FILE="$HOME/.profile" ;;
+  esac
+
+  local EXPORT_LINE="export PATH=\"$LOCAL_BIN:\$PATH\""
+
+  # Add to current session
+  if [[ ":$PATH:" != *":$LOCAL_BIN:"* ]]; then
+    export PATH="$LOCAL_BIN:$PATH"
+    echo "Added to session PATH: $LOCAL_BIN"
+  fi
+
+  # Persist to rc file (idempotent)
+  if [[ -n "$RC_FILE" ]]; then
+    mkdir -p "$(dirname "$RC_FILE")"
+    if [[ ! -f "$RC_FILE" ]] || ! grep -qF "$LOCAL_BIN" "$RC_FILE"; then
+      printf '\n# Added by Claude Code installer\n%s\n' "$EXPORT_LINE" >> "$RC_FILE"
+      echo "Persisted to $RC_FILE"
+    fi
+  fi
+}
+
+# === 7. Install functions ===
 install_claudecode() {
   echo ""
   echo "--- Installing Claude Code ---"
   curl -fsSL https://claude.ai/install.sh | bash
+
+  # Add ~/.local/bin to PATH (current shell + persistent rc file)
+  if [[ -d "$HOME/.local/bin" ]]; then
+    persist_local_bin_path
+  else
+    echo "Note: $HOME/.local/bin not found yet (may be created lazily on first use)"
+  fi
+
   echo "--- Verifying Claude Code ---"
   if command -v claude >/dev/null 2>&1; then
-    claude --version
-    echo "Claude Code installed successfully"
+    local CLAUDE_PATH
+    CLAUDE_PATH="$(command -v claude)"
+    "$CLAUDE_PATH" --version
+    echo "Claude Code installed successfully ($CLAUDE_PATH)"
   else
     echo "Claude Code not available, see 04-troubleshooting.md"
     return 1
@@ -73,7 +116,6 @@ install_claudecode() {
 install_codex() {
   echo ""
   echo "--- Installing Codex ---"
-  # TODO: replace with Codex official URL (npm fallback if not available)
   CODEX_URL="${CODEX_URL:-https://openai.com/codex/install.sh}"
   if ! curl -fsSL "$CODEX_URL" | bash 2>/dev/null; then
     echo "Official script failed, trying npm..."
@@ -94,7 +136,7 @@ install_codex() {
   fi
 }
 
-# === 7. Main menu loop ===
+# === 8. Main menu loop ===
 while true; do
   echo ""
   echo "Select tool to install:"
@@ -115,3 +157,4 @@ done
 echo ""
 echo "=== Installation complete ==="
 echo "Note: Proxy environment variables will be lost when the terminal is closed (not persistent)"
+echo "Note: PATH changes have been written to your shell rc file; restart the terminal or 'source' it to take effect."
