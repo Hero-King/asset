@@ -65,8 +65,7 @@ title: 04 问题排查与售后
 1. 看脚本报错信息
 2. 去 https://claude.ai/download 或 https://openai.com/codex 看最新文档
 3. 改本仓库的 install.sh / .ps1 / .cmd 适配
-4. 改 VERSION（+0.0.1）
-5. 推送到 nginx
+4. 推送到 nginx
 
 ## 装完用不了
 
@@ -110,19 +109,9 @@ title: 04 问题排查与售后
 - 或者让客户用**自己公司/家里的代理**（如果允许访问 api.anthropic.com / api.openai.com）
 - 或者用 Claude Code / Codex 内部的代理设置（每个工具的 `~/.claude.json` / `~/.codex/config.toml` 有 proxy 配置）
 
-### 症状：版本号对不上（脚本里 VERSION 和实际跑的不一样）
-
-**原因**：nginx 上的脚本版本落后于本仓库
-
-**解决**：
-
-1. 在仓库里 `git pull`
-2. `bash deploy/sync-to-nginx.sh` 推上去
-3. 在 nginx 上确认 VERSION 文件更新
-
 ## 售后政策
 
 - 7 天内任何装机问题 → 免费远程重装
 - 7 天内任何 API Key / 登录问题 → 免费答疑
 - 7 天后 → 收费 ¥XX / 次
-- 永久 bug 反馈（脚本本身的问题）→ 免费修，VERSION + 0.0.1
+- 永久 bug 反馈（脚本本身的问题）→ 免费修

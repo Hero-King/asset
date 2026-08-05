@@ -1,16 +1,9 @@
 @echo off
 REM Claude Code / Codex 一键安装脚本 (Windows CMD)
-REM 配套: 同目录 VERSION 文件
-
 REM 字符编码 UTF-8
 chcp 65001 > nul
 
-REM === 0. 版本 ===
-set "VERSION=unknown"
-if exist "%~dp0VERSION" (
-  for /f "usebackq delims=" %%v in ("%~dp0VERSION") do set "VERSION=%%v"
-)
-echo === Claude Code / Codex Installer v%VERSION% ===
+echo === Claude Code / Codex Installer ===
 
 REM === 1. 代理地址 (写死) ===
 if "%PROXY_ADDR%"=="" set "PROXY_ADDR=http://op.heroking.top:5002"
