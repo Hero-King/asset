@@ -30,8 +30,8 @@ echo "检测到操作系统: $OS"
 # === 3. 代理账号密码 ===
 echo ""
 echo "代理服务器: $PROXY_ADDR"
-read -r -p "代理用户名: " PROXY_USER
-read -r -s -p "代理密码: " PROXY_PASS
+read -r -p "代理用户名: " PROXY_USER < /dev/tty
+read -r -s -p "代理密码: " PROXY_PASS < /dev/tty
 echo ""
 
 # === 4. 注入 env var (本进程 + 子进程) ===
@@ -107,7 +107,7 @@ while true; do
   echo "  [2] Codex"
   echo "  [3] 两个都装"
   echo "  [0] 退出"
-  read -r -p "输入选项 [0-3]: " choice
+  read -r -p "输入选项 [0-3]: " choice < /dev/tty
   case "$choice" in
     1) install_claudecode ;;
     2) install_codex ;;

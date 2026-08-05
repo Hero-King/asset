@@ -4,9 +4,15 @@
 $ErrorActionPreference = "Stop"
 
 # === 0. 版本 ===
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$VersionFile = Join-Path $ScriptDir "VERSION"
-$Version = if (Test-Path $VersionFile) { (Get-Content $VersionFile -Raw).Trim() } else { "unknown" }
+# 通过 irm | iex 管道执行时 $MyInvocation.MyCommand.Path 为空, 无法定位本地 VERSION
+$ScriptPath = $MyInvocation.MyCommand.Path
+if ($ScriptPath) {
+  $ScriptDir = Split-Path -Parent $ScriptPath
+  $VersionFile = Join-Path $ScriptDir "VERSION"
+  $Version = if (Test-Path $VersionFile) { (Get-Content $VersionFile -Raw).Trim() } else { "unknown" }
+} else {
+  $Version = "unknown"
+}
 Write-Host "=== Claude Code / Codex Installer v$Version ==="
 
 # === 1. 代理地址 (写死) ===
