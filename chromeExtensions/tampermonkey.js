@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.13
+// @version      0.1.14
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @match        *://*/*
 // @grant        GM_cookie
-// @grant        GM_info
-// @grant        GM_addStyle     
+// @grant        GM_addStyle
+// @grant        unsafeWindow
+// @run-at       document-start
 // @license      MIT
 // @downloadURL https://update.greasyfork.org/scripts/466261/HeroKing%20Tampermonkey%20Userscript.user.js
 // @updateURL https://update.greasyfork.org/scripts/466261/HeroKing%20Tampermonkey%20Userscript.meta.js
@@ -17,12 +18,10 @@
   'use strict'
 
   const d = document
-  function removeWebLimit() {
-    window.oncontextmenu = window.onkeydown = window.onkeyup = window.onkeypress = d.oncontextmenu = null
-  }
   function getCookie(name) {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
-    return match ? decodeURIComponent(match[2]) : null
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const match = document.cookie.match(new RegExp('(?:^|;\\s*)' + escapedName + '=([^;]+)'))
+    return match ? decodeURIComponent(match[1]) : null
   }
   function findVueInstance(element) {
     if (element.__vue__) {
@@ -34,12 +33,6 @@
     }
     return null
   }
-  const sleep = (time) => {
-    return new Promise((res) => {
-      setTimeout(res, time)
-    })
-  }
-
   // 设置127.0.0.1的ticket字段 与dsim平台一致
   if (location.host.match(/dsim.*\-api/)) {
     const ticket = getCookie('ticket')
@@ -69,10 +62,12 @@
   if (location.hostname === '127.0.0.1') {
     setTimeout(() => {
       const rootElement = document.getElementById('app') || document.body
-      window.vueConstructor = findVueInstance(rootElement)
-      if (window.vueConstructor) {
-        window.__VUE_DEVTOOLS_GLOBAL_HOOK__?.emit('init', vueConstructor)
-        window.__VUE_DEVTOOLS_MANUALLY_INITIALIZED__ = true
+      const vueConstructor = findVueInstance(rootElement)
+      if (vueConstructor) {
+        // 必须写入 unsafeWindow，否则 Vue DevTools 钩子检测不到
+        unsafeWindow.vueConstructor = vueConstructor
+        unsafeWindow.__VUE_DEVTOOLS_GLOBAL_HOOK__?.emit('init', vueConstructor)
+        unsafeWindow.__VUE_DEVTOOLS_MANUALLY_INITIALIZED__ = true
         console.log('✅ Vue DevTools initialized using Vue instance constructor')
 
         // 拦截 console.error，过滤掉 Vue key重复的错误
@@ -90,9 +85,11 @@
     }, 5000)
   }
 
-  if (location.host == 'mongoosejs.net') {
-    let advertise = d.querySelector('#layout .container > div:nth-child(1)')
-    advertise.parentElement.removeChild(advertise)
+  if (location.host === 'mongoosejs.net') {
+    const advertise = d.querySelector('#layout .container > div:nth-child(1)')
+    if (advertise && advertise.parentElement) {
+      advertise.parentElement.removeChild(advertise)
+    }
   }
   // PC打开抖音网站时 视频放大一倍
   if (
@@ -111,15 +108,20 @@
 
   // wx人社
   if (location.href.startsWith('https://61.160.99.102:8031/WXJXJY')) {
-    window.addEventListener('load', () => {
+    unsafeWindow.addEventListener('load', () => {
       setTimeout(() => {
-        myVid.muted = 'muted'
-        myVid.play()
+        const vid = unsafeWindow.myVid
+        if (!vid) {
+          console.warn('未找到 myVid 元素')
+          return
+        }
+        vid.muted = true
+        vid.play().catch((err) => console.warn('视频自动播放被阻止:', err))
         // 设置倍速
-        myVid.playbackRate = 2
+        vid.playbackRate = 2
 
         // 播放结束
-        myVid.addEventListener('ended', () => {
+        vid.addEventListener('ended', () => {
           setTimeout(() => {
             // location.reload()
           }, 1000 * 5)
@@ -128,7 +130,7 @@
     })
   }
 
-  window.addEventListener('load', () => {
+  unsafeWindow.addEventListener('load', () => {
     removeAds()
   })
 
@@ -208,14 +210,14 @@
         branch,
         usn
       }
-      const webServiceInfo = serviceListRes.code == 0 ? serviceListRes.data.list[0] : null
-      const params = JSON.parse(JSON.stringify(deployInfo))
+      const webServiceInfo = serviceListRes.code === 0 ? serviceListRes.data.list[0] : null
+      const params = { ...deployInfo }
       if (webServiceInfo) {
         if (webServiceInfo.defaultBranch !== branch) {
           console.log(`当前分支为${webServiceInfo.defaultBranch},将切换到${branch}`)
         }
         const packageListRes = await getPackageList(params)
-        if (packageListRes.code == 0) {
+        if (packageListRes.code === 0) {
           const packageInfo = packageListRes.data.packageLists[0]
           deployInfo.services = [
             {
@@ -231,9 +233,9 @@
           if (packageInfo.commit !== webServiceInfo.defaultCommit) {
             console.log(`存在新的部署包, 详情:${packageInfo.commit}, 将进行部署`)
             const checkRes = await checkDeploy(deployInfo)
-            if (checkRes.code == 0) {
+            if (checkRes.code === 0) {
               const deployRes = await deploy(deployInfo)
-              if (deployRes.code == 0) {
+              if (deployRes.code === 0) {
                 console.log('部署成功')
               } else {
                 console.error('部署失败')
@@ -250,6 +252,6 @@
       }
     }
 
-    window.dsimDeploy = dsimDeploy
+    unsafeWindow.dsimDeploy = dsimDeploy
   }
 })()
