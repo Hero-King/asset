@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.14
+// @version      0.1.15
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @match        *://*/*
+// @match        http://127.0.0.1/*
 // @grant        GM_cookie
 // @grant        GM_addStyle
 // @grant        unsafeWindow
@@ -38,7 +39,7 @@
     const ticket = getCookie('ticket')
     if (ticket) {
       GM_cookie.set({
-        url: 'http://127.0.0.1', // 必须带协议
+        url: 'http://127.0.0.1/', // 必须带协议,且必须有 path,否则 GM_cookie 校验过不了 @match
         name: 'ticket',
         value: ticket,
         domain: '127.0.0.1',
@@ -46,6 +47,12 @@
         secure: false, // 127.0.0.1 是 http，不能用 secure
         httpOnly: false, // 必须 false，JS 才能读取
         expirationDate: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60 // 7天后过期
+      }, (error) => {
+        if (error) {
+          console.error('设置 127.0.0.1 ticket cookie 失败:', error)
+        } else {
+          console.log('✅ 设置 127.0.0.1 ticket cookie 成功')
+        }
       })
     }
   }
