@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HeroKing Tampermonkey Userscript
 // @namespace    http://tampermonkey.net/
-// @version      0.1.15
+// @version      0.1.16
 // @description  HeroKing some scripts
 // @author       HeroKing
 // @match        *://*/*
@@ -34,26 +34,59 @@
     }
     return null
   }
+
+  // ====== Console 错误过滤 ======
+  // 定义需要过滤的错误关键词列表
+  const FILTER_KEYWORDS = [
+    "Failed to execute 'getRangeAt' on 'Selection'",
+    // 'IndexSizeError'
+    // 你可以在这里添加更多需要屏蔽的错误关键词
+    // 例如: "Another error message",
+  ]
+
+  // 保存原始的 console.error 方法
+  const originalConsoleError = console.error
+
+  // 重写 console.error
+  console.error = function (...args) {
+    // 将参数合并为字符串进行检查
+    const errorMessage = args.join(' ')
+
+    // 检查是否包含任何需要过滤的关键词
+    const shouldFilter = FILTER_KEYWORDS.some((keyword) => errorMessage.includes(keyword))
+
+    // 如果匹配过滤关键词，则不输出到控制台
+    if (shouldFilter) {
+      return
+    }
+
+    // 否则调用原始的 console.error
+    originalConsoleError.apply(console, args)
+  }
+
   // 设置127.0.0.1的ticket字段 与dsim平台一致
   if (location.host.match(/dsim.*\-api/)) {
     const ticket = getCookie('ticket')
     if (ticket) {
-      GM_cookie.set({
-        url: 'http://127.0.0.1/', // 必须带协议,且必须有 path,否则 GM_cookie 校验过不了 @match
-        name: 'ticket',
-        value: ticket,
-        domain: '127.0.0.1',
-        path: '/',
-        secure: false, // 127.0.0.1 是 http，不能用 secure
-        httpOnly: false, // 必须 false，JS 才能读取
-        expirationDate: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60 // 7天后过期
-      }, (error) => {
-        if (error) {
-          console.error('设置 127.0.0.1 ticket cookie 失败:', error)
-        } else {
-          console.log('✅ 设置 127.0.0.1 ticket cookie 成功')
+      GM_cookie.set(
+        {
+          url: 'http://127.0.0.1/', // 必须带协议,且必须有 path,否则 GM_cookie 校验过不了 @match
+          name: 'ticket',
+          value: ticket,
+          domain: '127.0.0.1',
+          path: '/',
+          secure: false, // 127.0.0.1 是 http，不能用 secure
+          httpOnly: false, // 必须 false，JS 才能读取
+          expirationDate: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60 // 7天后过期
+        },
+        (error) => {
+          if (error) {
+            console.error('设置 127.0.0.1 ticket cookie 失败:', error)
+          } else {
+            console.log('✅ 设置 127.0.0.1 ticket cookie 成功')
+          }
         }
-      })
+      )
     }
   }
 
@@ -66,6 +99,7 @@
       }
     `)
   }
+  // 添加Vue DevTools
   if (location.hostname === '127.0.0.1') {
     setTimeout(() => {
       const rootElement = document.getElementById('app') || document.body
@@ -113,30 +147,6 @@
     `)
   }
 
-  // wx人社
-  if (location.href.startsWith('https://61.160.99.102:8031/WXJXJY')) {
-    unsafeWindow.addEventListener('load', () => {
-      setTimeout(() => {
-        const vid = unsafeWindow.myVid
-        if (!vid) {
-          console.warn('未找到 myVid 元素')
-          return
-        }
-        vid.muted = true
-        vid.play().catch((err) => console.warn('视频自动播放被阻止:', err))
-        // 设置倍速
-        vid.playbackRate = 2
-
-        // 播放结束
-        vid.addEventListener('ended', () => {
-          setTimeout(() => {
-            // location.reload()
-          }, 1000 * 5)
-        })
-      }, 1000 * 2)
-    })
-  }
-
   unsafeWindow.addEventListener('load', () => {
     removeAds()
   })
@@ -159,6 +169,7 @@
     document.getElementsByTagName('head')[0].appendChild(oMeta)
   }
 
+  // 安装dsimDeploy方法
   if (location.host === 'dsim.intra.didiglobal.com') {
     const getServiceList = (params) => {
       const queryString = new URLSearchParams(params).toString()
