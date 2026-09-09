@@ -89,3 +89,9 @@ auth: password
 password: xxx
 cert: false
 ```
+
+## 快捷键
+1. ctrl + - 跳转到上一个光标位置
+2. ctrl + shift + - 跳转到下一个光标位置
+3. ctrl + shift + p 搜索快捷键
+4. cmd + shift + k 删除当前行
