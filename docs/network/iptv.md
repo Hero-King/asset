@@ -24,6 +24,26 @@ M3U 文件可以直接在文本编辑器中打开和修改，并且可以通过�
 
 在 IPTV 领域，M3U 文件也被广泛使用。供应商可以创建 M3U 格式的播放列表，其中包含多个电视频道或点播节目的链接地址，用户可以通过将这些播放列表导入他们的 IPTV 设备或应用程序来观看这些内容。
 
+#### 核心内容
+
+- #EXTM3U 文件头标识，表明这是一个扩展的 M3U 播放列表文件。它必须出现在文件的第一行
+- #EXTINF 媒体切片时长与信息，这是最常用的标签之一。它后面跟着的 URL 就是实际媒体文件的地址。格式为 #EXTINF:<时长>,<标题>，时长单位是秒。它的下一行必须是媒体文件的 URL
+  - tvg-name="CCTV1" 非常重要的扩展属性，用于定义频道的唯一标识名或机器名
+  - tvg-logo="https://...png" 指定了频道台标（Logo）的图片 URL
+  - tvg-id="13" 这个属性可以看作是 tvg-name 的一个备用或更精确的 ID，也常用于 EPG 匹配
+  - group-title="央视频道"：指定了频道分组
+
+#### txt 格式
+
+频道名称,视频流地址, 分隔符不一定是逗号,分组信息：有些 TXT 文件为了提供类似于 M3U 中 group-title 的功能，会通过空行来分组
+
+```txt
+CCTV-1 综合,http://[2409:8087:8:21::18]:6610/.../1.m3u8?
+
+# 卫视频道
+北京卫视,http://...
+东方卫视,http://...
+```
 ## 电视软件
 
 常用资源导航页: https://饭太硬.top/
@@ -34,8 +54,8 @@ M3U 文件可以直接在文本编辑器中打开和修改，并且可以通过�
 
 1. https://饭太硬.top/tv
 2. 自己配置了明明的直播源`备用`: https://blog.heroking.top/tv/tv.json (只有直播)
-3. `https://op.heroking.top:8000/tv` 已使用302重定向到指定的源地址
-3. `https://op.heroking.top:8000/live` 已使用302重定向到指定的源地址,如https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/v6.m3u
+3. `https://op.heroking.top:8000/tv` 已使用 302 重定向到指定的源地址
+4. `https://op.heroking.top:8000/live` 已使用 302 重定向到指定的源地址,如https://fanmingming.com/txt?url=https://live.fanmingming.com/tv/m3u/v6.m3u
 
 #### 直播源
 
